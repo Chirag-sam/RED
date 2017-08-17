@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chirag.red.PlayAgain">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GAME OVER"
+        android:textSize="30dp"
+        android:textColor="@color/GREEN"
+        android:layout_above="@+id/sc"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SCORE : 25"
+        android:textSize="30dp"
+        android:textColor="@color/GREEN"
+        android:layout_above="@+id/iv"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/sc"/>
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_forward_black_24dp"
+        android:tint="@color/BLUE"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/iv"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PLAY AGAIN"
+        android:textSize="30dp"
+        android:textColor="@color/GREEN"
+        android:layout_below="@+id/iv"
+        android:layout_centerHorizontal="true"/>
+
+
+
+</RelativeLayout>
