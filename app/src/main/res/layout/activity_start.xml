@@ -9,12 +9,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="START"
+        android:text="EASY"
         android:textSize="30dp"
         android:textColor="@color/RED"
-        android:layout_above="@+id/iv"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:id="@+id/start"/>
+        android:layout_marginBottom="30dp"
+        android:id="@+id/easy"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HARD"
+        android:textSize="30dp"
+        android:textColor="@color/RED"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/hard"
+        android:layout_below="@+id/easy"/>
 
 </RelativeLayout>

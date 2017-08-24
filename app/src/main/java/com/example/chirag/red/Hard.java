@@ -1,9 +1,6 @@
 package com.example.chirag.red;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,28 +8,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.anastr.flattimelib.CountDownTimerView;
-import com.github.anastr.flattimelib.colors.Colors;
 import com.github.anastr.flattimelib.intf.OnTimeFinish;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class Hard extends AppCompatActivity {
 
     private ArrayList<String> colorNames=new ArrayList<>();
     private int colors[]=new int[4];
     private CountDownTimerView cd;
     private TextView colorText;
-    private RelativeLayout green;
-    private RelativeLayout blue;
-    private RelativeLayout red;
-    private RelativeLayout yellow;
+    private RelativeLayout butt4;
+    private RelativeLayout butt3;
+    private RelativeLayout butt1;
+    private RelativeLayout butt2;
     private TextView score;
     private int sc;
     private long speed;
+    private ArrayList<Integer> al = new ArrayList<>();
 
 
 
@@ -40,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_hard);
 
         cd = (CountDownTimerView) findViewById(R.id.mCountDownTimer);
         colorText = (TextView) findViewById(R.id.colorText);
-        green = (RelativeLayout)findViewById(R.id.rlgree);
-        blue = (RelativeLayout)findViewById(R.id.rlblu);
-        red = (RelativeLayout)findViewById(R.id.rlred);
-        yellow = (RelativeLayout)findViewById(R.id.rlyell);
+        butt4 = (RelativeLayout)findViewById(R.id.butt4);
+        butt3 = (RelativeLayout)findViewById(R.id.butt3);
+        butt1 = (RelativeLayout)findViewById(R.id.butt1);
+        butt2 = (RelativeLayout)findViewById(R.id.butt2);
         score = (TextView)findViewById(R.id.score);
 
         colorNames.add("RED");colorNames.add("BLUE");colorNames.add("GREEN");colorNames.add("YELLOW");
@@ -66,13 +62,25 @@ public class MainActivity extends AppCompatActivity {
         colorText.setText(colorNames.get(valuetext));
         colorText.setTextColor(colors[valuecolor]);
 
+        int ran1 = generateRandom(4,null);
+
+        al.add(ran1);
+        int ran2 = generateRandom(4,al);
+        al.add(ran2);
+        int ran3 = generateRandom(4,al);
+        al.add(ran3);
+        int ran4 = generateRandom(4,al);
+
+        butt1.setBackgroundColor(colors[ran1]);
+        butt2.setBackgroundColor(colors[ran2]);
+        butt3.setBackgroundColor(colors[ran3]);
+        butt4.setBackgroundColor(colors[ran4]);
 
 
-
-        red.setOnClickListener(new View.OnClickListener() {
+        butt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int color =((ColorDrawable)red.getBackground()).getColor();
+                int color =((ColorDrawable)butt1.getBackground()).getColor();
                 if(color==colors[valuecolor])
                 {
 
@@ -83,73 +91,77 @@ public class MainActivity extends AppCompatActivity {
                     sc++;
                     score.setText(String.valueOf(sc));
                     speed=speed-10;
+                    al.clear();
                     change();
                 }
                 else{
                     cd.stop();
-                    Intent intent = new Intent(MainActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(Hard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","easy");
+                    intent.putExtra("Mode","hard");
                     startActivity(intent);}
             }
         });
-        blue.setOnClickListener(new View.OnClickListener() {
+        butt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int color =((ColorDrawable)blue.getBackground()).getColor();
+                int color =((ColorDrawable)butt3.getBackground()).getColor();
                 if(color==colors[valuecolor])
                 {
                     sc = Integer.parseInt(score.getText().toString());
                     sc++;
                     score.setText(String.valueOf(sc));
                     speed=speed-10;
+                    al.clear();
                     change();
                 }
                 else
                 {cd.stop();
-                    Intent intent = new Intent(MainActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(Hard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","easy");
-                startActivity(intent);}
-            }
-        });
-        green.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int color =((ColorDrawable)green.getBackground()).getColor();
-                if(color==colors[valuecolor])
-                {
-                    sc = Integer.parseInt(score.getText().toString());
-                    sc++;
-                    score.setText(String.valueOf(sc));
-                    speed=speed-10;
-                    change();
-                }
-                else
-                {cd.stop();
-                    Intent intent = new Intent(MainActivity.this, PlayAgain.class);
-                    intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","easy");
+                    intent.putExtra("Mode","hard");
                     startActivity(intent);}
             }
         });
-        yellow.setOnClickListener(new View.OnClickListener() {
+        butt4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int color =((ColorDrawable)yellow.getBackground()).getColor();
+                int color =((ColorDrawable)butt4.getBackground()).getColor();
                 if(color==colors[valuecolor])
                 {
                     sc = Integer.parseInt(score.getText().toString());
                     sc++;
                     score.setText(String.valueOf(sc));
                     speed=speed-10;
+                    al.clear();
                     change();
                 }
                 else
                 {cd.stop();
-                    Intent intent = new Intent(MainActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(Hard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","easy");
+                    intent.putExtra("Mode","hard");
+                    startActivity(intent);}
+            }
+        });
+        butt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int color =((ColorDrawable)butt2.getBackground()).getColor();
+                if(color==colors[valuecolor])
+                {
+                    sc = Integer.parseInt(score.getText().toString());
+                    sc++;
+                    score.setText(String.valueOf(sc));
+                    speed=speed-10;
+                    al.clear();
+                    change();
+                }
+                else
+                {cd.stop();
+                    Intent intent = new Intent(Hard.this, PlayAgain.class);
+                    intent.putExtra("Score",sc);
+                    intent.putExtra("Mode","hard");
                     startActivity(intent);}
             }
         });
@@ -160,11 +172,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 cd.stop();
-                Intent intent = new Intent(MainActivity.this, PlayAgain.class);
+                Intent intent = new Intent(Hard.this, PlayAgain.class);
                 intent.putExtra("Score",sc);
-                intent.putExtra("Mode","easy");
+                intent.putExtra("Mode","hard");
                 startActivity(intent);
             }
         });
+    }
+    public int generateRandom(int end, ArrayList<Integer> excludeRows) {
+        Random rand = new Random();
+        int valuetext = rand.nextInt(end);
+
+
+
+        if(excludeRows!=null) {
+            while (excludeRows.contains(valuetext)) {
+                rand = new Random();
+                valuetext = rand.nextInt(end);
+            }
+        }
+
+        return valuetext;
     }
 }

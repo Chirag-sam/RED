@@ -8,19 +8,28 @@ import android.widget.TextView;
 
 public class StartActivity extends AppCompatActivity {
 
-    TextView start;
+    TextView easy;
+    TextView hard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        start = (TextView)findViewById(R.id.start);
+        easy = (TextView)findViewById(R.id.easy);
+        hard = (TextView)findViewById(R.id.hard);
 
-        start.setOnClickListener(new View.OnClickListener() {
+        easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this, Hard.class);
                 startActivity(intent);
             }
         });

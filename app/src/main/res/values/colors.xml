@@ -7,4 +7,9 @@
     <color name="BLUE">#0000FF</color>
     <color name="GREEN">#00FF00</color>
     <color name="YELLOW">#FFFF00</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="primary">#00bcd4</color>
+    <color name="primary_dark">#0097A7</color>
 </resources>
