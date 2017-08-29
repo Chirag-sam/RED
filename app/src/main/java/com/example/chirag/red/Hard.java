@@ -41,6 +41,7 @@ public class Hard extends AppCompatActivity {
 
         cd = (CountDownTimerView) findViewById(R.id.mCountDownTimer);
         colorText = (TextView) findViewById(R.id.colorText);
+
         butt4 = (Button)findViewById(R.id.butt4);
         butt3 = (Button)findViewById(R.id.butt3);
         butt1 = (Button)findViewById(R.id.butt1);

@@ -41,26 +41,26 @@
         >
         <TableRow>
             <Button
-                android:id="@+id/rlred"
+                android:id="@+id/butt1"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/RED" />
 
             <Button
-                android:id="@+id/rlyell"
+                android:id="@+id/butt2"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/YELLOW" />
         </TableRow>
         <TableRow>
             <Button
-                android:id="@+id/rlblu"
+                android:id="@+id/butt3"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/BLUE" />
 
             <Button
-                android:id="@+id/rlgree"
+                android:id="@+id/butt4"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/GREEN" />
