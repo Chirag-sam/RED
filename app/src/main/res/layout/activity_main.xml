@@ -7,56 +7,67 @@
     tools:context="com.example.chirag.red.MainActivity">
 
     <TextView
+        android:id="@+id/colorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RED"
-        android:textSize="30dp"
-        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:id="@+id/colorText"/>
+        android:text="RED"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
     <com.github.anastr.flattimelib.CountDownTimerView
         android:id="@+id/mCountDownTimer"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+
     <TextView
+        android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:id="@+id/score"/>
-    <RelativeLayout
-        android:layout_width="193dp"
-        android:layout_height="100dp"
-        android:background="@color/RED"
+        android:layout_marginTop="20dp"
+        android:text="0"
+        android:textColor="#000"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:stretchColumns="0,1"
         android:layout_alignParentBottom="true"
-        android:id="@+id/rlred"></RelativeLayout>
-    <RelativeLayout
-        android:layout_width="193dp"
-        android:layout_height="100dp"
-        android:background="@color/YELLOW"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/rlyell"></RelativeLayout>
-    <RelativeLayout
-        android:layout_width="193dp"
-        android:layout_height="100dp"
-        android:background="@color/BLUE"
-        android:layout_above="@+id/rlyell"
-        android:layout_alignParentRight="true"
-        android:id="@+id/rlblu"></RelativeLayout>
-    <RelativeLayout
-        android:layout_width="193dp"
-        android:layout_height="100dp"
-        android:background="@color/GREEN"
-        android:layout_above="@+id/rlred"
-        android:id="@+id/rlgree"></RelativeLayout>
+        >
+<TableRow>
+        <Button
+            android:id="@+id/rlred"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/RED" />
+
+        <Button
+            android:id="@+id/rlyell"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/YELLOW" />
+</TableRow>
+        <TableRow>
+        <Button
+            android:id="@+id/rlblu"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/BLUE" />
+
+        <Button
+            android:id="@+id/rlgree"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/GREEN" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,10 +22,10 @@ public class Hard extends AppCompatActivity {
     private int colors[]=new int[4];
     private CountDownTimerView cd;
     private TextView colorText;
-    private RelativeLayout butt4;
-    private RelativeLayout butt3;
-    private RelativeLayout butt1;
-    private RelativeLayout butt2;
+    private Button butt4;
+    private Button butt3;
+    private Button butt1;
+    private Button butt2;
     private TextView score;
     private int sc;
     private long speed;
@@ -40,10 +41,10 @@ public class Hard extends AppCompatActivity {
 
         cd = (CountDownTimerView) findViewById(R.id.mCountDownTimer);
         colorText = (TextView) findViewById(R.id.colorText);
-        butt4 = (RelativeLayout)findViewById(R.id.butt4);
-        butt3 = (RelativeLayout)findViewById(R.id.butt3);
-        butt1 = (RelativeLayout)findViewById(R.id.butt1);
-        butt2 = (RelativeLayout)findViewById(R.id.butt2);
+        butt4 = (Button)findViewById(R.id.butt4);
+        butt3 = (Button)findViewById(R.id.butt3);
+        butt1 = (Button)findViewById(R.id.butt1);
+        butt2 = (Button)findViewById(R.id.butt2);
         score = (TextView)findViewById(R.id.score);
 
         colorNames.add("RED");colorNames.add("BLUE");colorNames.add("GREEN");colorNames.add("YELLOW");
