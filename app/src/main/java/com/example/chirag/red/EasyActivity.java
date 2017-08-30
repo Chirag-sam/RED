@@ -55,7 +55,7 @@ rl=(RelativeLayout)findViewById(R.id.rel);
         colors[2] = Color.GREEN;
         colors[3] = Color.YELLOW;
 
-        speed = 1000;
+        speed = 1500;
         change();
 
     }
@@ -74,25 +74,81 @@ rl=(RelativeLayout)findViewById(R.id.rel);
         red.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                check(((ColorDrawable) red.getBackground()).getColor());
+                int color = ((ColorDrawable) red.getBackground()).getColor();
+                if (color == colors[valuecolor]) {
+                    sc = Integer.parseInt(score.getText().toString());
+                    sc++;
+                    score.setText(String.valueOf(sc));
+                    speed = speed - 10;
+                    change();
+                } else {
+                    cd.stop();
+                    Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
+                    intent.putExtra("Score", sc);
+                    intent.putExtra("Mode", "easy");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         blue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                check(((ColorDrawable) blue.getBackground()).getColor());
+                int color = ((ColorDrawable) blue.getBackground()).getColor();
+                if (color == colors[valuecolor]) {
+                    sc = Integer.parseInt(score.getText().toString());
+                    sc++;
+                    score.setText(String.valueOf(sc));
+                    speed = speed - 10;
+                    change();
+                } else {
+                    cd.stop();
+                    Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
+                    intent.putExtra("Score", sc);
+                    intent.putExtra("Mode", "easy");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         green.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                check(((ColorDrawable) green.getBackground()).getColor());
+                int color = ((ColorDrawable) green.getBackground()).getColor();
+                if (color == colors[valuecolor]) {
+                    sc = Integer.parseInt(score.getText().toString());
+                    sc++;
+                    score.setText(String.valueOf(sc));
+                    speed = speed - 10;
+                    change();
+                } else {
+                    cd.stop();
+                    Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
+                    intent.putExtra("Score", sc);
+                    intent.putExtra("Mode", "easy");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         yellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                check(((ColorDrawable) yellow.getBackground()).getColor());
+                int color = ((ColorDrawable) yellow.getBackground()).getColor();
+                if (color == colors[valuecolor]) {
+                    sc = Integer.parseInt(score.getText().toString());
+                    sc++;
+                    score.setText(String.valueOf(sc));
+                    speed = speed - 10;
+                    change();
+                } else {
+                    cd.stop();
+                    Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
+                    intent.putExtra("Score", sc);
+                    intent.putExtra("Mode", "easy");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -106,23 +162,10 @@ rl=(RelativeLayout)findViewById(R.id.rel);
                 intent.putExtra("Score", sc);
                 intent.putExtra("Mode", "easy");
                 startActivity(intent);
+                finish();
             }
         });
     }
 
-    void check(int color) {
-        if (color == colors[valuecolor]) {
-            sc = Integer.parseInt(score.getText().toString());
-            sc++;
-            score.setText(String.valueOf(sc));
-            speed = speed - 10;
-            change();
-        } else {
-            cd.stop();
-            Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
-            intent.putExtra("Score", sc);
-            intent.putExtra("Mode", "easy");
-            startActivity(intent);
-        }
-    }
+
 }

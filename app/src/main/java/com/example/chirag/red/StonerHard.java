@@ -20,7 +20,7 @@ import com.github.anastr.flattimelib.intf.OnTimeFinish;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class HardActivity extends AppCompatActivity {
+public class StonerHard extends AppCompatActivity {
 
     private ArrayList<String> colorNames=new ArrayList<>();
     private int colors[]=new int[4];
@@ -92,7 +92,7 @@ public class HardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int color =((ColorDrawable)butt1.getBackground()).getColor();
-                int contastcolor = getContrastColor(color);
+                int contastcolor = OpposeColor(color);
 
                 if(color==colors[valuecolor])
                 {
@@ -106,9 +106,9 @@ public class HardActivity extends AppCompatActivity {
                 }
                 else{
                     cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(StonerHard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","hard");
+                    intent.putExtra("Mode","stoner");
                     startActivity(intent);
                 finish();}
             }
@@ -117,7 +117,7 @@ public class HardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int color =((ColorDrawable)butt3.getBackground()).getColor();
-                int contastcolor = getContrastColor(color);
+                int contastcolor = OpposeColor(color);
                 if(color==colors[valuecolor])
                 {
                     rel.setBackgroundColor(contastcolor);
@@ -130,9 +130,9 @@ public class HardActivity extends AppCompatActivity {
                 }
                 else
                 {cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(StonerHard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","hard");
+                    intent.putExtra("Mode","stoner");
                     startActivity(intent);
                 finish();}
             }
@@ -141,7 +141,7 @@ public class HardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int color =((ColorDrawable)butt4.getBackground()).getColor();
-                int contastcolor = getContrastColor(color);
+                int contastcolor = OpposeColor(color);
                 if(color==colors[valuecolor])
                 {
                     rel.setBackgroundColor(contastcolor);
@@ -154,18 +154,17 @@ public class HardActivity extends AppCompatActivity {
                 }
                 else
                 {cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(StonerHard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","hard");
-                    startActivity(intent);
-                finish();}
+                    intent.putExtra("Mode","stoner");
+                    startActivity(intent);finish();}
             }
         });
         butt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int color =((ColorDrawable)butt2.getBackground()).getColor();
-                int contastcolor = getContrastColor(color);
+                int contastcolor = OpposeColor(color);
                 if(color==colors[valuecolor])
                 {
                     rel.setBackgroundColor(contastcolor);
@@ -178,9 +177,9 @@ public class HardActivity extends AppCompatActivity {
                 }
                 else
                 {cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
+                    Intent intent = new Intent(StonerHard.this, PlayAgain.class);
                     intent.putExtra("Score",sc);
-                    intent.putExtra("Mode","hard");
+                    intent.putExtra("Mode","stoner");
                     startActivity(intent);
                 finish();}
             }
@@ -192,9 +191,9 @@ public class HardActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 cd.stop();
-                Intent intent = new Intent(HardActivity.this, PlayAgain.class);
+                Intent intent = new Intent(StonerHard.this, PlayAgain.class);
                 intent.putExtra("Score",sc);
-                intent.putExtra("Mode","hard");
+                intent.putExtra("Mode","stoner");
                 startActivity(intent);
                 finish();
             }
@@ -216,8 +215,22 @@ public class HardActivity extends AppCompatActivity {
 
         return valuetext;
     }
-    public static int getContrastColor(int color) {
-        double y = (299 * Color.red(color) + 587 * Color.green(color) + 114 * Color.blue(color)) / 1000;
-        return y >= 128 ? Color.BLACK : Color.WHITE;
+    public static int OpposeColor(int ColorToInvert)
+    {
+        int RGBMAX = 255;
+
+        float[] hsv = new float[3];
+        float H;
+
+
+        Color.RGBToHSV( Color.red( ColorToInvert),  RGBMAX - Color.green( ColorToInvert), Color.blue(ColorToInvert), hsv);
+
+
+        H = (float) (hsv[0] + 0.5);
+
+        if (H > 1) H -= 1;
+        return Color.HSVToColor(hsv );
+
+
     }
 }

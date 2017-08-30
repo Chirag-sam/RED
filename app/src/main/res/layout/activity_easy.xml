@@ -12,12 +12,12 @@
         android:id="@+id/colorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:text="RED"
         android:textColor="@color/THEME"
         android:textSize="30dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/mCountDownTimer"
+        android:layout_centerHorizontal="true" />
 
     <com.github.anastr.flattimelib.CountDownTimerView
         android:id="@+id/mCountDownTimer"
@@ -45,7 +45,7 @@
         android:stretchColumns="0,1"
         android:layout_alignParentBottom="true"
         >
-<TableRow>
+     <TableRow>
         <Button
             android:id="@+id/rlred"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@color/YELLOW" />
-</TableRow>
+      </TableRow>
         <TableRow>
         <Button
             android:id="@+id/rlblu"
@@ -65,11 +65,11 @@
             android:layout_height="100dp"
             android:background="@color/BLUE" />
 
-        <Button
-            android:id="@+id/rlgree"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/GREEN" />
+            <Button
+                android:id="@+id/rlgree"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/GREEN" />
         </TableRow>
     </TableLayout>
 

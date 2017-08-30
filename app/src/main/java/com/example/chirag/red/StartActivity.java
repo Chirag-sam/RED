@@ -30,15 +30,19 @@ public class StartActivity extends AppCompatActivity {
                     case "EASY":
 
                         startActivity(new Intent(StartActivity.this, EasyActivity.class));
+                        finish();
                         break;
                     case "HARD":
                         startActivity(new Intent(StartActivity.this, HardActivity.class));
+                        finish();
                         break;
                     case "STONER HARD":
-                        startActivity(new Intent(StartActivity.this, HardActivity.class));
+                        startActivity(new Intent(StartActivity.this, StonerHard.class));
+                        finish();
                         break;
                     default:
                         startActivity(new Intent(StartActivity.this, EasyActivity.class));
+                        finish();
                 }
             }
         });

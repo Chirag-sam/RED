@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.example.chirag.red.PlayAgain">
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/ic_home_black_24dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/gv"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/home"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,7 +23,8 @@
         android:textSize="30dp"
         android:textColor="@color/GREEN"
         android:layout_above="@+id/sc"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:id="@+id/gv"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

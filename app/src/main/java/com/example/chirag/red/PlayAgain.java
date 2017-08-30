@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class PlayAgain extends AppCompatActivity {
 
     ImageView iv;
+    ImageView home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class PlayAgain extends AppCompatActivity {
         sc.setText("SCORE: "+String.valueOf(sco));
 
         iv = (ImageView)findViewById(R.id.iv);
+        home = (ImageView)findViewById(R.id.home);
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,11 +34,26 @@ public class PlayAgain extends AppCompatActivity {
                 if(ty.equals("easy"))
                 {
                     Intent intent = new Intent(PlayAgain.this, EasyActivity.class);
-                    startActivity(intent);}
+                    startActivity(intent);
+                finish();}
                 if(ty.equals("hard"))
                 {
                     Intent intent = new Intent(PlayAgain.this, HardActivity.class);
-                    startActivity(intent);}
+                    startActivity(intent);
+                finish();}
+                if(ty.equals("stoner"))
+                {
+                    Intent intent = new Intent(PlayAgain.this, StonerHard.class);
+                    startActivity(intent);
+                    finish();}
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlayAgain.this, StartActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
