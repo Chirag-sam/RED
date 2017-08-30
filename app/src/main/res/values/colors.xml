@@ -7,7 +7,9 @@
     <color name="BLUE">#0000FF</color>
     <color name="GREEN">#00FF00</color>
     <color name="YELLOW">#FFFF00</color>
-
+    <color name="THEME">#DC3D24</color>
+    <color name="THEMEDark">#FFB93420</color>
+    <color name="white">#ffffff</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="primary">#00bcd4</color>

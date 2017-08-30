@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chirag.red.MainActivity">
+    tools:context="com.example.chirag.red.EasyActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,14 +32,23 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:id="@+id/score"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rel">
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:stretchColumns="0,1"
         android:layout_alignParentBottom="true"
+        android:id="@+id/tl"
+
         >
-        <TableRow>
+        <TableRow
+
+            android:id="@+id/tr1"
+            >
             <Button
                 android:id="@+id/butt1"
                 android:layout_width="match_parent"
@@ -52,7 +61,8 @@
                 android:layout_height="100dp"
                 android:background="@color/YELLOW" />
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:id="@+id/tr2">
             <Button
                 android:id="@+id/butt3"
                 android:layout_width="match_parent"
@@ -66,6 +76,7 @@
                 android:background="@color/GREEN" />
         </TableRow>
     </TableLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

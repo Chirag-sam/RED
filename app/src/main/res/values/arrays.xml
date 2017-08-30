@@ -6,4 +6,10 @@
         <item>#FF00FF00</item>
 
     </array>
+    <string-array name="modes">
+        <item>EASY</item>
+        <item>HARD</item>
+        <item>STONER HARD</item>
+
+    </string-array>
 </resources>

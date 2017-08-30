@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".EasyActivity"></activity>
         <activity android:name=".PlayAgain" />
         <activity android:name=".StartActivity">
             <intent-filter>
@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Hard"></activity>
+        <activity android:name=".HardActivity"></activity>
     </application>
 
 </manifest>

@@ -6,7 +6,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,11 +31,11 @@ public class PlayAgain extends AppCompatActivity {
             public void onClick(View view) {
                 if(ty.equals("easy"))
                 {
-                    Intent intent = new Intent(PlayAgain.this, MainActivity.class);
+                    Intent intent = new Intent(PlayAgain.this, EasyActivity.class);
                     startActivity(intent);}
                 if(ty.equals("hard"))
                 {
-                    Intent intent = new Intent(PlayAgain.this, Hard.class);
+                    Intent intent = new Intent(PlayAgain.this, HardActivity.class);
                     startActivity(intent);}
             }
         });

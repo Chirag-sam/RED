@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chirag.red.MainActivity">
+    tools:context="com.example.chirag.red.EasyActivity"
+    android:id="@+id/rel"
+    android:background="#232B2B">
 
     <TextView
         android:id="@+id/colorText"
@@ -13,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="RED"
+        android:textColor="@color/THEME"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -31,7 +34,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:text="0"
-        android:textColor="#000"
+        android:textColor="@color/white"
         android:textSize="30dp"
         android:textStyle="bold" />
 
