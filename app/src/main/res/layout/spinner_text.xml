@@ -4,4 +4,5 @@
     android:layout_height="match_parent"
     android:gravity="top"
     android:maxLines="1"
-    android:textColor="@color/THEME" />
+    android:textColor="@color/colorPrimary"
+    />

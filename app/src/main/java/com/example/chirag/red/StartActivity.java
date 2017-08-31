@@ -1,51 +1,47 @@
 package com.example.chirag.red;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.ImageButton;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class StartActivity extends AppCompatActivity {
 
-    Button start;
-    Spinner spinner;
+  @BindView(R.id.start) Button start;
+  @BindView(R.id.spinner) AppCompatSpinner spinner;
+  @BindView(R.id.ads) ImageButton ads;
+  @BindView(R.id.high) ImageButton high;
+  @BindView(R.id.aboutus) ImageButton aboutus;
+  @BindView(R.id.mute) ImageButton mute;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-        spinner = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text,getResources().getStringArray(R.array.modes));
-        spinner.setAdapter(adapter);
-        start = (Button) findViewById(R.id.start);
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_start);
+    ButterKnife.bind(this);
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_text,
+        getResources().getStringArray(R.array.modes));
+    spinner.setAdapter(adapter);
+  }
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (spinner.getSelectedItem().toString())
-                {
-                    case "EASY":
-
-                        startActivity(new Intent(StartActivity.this, EasyActivity.class));
-                        finish();
-                        break;
-                    case "HARD":
-                        startActivity(new Intent(StartActivity.this, HardActivity.class));
-                        finish();
-                        break;
-                    case "STONER HARD":
-                        startActivity(new Intent(StartActivity.this, StonerHard.class));
-                        finish();
-                        break;
-                    default:
-                        startActivity(new Intent(StartActivity.this, EasyActivity.class));
-                        finish();
-                }
-            }
-        });
-
+  @OnClick(R.id.start) public void onViewClicked() {
+    switch (spinner.getSelectedItem().toString()) {
+      case "EASY":
+        startActivity(new Intent(StartActivity.this, EasyActivity.class));
+        break;
+      case "HARD":
+        startActivity(new Intent(StartActivity.this, HardActivity.class));
+        break;
+      case "STONER HARD":
+        startActivity(new Intent(StartActivity.this, StonerHard.class));
+        break;
+      default:
+        startActivity(new Intent(StartActivity.this, EasyActivity.class));
     }
+  }
 }

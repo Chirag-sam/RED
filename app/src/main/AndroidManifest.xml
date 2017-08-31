@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HardActivity" />
-        <activity android:name=".StonerHard"></activity>
+        <activity android:name=".StonerHard"/>
     </application>
 
 </manifest>

@@ -4,53 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chirag.red.PlayAgain">
-
+    android:background="@color/colorBackgroundDark"
+    android:gravity="center"
+    tools:context="com.example.chirag.red.PlayAgain"
+    >
+  <LinearLayout
+      android:id="@+id/appname"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_marginBottom="16dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      >
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:srcCompat="@drawable/ic_home_black_24dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/gv"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/home"
+        android:id="@+id/logo"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+
+        app:srcCompat="@drawable/ic_painter_palette"
+        />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="RED"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GAME OVER"
-        android:textSize="30dp"
-        android:textColor="@color/GREEN"
-        android:layout_above="@+id/sc"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/gv"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SCORE : 25"
-        android:textSize="30dp"
-        android:textColor="@color/GREEN"
-        android:layout_above="@+id/iv"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/sc"/>
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/ic_forward_black_24dp"
-        android:tint="@color/BLUE"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/iv"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PLAY AGAIN"
-        android:textSize="30dp"
-        android:textColor="@color/GREEN"
-        android:layout_below="@+id/iv"
-        android:layout_centerHorizontal="true"/>
+  </LinearLayout>
+  <TextView
+      android:id="@+id/sctext"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/appname"
+      android:layout_centerHorizontal="true"
+      android:text="SCORE"
+      android:textColor="@color/colorPrimary"
+      android:textSize="24sp"
+      />
+  <TextView
+      android:id="@+id/sc"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/sctext"
+      android:layout_centerHorizontal="true"
+      android:text="99"
+      android:textColor="@color/colorAccent"
+      android:textSize="42sp"
+      />
+  <TextView
+      android:id="@+id/best"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/sc"
+      android:layout_centerHorizontal="true"
+      android:text="BEST: 100"
+      android:textColor="@color/colorPrimary"
+      android:textSize="16sp"
+      />
+  <ImageButton
+      android:id="@+id/restart"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_below="@+id/best"
+      android:layout_centerHorizontal="true"
+      android:background="?selectableItemBackgroundBorderless"
+      android:scaleType="fitXY"
+      app:srcCompat="@drawable/ic_refresh_black_24dp"
+      />
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/restart"
+      android:layout_centerHorizontal="true"
 
+      >
+    <ImageButton
+        android:id="@+id/help"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="?selectableItemBackgroundBorderless"
 
-
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_help_black_24dp"
+        />
+    <ImageButton
+        android:id="@+id/home"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_home_black_24dp"
+        />
+    <ImageButton
+        android:id="@+id/share"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_share_black_24dp"
+        />
+  </LinearLayout>
 </RelativeLayout>

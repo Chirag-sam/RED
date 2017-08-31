@@ -1,76 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#232B2B"
     tools:context="com.example.chirag.red.EasyActivity"
-    android:id="@+id/rel"
-    android:background="#232B2B">
+    >
 
-    <TextView
-        android:id="@+id/colorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="RED"
-        android:textColor="@color/THEME"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/mCountDownTimer"
-        android:layout_centerHorizontal="true" />
+  <TextView
+      android:id="@+id/colorText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/mCountDownTimer"
+      android:layout_centerHorizontal="true"
+      android:text="RED"
+      android:textColor="@color/colorPrimary"
+      android:textSize="30dp"
+      android:textStyle="bold"
+      />
 
-    <com.github.anastr.flattimelib.CountDownTimerView
-        android:id="@+id/mCountDownTimer"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp" />
+  <com.github.anastr.flattimelib.CountDownTimerView
+      android:id="@+id/mCountDownTimer"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_alignParentRight="true"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="10dp"
+      />
 
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+  <TextView
+      android:id="@+id/score"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="20dp"
+      android:text="0"
+      android:textColor="@color/colorAccent"
+      android:textSize="30dp"
+      android:textStyle="bold"
+      />
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:stretchColumns="0,1"
-        android:layout_alignParentBottom="true"
-        >
-        <TableRow>
-            <Button
-                android:id="@+id/butt1"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/RED" />
+  <TableLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:gravity="center"
+      android:stretchColumns="0,1"
+      >
+    <TableRow>
+      <Button
+          android:id="@+id/butt1"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:background="@color/RED"
+          />
 
-            <Button
-                android:id="@+id/butt2"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/YELLOW" />
-        </TableRow>
-        <TableRow>
-            <Button
-                android:id="@+id/butt3"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/BLUE" />
+      <Button
+          android:id="@+id/butt2"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:background="@color/YELLOW"
+          />
+    </TableRow>
+    <TableRow>
+      <Button
+          android:id="@+id/butt3"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:background="@color/BLUE"
+          />
 
-            <Button
-                android:id="@+id/butt4"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/GREEN" />
-        </TableRow>
-    </TableLayout>
+      <Button
+          android:id="@+id/butt4"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          android:background="@color/GREEN"
+          />
+    </TableRow>
+  </TableLayout>
 
 </RelativeLayout>
