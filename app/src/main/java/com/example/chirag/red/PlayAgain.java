@@ -1,6 +1,8 @@
 package com.example.chirag.red;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,7 @@ public class PlayAgain extends AppCompatActivity {
   @BindView(R.id.help) ImageButton help;
   @BindView(R.id.home) ImageButton home;
   @BindView(R.id.share) ImageButton share;
+  @BindView(R.id.status) TextView status;
   private String ty;
   private String s;
 
@@ -29,8 +32,19 @@ public class PlayAgain extends AppCompatActivity {
     s = getIntent().getExtras().get("Score").toString();
     ty = getIntent().getExtras().get("Mode").toString();
     int sco = Integer.parseInt(s);
-    TextView sc = findViewById(R.id.sc);
+    SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+    long highScore = sharedPref.getInt(ty, 0);
+    if (highScore < sco) {
+      status.setText("NEW BEST!!");
+      highScore = sco;
+      SharedPreferences.Editor editor = sharedPref.edit();
+      editor.putInt(ty, sco);
+      editor.commit();
+    } else {
+      status.setText("GAME OVER!!");
+    }
     sc.setText(String.valueOf(sco));
+    best.setText("BEST: " + String.valueOf(highScore));
   }
 
   @OnClick({ R.id.restart, R.id.help, R.id.home, R.id.share })
