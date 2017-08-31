@@ -1,8 +1,11 @@
 package com.example.chirag.red;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,7 +29,7 @@ public class EasyActivity extends AppCompatActivity {
   @BindView(R.id.rlblu) Button blue;
   @BindView(R.id.rlgree) Button green;
   @BindView(R.id.rel) RelativeLayout rel;
-
+  SharedPreferences sharedPref;
   private ArrayList<String> colorNames = new ArrayList<>();
   private int colors[] = new int[4];
   private int sc;
@@ -34,11 +37,16 @@ public class EasyActivity extends AppCompatActivity {
   private int valuecolor;
   private int valuetext;
   private Random rand = new Random();
+  private MediaPlayer player;
+  private Boolean audio;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_easy);
     ButterKnife.bind(this);
+    player = MediaPlayer.create(this, R.raw.titan_nexus_5);
+    sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+    audio = sharedPref.getBoolean("audio", true);
     colorNames.add("RED");
     colorNames.add("BLUE");
     colorNames.add("GREEN");
@@ -69,6 +77,9 @@ public class EasyActivity extends AppCompatActivity {
 
   @OnClick({ R.id.rlred, R.id.rlyell, R.id.rlblu, R.id.rlgree })
   public void onViewClicked(View view) {
+    if (audio) {
+      player.start();
+    }
     switch (view.getId()) {
       case R.id.rlred:
         checkcolor(((ColorDrawable) red.getBackground()).getColor());
@@ -94,6 +105,7 @@ public class EasyActivity extends AppCompatActivity {
       change();
     } else {
       cd.stop();
+      if (audio) player.stop();
       Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
       intent.putExtra("Score", sc);
       intent.putExtra("Mode", "easy");
