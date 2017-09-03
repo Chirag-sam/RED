@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,9 @@ import com.github.anastr.flattimelib.intf.OnTimeFinish;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HardActivity extends AppCompatActivity {
 
@@ -37,6 +41,7 @@ public class HardActivity extends AppCompatActivity {
     private MediaPlayer player;
     SharedPreferences sharedPref;
     private Boolean audio;
+    private int valuecolor;
 
     private ArrayList<Integer> al = new ArrayList<>();
 
@@ -44,8 +49,9 @@ public class HardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hard);
+        ButterKnife.bind(this);
         player = MediaPlayer.create(this, R.raw.ding);
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(HardActivity.this);
         audio = sharedPref.getBoolean("audio", true);
 
         cd = findViewById(R.id.mCountDownTimer);
@@ -71,11 +77,12 @@ public class HardActivity extends AppCompatActivity {
         change();
     }
 
+
     void change() {
 
         Random rand = new Random();
         int valuetext = rand.nextInt(4);
-        final int valuecolor = rand.nextInt(4);
+        valuecolor = rand.nextInt(4);
         colorText.setText(colorNames.get(valuetext));
         colorText.setTextColor(colors[valuecolor]);
         ChangeBackgroundColour(colors[valuecolor]);
@@ -93,132 +100,6 @@ public class HardActivity extends AppCompatActivity {
         butt2.setBackgroundColor(colors[ran2]);
         butt3.setBackgroundColor(colors[ran3]);
         butt4.setBackgroundColor(colors[ran4]);
-
-        butt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int color = ((ColorDrawable) butt1.getBackground()).getColor();
-
-                if (color == colors[valuecolor]) {
-                    if (audio) {
-                        if(player.isPlaying()==true)
-                        {
-                            player.stop();
-                            player.release();
-                            player = MediaPlayer.create(HardActivity.this,R.raw.ding);
-                        }
-                        player.start();
-                    }
-                    Log.e("Color:" + color, "textColor:" + colors[valuecolor] + "Red: " + R.color.RED + "Blue: " + R.color.BLUE + "yellow: " + R.color.YELLOW + "Green: " + R.color.GREEN);
-                    sc = Integer.parseInt(score.getText().toString());
-                    sc++;
-                    score.setText(String.valueOf(sc));
-                    speed = speed - 10;
-                    al.clear();
-                    change();
-                } else {
-                    cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
-                    intent.putExtra("Score", sc);
-                    intent.putExtra("Mode", "hard");
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-        butt3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int color = ((ColorDrawable) butt3.getBackground()).getColor();
-                if (color == colors[valuecolor]) {
-                    if (audio) {
-                        if(player.isPlaying()==true)
-                        {
-                            player.stop();
-                            player.release();
-                            player = MediaPlayer.create(HardActivity.this,R.raw.ding);
-                        }
-                        player.start();
-                    }
-                    Log.e("Color:" + color, "textColor:" + colors[valuecolor] + "Red: " + R.color.RED + "Blue: " + R.color.BLUE + "yellow: " + R.color.YELLOW + "Green: " + R.color.GREEN);
-                    sc = Integer.parseInt(score.getText().toString());
-                    sc++;
-                    score.setText(String.valueOf(sc));
-                    speed = speed - 10;
-                    al.clear();
-                    change();
-                } else {
-                    cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
-                    intent.putExtra("Score", sc);
-                    intent.putExtra("Mode", "hard");
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-        butt4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int color = ((ColorDrawable) butt4.getBackground()).getColor();
-                if (color == colors[valuecolor]) {
-                    if (audio) {
-                        if(player.isPlaying()==true)
-                        {
-                            player.stop();
-                            player.release();
-                            player = MediaPlayer.create(HardActivity.this,R.raw.ding);
-                        }
-                        player.start();
-                    }
-                    Log.e("Color:" + color, "textColor:" + colors[valuecolor] + "Red: " + R.color.RED + "Blue: " + R.color.BLUE + "yellow: " + R.color.YELLOW + "Green: " + R.color.GREEN);
-                    sc = Integer.parseInt(score.getText().toString());
-                    sc++;
-                    score.setText(String.valueOf(sc));
-                    speed = speed - 10;
-                    al.clear();
-                    change();
-                } else {
-                    cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
-                    intent.putExtra("Score", sc);
-                    intent.putExtra("Mode", "hard");
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-        butt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int color = ((ColorDrawable) butt2.getBackground()).getColor();
-                if (color == colors[valuecolor]) {
-                    if (audio) {
-                        if(player.isPlaying()==true)
-                        {
-                            player.stop();
-                            player.release();
-                            player = MediaPlayer.create(HardActivity.this,R.raw.ding);
-                        }
-                        player.start();
-                    }
-                    Log.e("Color:" + color, "textColor:" + colors[valuecolor] + "Red: " + R.color.RED + "Blue: " + R.color.BLUE + "yellow: " + R.color.YELLOW + "Green: " + R.color.GREEN);
-                    sc = Integer.parseInt(score.getText().toString());
-                    sc++;
-                    score.setText(String.valueOf(sc));
-                    speed = speed - 10;
-                    al.clear();
-                    change();
-                } else {
-                    cd.stop();
-                    Intent intent = new Intent(HardActivity.this, PlayAgain.class);
-                    intent.putExtra("Score", sc);
-                    intent.putExtra("Mode", "hard");
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
 
         cd.start(speed);
         cd.setOnEndAnimationFinish(new OnTimeFinish() {
@@ -253,5 +134,49 @@ public class HardActivity extends AppCompatActivity {
             rel.setBackgroundColor(Color.parseColor("#ffffff"));
         else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN))
             rel.setBackgroundColor(Color.parseColor("#000000"));
+    }
+
+    @OnClick({R.id.butt1, R.id.butt2, R.id.butt3, R.id.butt4})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.butt1:
+                checkcolor(((ColorDrawable) butt1.getBackground()).getColor());
+                break;
+            case R.id.butt2:
+                checkcolor(((ColorDrawable) butt2.getBackground()).getColor());
+                break;
+            case R.id.butt3:
+                checkcolor(((ColorDrawable) butt3.getBackground()).getColor());
+                break;
+            case R.id.butt4:
+                checkcolor(((ColorDrawable) butt4.getBackground()).getColor());
+                break;
+        }
+    }
+    void checkcolor(int color)
+    {
+        if (color == colors[valuecolor]) {
+            if (audio) {
+                if (player.isPlaying() == true) {
+                    player.stop();
+                    player.release();
+                    player = MediaPlayer.create(HardActivity.this, R.raw.ding);
+                }
+                player.start();
+            }
+            sc = Integer.parseInt(score.getText().toString());
+            sc++;
+            score.setText(String.valueOf(sc));
+            speed = speed - 10;
+            al.clear();
+            change();
+        } else {
+            cd.stop();
+            Intent intent = new Intent(HardActivity.this, PlayAgain.class);
+            intent.putExtra("Score", sc);
+            intent.putExtra("Mode", "hard");
+            startActivity(intent);
+            finish();
+        }
     }
 }

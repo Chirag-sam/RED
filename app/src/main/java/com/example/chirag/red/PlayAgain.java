@@ -1,10 +1,13 @@
 package com.example.chirag.red;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,17 +29,23 @@ public class PlayAgain extends AppCompatActivity {
   private MediaPlayer laugh;
   private String ty;
   private String s;
+  private Boolean audio;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_play_again);
     ButterKnife.bind(this);
-    laugh = MediaPlayer.create(this, R.raw.dennis);
-    laugh.start();
+    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
+    audio = sharedPref.getBoolean("audio",true);
+    if(audio)
+    {
+      laugh = MediaPlayer.create(this, R.raw.dennis);
+      laugh.start();
+    }
     s = getIntent().getExtras().get("Score").toString();
     ty = getIntent().getExtras().get("Mode").toString();
     int sco = Integer.parseInt(s);
-    SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
     long highScore = sharedPref.getInt(ty, 0);
     if (highScore < sco) {
       status.setText("NEW BEST!!");
@@ -76,11 +85,29 @@ public class PlayAgain extends AppCompatActivity {
         }
         break;
       case R.id.help:
-        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Sample Text")
-            .setMessage(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin diam purus, eget feugiat erat luctus malesuada. Sed egestas convallis metus, sed convallis orci gravida vel. In hac habitasse platea dictumst. Donec non dolor felis. Nam vel varius nibh, at gravida nisl. Curabitur blandit et massa eget lobortis. Integer vel efficitur augue, non fermentum lectus. Proin urna lacus, gravida nec porttitor at, mattis eu ex. Curabitur molestie lectus tellus, id eleifend urna ornare quis. Suspendisse id molestie metu")
-            .setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
-        AlertDialog dialog = builder.create();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Sample Text")
+//            .setMessage(
+//                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin diam purus, eget feugiat erat luctus malesuada. Sed egestas convallis metus, sed convallis orci gravida vel. In hac habitasse platea dictumst. Donec non dolor felis. Nam vel varius nibh, at gravida nisl. Curabitur blandit et massa eget lobortis. Integer vel efficitur augue, non fermentum lectus. Proin urna lacus, gravida nec porttitor at, mattis eu ex. Curabitur molestie lectus tellus, id eleifend urna ornare quis. Suspendisse id molestie metu")
+//            .setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//        break;
+        final Dialog dialog;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+          dialog = new Dialog(PlayAgain.this, R.style.dialogthemez);
+        } else {
+          dialog = new Dialog(PlayAgain.this);
+        }
+        dialog.setContentView(R.layout.highscoredialog);
+        TextView easy = dialog.findViewById(R.id.easy);
+        TextView hard = dialog.findViewById(R.id.hard);
+        TextView stoner = dialog.findViewById(R.id.stoner);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
+        long easys = sharedPref.getInt("easy",0);
+        easy.setText("EASY: "+easys);
+        hard.setText("HARD: "+sharedPref.getInt("hard",0));
+        stoner.setText("STONERHARD: "+sharedPref.getInt("stoner",0));
         dialog.show();
         break;
       case R.id.home:

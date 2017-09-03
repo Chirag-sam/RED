@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +58,7 @@ public class EasyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_easy);
         ButterKnife.bind(this);
         player = MediaPlayer.create(this, R.raw.ding);
-        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(EasyActivity.this);
         audio = sharedPref.getBoolean("audio", true);
         colorNames.add("RED");
         colorNames.add("BLUE");
