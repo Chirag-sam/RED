@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -30,11 +31,6 @@ public class HardActivity extends AppCompatActivity {
   private RelativeLayout rel;
 
   private ArrayList<Integer> al = new ArrayList<>();
-
-  public static int getContrastColor(int color) {
-    double y = (299 * Color.red(color) + 587 * Color.green(color) + 114 * Color.blue(color)) / 1000;
-    return y >= 128 ? Color.BLACK : Color.WHITE;
-  }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -70,6 +66,7 @@ public class HardActivity extends AppCompatActivity {
     final int valuecolor = rand.nextInt(4);
     colorText.setText(colorNames.get(valuetext));
     colorText.setTextColor(colors[valuecolor]);
+    ChangeBackgroundColour(colors[valuecolor]);
 
     int ran1 = generateRandom(4, null);
 
@@ -88,10 +85,9 @@ public class HardActivity extends AppCompatActivity {
     butt1.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         int color = ((ColorDrawable) butt1.getBackground()).getColor();
-        int contastcolor = getContrastColor(color);
 
         if (color == colors[valuecolor]) {
-          rel.setBackgroundColor(contastcolor);
+          Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+R.color.RED+"Blue: "+R.color.BLUE+"yellow: "+R.color.YELLOW+"Green: "+R.color.GREEN);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
           score.setText(String.valueOf(sc));
@@ -111,9 +107,8 @@ public class HardActivity extends AppCompatActivity {
     butt3.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         int color = ((ColorDrawable) butt3.getBackground()).getColor();
-        int contastcolor = getContrastColor(color);
         if (color == colors[valuecolor]) {
-          rel.setBackgroundColor(contastcolor);
+          Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+R.color.RED+"Blue: "+R.color.BLUE+"yellow: "+R.color.YELLOW+"Green: "+R.color.GREEN);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
           score.setText(String.valueOf(sc));
@@ -133,9 +128,8 @@ public class HardActivity extends AppCompatActivity {
     butt4.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         int color = ((ColorDrawable) butt4.getBackground()).getColor();
-        int contastcolor = getContrastColor(color);
         if (color == colors[valuecolor]) {
-          rel.setBackgroundColor(contastcolor);
+          Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+R.color.RED+"Blue: "+R.color.BLUE+"yellow: "+R.color.YELLOW+"Green: "+R.color.GREEN);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
           score.setText(String.valueOf(sc));
@@ -155,9 +149,8 @@ public class HardActivity extends AppCompatActivity {
     butt2.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
         int color = ((ColorDrawable) butt2.getBackground()).getColor();
-        int contastcolor = getContrastColor(color);
         if (color == colors[valuecolor]) {
-          rel.setBackgroundColor(contastcolor);
+          Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+R.color.RED+"Blue: "+R.color.BLUE+"yellow: "+R.color.YELLOW+"Green: "+R.color.GREEN);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
           score.setText(String.valueOf(sc));
@@ -200,5 +193,12 @@ public class HardActivity extends AppCompatActivity {
     }
 
     return valuetext;
+  }
+  public void ChangeBackgroundColour(int color)
+  {
+    if(color == getResources().getColor(R.color.BLUE) || color == getResources().getColor(R.color.RED))
+      rel.setBackgroundColor(Color.parseColor("#ffffff"));
+    else if(color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN))
+      rel.setBackgroundColor(Color.parseColor("#000000"));
   }
 }

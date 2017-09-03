@@ -53,14 +53,14 @@
           android:id="@+id/butt1"
           android:layout_width="match_parent"
           android:layout_height="100dp"
-          android:background="@color/RED"
+          android:background="@drawable/red_button_background"
           />
 
       <Button
           android:id="@+id/butt2"
           android:layout_width="match_parent"
           android:layout_height="100dp"
-          android:background="@color/YELLOW"
+          android:background="@drawable/blue_button_background"
           />
     </TableRow>
     <TableRow>
@@ -68,14 +68,14 @@
           android:id="@+id/butt3"
           android:layout_width="match_parent"
           android:layout_height="100dp"
-          android:background="@color/BLUE"
+          android:background="@drawable/green_colour_background"
           />
 
       <Button
           android:id="@+id/butt4"
           android:layout_width="match_parent"
           android:layout_height="100dp"
-          android:background="@color/GREEN"
+          android:background="@drawable/yellow_button_background"
           />
     </TableRow>
   </TableLayout>

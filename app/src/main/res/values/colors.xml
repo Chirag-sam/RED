@@ -7,6 +7,7 @@
   <color name="YELLOW">#FFFF00</color>
   <color name="colorPrimary">#DC3D24</color>
   <color name="colorPrimaryDark">#FFB93420</color>
+  <color name="white">#ffffff</color>
   <color name="colorAccent">#ffffff</color>
   <color name="colorBackgroundDark">#232B2B</color>
   <color name="primary_text">#212121</color>
