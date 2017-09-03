@@ -1,8 +1,11 @@
 package com.example.chirag.red;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -32,6 +35,9 @@ public class StonerHard extends AppCompatActivity {
   private int sc;
   private long speed;
   private RelativeLayout rel;
+  private MediaPlayer player;
+  SharedPreferences sharedPref;
+  private Boolean audio;
 
   private ArrayList<Integer> al = new ArrayList<>();
 
@@ -53,6 +59,10 @@ public class StonerHard extends AppCompatActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_hard);
+
+    player = MediaPlayer.create(this, R.raw.ding);
+    sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+    audio = sharedPref.getBoolean("audio", true);
 
     cd = findViewById(R.id.mCountDownTimer);
     colorText = findViewById(R.id.colorText);
@@ -119,6 +129,15 @@ public class StonerHard extends AppCompatActivity {
         int contastcolor = OpposeColor(color);
         Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+getResources().getColor(R.color.RED)+"Blue: "+getResources().getColor(R.color.BLUE)+"yellow: "+getResources().getColor(R.color.YELLOW)+"Green: "+getResources().getColor(R.color.GREEN));
         if (color == colors[valuecolor]) {
+          if (audio) {
+            if(player.isPlaying()==true)
+            {
+              player.stop();
+              player.release();
+              player = MediaPlayer.create(StonerHard.this,R.raw.ding);
+            }
+            player.start();
+          }
           rel.setBackgroundColor(contastcolor);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
@@ -150,6 +169,15 @@ public class StonerHard extends AppCompatActivity {
         int contastcolor = OpposeColor(color);
         Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+getResources().getColor(R.color.RED)+"Blue: "+getResources().getColor(R.color.BLUE)+"yellow: "+getResources().getColor(R.color.YELLOW)+"Green: "+getResources().getColor(R.color.GREEN));
         if (color == colors[valuecolor]) {
+          if (audio) {
+            if(player.isPlaying()==true)
+            {
+              player.stop();
+              player.release();
+              player = MediaPlayer.create(StonerHard.this,R.raw.ding);
+            }
+            player.start();
+          }
           rel.setBackgroundColor(contastcolor);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
@@ -179,7 +207,17 @@ public class StonerHard extends AppCompatActivity {
         else
           color = getResources().getColor(R.color.BLUE);
         int contastcolor = OpposeColor(color);
-        Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+getResources().getColor(R.color.RED)+"Blue: "+getResources().getColor(R.color.BLUE)+"yellow: "+getResources().getColor(R.color.YELLOW)+"Green: "+getResources().getColor(R.color.GREEN));        if (color == colors[valuecolor]) {
+        Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+getResources().getColor(R.color.RED)+"Blue: "+getResources().getColor(R.color.BLUE)+"yellow: "+getResources().getColor(R.color.YELLOW)+"Green: "+getResources().getColor(R.color.GREEN));
+        if (color == colors[valuecolor]) {
+          if (audio) {
+            if(player.isPlaying()==true)
+            {
+              player.stop();
+              player.release();
+              player = MediaPlayer.create(StonerHard.this,R.raw.ding);
+            }
+            player.start();
+          }
           rel.setBackgroundColor(contastcolor);
           sc = Integer.parseInt(score.getText().toString());
           sc++;
@@ -209,7 +247,17 @@ public class StonerHard extends AppCompatActivity {
         else
           color = getResources().getColor(R.color.BLUE);
         int contastcolor = OpposeColor(color);
-        Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+getResources().getColor(R.color.RED)+"Blue: "+getResources().getColor(R.color.BLUE)+"yellow: "+getResources().getColor(R.color.YELLOW)+"Green: "+getResources().getColor(R.color.GREEN));        if (color == colors[valuecolor]) {
+        Log.e("Color:"+color, "textColor:"+colors[valuecolor]+"Red: "+getResources().getColor(R.color.RED)+"Blue: "+getResources().getColor(R.color.BLUE)+"yellow: "+getResources().getColor(R.color.YELLOW)+"Green: "+getResources().getColor(R.color.GREEN));
+        if (color == colors[valuecolor]) {
+          if (audio) {
+            if(player.isPlaying()==true)
+            {
+              player.stop();
+              player.release();
+              player = MediaPlayer.create(StonerHard.this,R.raw.ding);
+            }
+            player.start();
+          }
           rel.setBackgroundColor(contastcolor);
           sc = Integer.parseInt(score.getText().toString());
           sc++;

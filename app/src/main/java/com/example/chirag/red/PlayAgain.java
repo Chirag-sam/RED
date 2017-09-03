@@ -3,6 +3,7 @@ package com.example.chirag.red;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class PlayAgain extends AppCompatActivity {
   @BindView(R.id.home) ImageButton home;
   @BindView(R.id.share) ImageButton share;
   @BindView(R.id.status) TextView status;
+  private MediaPlayer laugh;
   private String ty;
   private String s;
 
@@ -29,6 +31,8 @@ public class PlayAgain extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_play_again);
     ButterKnife.bind(this);
+    laugh = MediaPlayer.create(this, R.raw.dennis);
+    laugh.start();
     s = getIntent().getExtras().get("Score").toString();
     ty = getIntent().getExtras().get("Mode").toString();
     int sco = Integer.parseInt(s);
@@ -51,6 +55,11 @@ public class PlayAgain extends AppCompatActivity {
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.restart:
+        if(laugh.isPlaying()==true)
+        {
+          laugh.stop();
+          laugh.release();
+        }
         switch (ty) {
           case "easy":
             startActivity(new Intent(PlayAgain.this, EasyActivity.class));
@@ -75,6 +84,11 @@ public class PlayAgain extends AppCompatActivity {
         dialog.show();
         break;
       case R.id.home:
+          if(laugh.isPlaying()==true)
+          {
+              laugh.stop();
+              laugh.release();
+          }
         finish();
         break;
       case R.id.share:
