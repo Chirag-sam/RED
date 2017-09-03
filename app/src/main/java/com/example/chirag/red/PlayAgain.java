@@ -107,10 +107,11 @@ public class PlayAgain extends AppCompatActivity {
         long easys = sharedPref.getInt("easy",0);
         easy.setText("EASY: "+easys);
         hard.setText("HARD: "+sharedPref.getInt("hard",0));
-        stoner.setText("STONERHARD: "+sharedPref.getInt("stoner",0));
+        stoner.setText("STONER HARD: "+sharedPref.getInt("stoner",0));
         dialog.show();
         break;
       case R.id.home:
+        if(audio)
           if(laugh.isPlaying()==true)
           {
               laugh.stop();

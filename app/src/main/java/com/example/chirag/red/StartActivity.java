@@ -81,7 +81,7 @@ public class StartActivity extends AppCompatActivity {
         long easys = sharedPreff.getInt("easy",0);
         easy.setText("EASY: "+easys);
         hard.setText("HARD: "+sharedPreff.getInt("hard",0));
-        stoner.setText("STONERHARD: "+sharedPreff.getInt("stoner",0));
+        stoner.setText("STONER HARD: "+sharedPreff.getInt("stoner",0));
         dialog.show();
         break;
       case R.id.aboutus:
