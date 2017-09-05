@@ -56,6 +56,9 @@ public class StartActivity extends AppCompatActivity {
       case "STONER HARD":
         startActivity(new Intent(StartActivity.this, StonerHard.class));
         break;
+      case "REFLEX 30":
+        startActivity(new Intent(StartActivity.this, Reflex30.class));
+        break;
       default:
         startActivity(new Intent(StartActivity.this, EasyActivity.class));
     }

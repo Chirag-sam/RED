@@ -167,6 +167,7 @@ public class HardActivity extends AppCompatActivity {
             sc = Integer.parseInt(score.getText().toString());
             sc++;
             score.setText(String.valueOf(sc));
+            if(speed>380)
             speed = speed - 10;
             al.clear();
             change();
