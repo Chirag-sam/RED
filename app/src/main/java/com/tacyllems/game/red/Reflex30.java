@@ -1,4 +1,4 @@
-package com.example.chirag.red;
+package com.tacyllems.game.red;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,19 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Reflex30 extends AppCompatActivity {
 
-    private TextView timer;
-    private long startTime = 0L;
-    private Handler customHandler = new Handler();
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
@@ -45,6 +40,9 @@ public class Reflex30 extends AppCompatActivity {
     @BindView(R.id.rel)
     RelativeLayout rel;
     SharedPreferences sharedPref;
+  private TextView timer;
+  private long startTime = 0L;
+  private Handler customHandler = new Handler();
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private int sc;
@@ -55,7 +53,19 @@ public class Reflex30 extends AppCompatActivity {
     private Boolean audio;
     private Random rand = new Random();
     private int init;
-
+  private Runnable updateTimerThread = new Runnable() {
+    public void run() {
+      timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+      updatedTime = timeSwapBuff + timeInMilliseconds;
+      int secs = (int) (updatedTime / 1000);
+      int mins = secs / 60;
+      secs = secs % 60;
+      int milliseconds = (int) (updatedTime % 1000);
+      timer.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+          milliseconds));
+      customHandler.postDelayed(this, 0);
+    }
+  };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +73,7 @@ public class Reflex30 extends AppCompatActivity {
         setContentView(R.layout.activity_reflex30);
         ButterKnife.bind(this);
         init = 0;
-        timer = (TextView) findViewById(R.id.timer);
+      timer = findViewById(R.id.timer);
         player = MediaPlayer.create(this, R.raw.ding);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(Reflex30.this);
         audio = sharedPref.getBoolean("audio", true);
@@ -77,21 +87,6 @@ public class Reflex30 extends AppCompatActivity {
         colors[3] = Color.YELLOW;
         score.setText("30");
     }
-
-    private Runnable updateTimerThread = new Runnable() {
-        public void run() {
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-            updatedTime = timeSwapBuff + timeInMilliseconds;
-            int secs = (int) (updatedTime / 1000);
-            int mins = secs / 60;
-            secs = secs % 60;
-            int milliseconds = (int) (updatedTime % 1000);
-            timer.setText("" + mins + ":"
-                    + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));
-            customHandler.postDelayed(this, 0);
-        }
-    };
 
     @OnClick({R.id.rlred, R.id.rlyell, R.id.rlblu, R.id.rlgree})
     public void onViewClicked(View view) {

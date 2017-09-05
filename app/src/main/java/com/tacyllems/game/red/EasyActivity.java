@@ -1,6 +1,5 @@
-package com.example.chirag.red;
+package com.tacyllems.game.red;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,13 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 import com.github.anastr.flattimelib.CountDownTimerView;
-
 import java.util.ArrayList;
 import java.util.Random;
 

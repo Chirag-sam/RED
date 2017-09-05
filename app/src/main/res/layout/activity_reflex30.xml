@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#232B2B"
-    tools:context="com.example.chirag.red.EasyActivity"
+    tools:context="com.tacyllems.game.red.EasyActivity"
     >
 
     <TextView
@@ -22,14 +22,15 @@
         />
 
     <TextView
+        android:id="@+id/timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/score"
+        android:layout_centerHorizontal="true"
         android:text="00:00:00"
         android:textColor="@color/white"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/timer"
-        android:layout_alignBottom="@+id/score"/>
+        />
 
     <TextView
         android:id="@+id/score"

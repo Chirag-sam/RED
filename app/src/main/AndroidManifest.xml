@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chirag.red">
+    package="com.tacyllems.game.red">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name="com.tacyllems.game.red.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,12 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EasyActivity" />
-        <activity android:name=".PlayAgain" />
-        <activity android:name=".StartActivity" />
-        <activity android:name=".HardActivity" />
-        <activity android:name=".StonerHard" />
-        <activity android:name=".Reflex30"></activity>
+        <activity android:name="com.tacyllems.game.red.EasyActivity"/>
+        <activity android:name="com.tacyllems.game.red.PlayAgain"/>
+        <activity android:name="com.tacyllems.game.red.StartActivity"/>
+        <activity android:name="com.tacyllems.game.red.HardActivity"/>
+        <activity android:name="com.tacyllems.game.red.StonerHard"/>
+        <activity android:name="com.tacyllems.game.red.Reflex30"></activity>
     </application>
 
 </manifest>

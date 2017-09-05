@@ -1,4 +1,4 @@
-package com.example.chirag.red;
+package com.tacyllems.game.red;
 
 import android.content.Intent;
 import android.os.Bundle;

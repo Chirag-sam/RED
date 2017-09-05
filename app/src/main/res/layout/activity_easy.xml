@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#232B2B"
-    tools:context="com.example.chirag.red.EasyActivity"
+    tools:context="com.tacyllems.game.red.EasyActivity"
     >
 
   <TextView

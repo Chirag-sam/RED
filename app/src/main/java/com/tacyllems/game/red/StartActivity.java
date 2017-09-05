@@ -1,7 +1,6 @@
-package com.example.chirag.red;
+package com.tacyllems.game.red;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -9,15 +8,19 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -29,10 +32,25 @@ public class StartActivity extends AppCompatActivity {
   @BindView(R.id.mute) ImageButton mute;
   Boolean audio;
   SharedPreferences sharedPref;
+  InterstitialAd mInterstitialAd;
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
     ButterKnife.bind(this);
+    MobileAds.initialize(this, getString(R.string.appidads));
+    mInterstitialAd = new InterstitialAd(this);
+    if (BuildConfig.DEBUG) {
+      mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+    } else {
+      mInterstitialAd.setAdUnitId(getString(R.string.fullscreenadid));
+    }
+    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    mInterstitialAd.setAdListener(new AdListener() {
+      @Override public void onAdClosed() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequest);
+      }
+    });
     sharedPref = PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
     audio = sharedPref.getBoolean("audio", true);
     if (audio) {
@@ -67,6 +85,11 @@ public class StartActivity extends AppCompatActivity {
   @OnClick({ R.id.ads, R.id.high, R.id.aboutus, R.id.mute }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.ads:
+        if (mInterstitialAd.isLoaded()) {
+          mInterstitialAd.show();
+        } else {
+          Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
         break;
       case R.id.high:
         final Dialog dialog;
