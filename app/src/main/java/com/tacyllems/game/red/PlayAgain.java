@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,7 +22,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class PlayAgain extends AppCompatActivity {
 
@@ -33,9 +36,9 @@ public class PlayAgain extends AppCompatActivity {
   @BindView(R.id.share) ImageButton share;
   @BindView(R.id.status) TextView status;
   @BindView(R.id.adView) AdView adView;
-  @BindView(R.id.addpont)
-  LinearLayout videoad;
+  @BindView(R.id.addpont) LinearLayout videoad;
   InterstitialAd mInterstitialAd;
+  RewardedVideoAd mAd;
   private MediaPlayer laugh;
   private String ty;
   private String s;
@@ -43,7 +46,6 @@ public class PlayAgain extends AppCompatActivity {
   private Boolean audio;
   private String time;
   private int noofgames = 0;
-  RewardedVideoAd mAd;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -54,7 +56,39 @@ public class PlayAgain extends AppCompatActivity {
     AdRequest adRequest = new AdRequest.Builder().build();
     adView.loadAd(adRequest);
     mAd = MobileAds.getRewardedVideoAdInstance(this);
-    mAd.setRewardedVideoAdListener(this);
+    mAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+    mAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+      @Override public void onRewardedVideoAdLoaded() {
+
+      }
+
+      @Override public void onRewardedVideoAdOpened() {
+
+      }
+
+      @Override public void onRewardedVideoStarted() {
+
+      }
+
+      @Override public void onRewardedVideoAdClosed() {
+        mAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+      }
+
+      @Override public void onRewarded(RewardItem rewardItem) {
+        Toast.makeText(PlayAgain.this,
+            "onRewarded! currency: " + rewardItem.getType() + "  amount: " + rewardItem.getAmount(),
+            Toast.LENGTH_SHORT).show();
+        // Reward the user.
+      }
+
+      @Override public void onRewardedVideoAdLeftApplication() {
+
+      }
+
+      @Override public void onRewardedVideoAdFailedToLoad(int i) {
+
+      }
+    });
     mInterstitialAd = new InterstitialAd(this);
     if (BuildConfig.DEBUG) {
       mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
@@ -87,7 +121,6 @@ public class PlayAgain extends AppCompatActivity {
           SharedPreferences.Editor editor = sharedPref.edit();
           editor.putInt("noofgames", noofgames);
           editor.apply();
-
         }
         Log.i("Ads", "onAdLoaded");
       }
@@ -124,7 +157,7 @@ public class PlayAgain extends AppCompatActivity {
     best.setText("BEST: " + String.valueOf(highScore));
   }
 
-  @OnClick({ R.id.restart, R.id.help, R.id.home, R.id.share })
+  @OnClick({ R.id.restart, R.id.help, R.id.home, R.id.share, R.id.addpont })
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.restart:
@@ -197,6 +230,24 @@ public class PlayAgain extends AppCompatActivity {
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, "Share Score Via"));
         break;
+      case R.id.addpont:
+        if (mAd.isLoaded()) mAd.show();
+        break;
     }
+  }
+
+  @Override public void onResume() {
+    mAd.resume(this);
+    super.onResume();
+  }
+
+  @Override public void onPause() {
+    mAd.pause(this);
+    super.onPause();
+  }
+
+  @Override public void onDestroy() {
+    mAd.destroy(this);
+    super.onDestroy();
   }
 }
