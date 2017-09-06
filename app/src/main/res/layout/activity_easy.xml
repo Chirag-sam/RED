@@ -28,6 +28,22 @@
       android:layout_marginRight="10dp"
       android:layout_marginTop="10dp"
       />
+  <TextView
+      android:id="@+id/slowitemtext"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_alignLeft="@+id/mCountDownTimer"
+      android:layout_alignParentRight="true"
+      android:layout_below="@id/mCountDownTimer"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="10dp"
+      android:background="@drawable/circle_background"
+      android:gravity="center"
+      android:text="5"
+      android:textColor="@color/white"
+      android:textSize="15sp"
+      />
+
 
   <TextView
       android:id="@+id/score"
@@ -42,6 +58,7 @@
       />
 
   <TableLayout
+      android:id="@+id/tableLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
@@ -79,5 +96,16 @@
           />
     </TableRow>
   </TableLayout>
+  <ProgressBar
+      android:id="@+id/progressBar2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/colorText"
+      android:layout_centerHorizontal="true"
+      android:layout_margin="40dp"
+      android:max="100"
+      android:progress="100"
+      style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+      />
 
 </RelativeLayout>

@@ -43,6 +43,7 @@ public class PlayAgain extends AppCompatActivity {
   private String ty;
   private String s;
   private int sco;
+  private int slowvalue;
   private Boolean audio;
   private String time;
   private int noofgames = 0;
@@ -52,6 +53,7 @@ public class PlayAgain extends AppCompatActivity {
     setContentView(R.layout.activity_play_again);
     ButterKnife.bind(this);
     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
+    slowvalue = sharedPref.getInt("slowitem", 0);
     MobileAds.initialize(this, getString(R.string.appidads));
     AdRequest adRequest = new AdRequest.Builder().build();
     adView.loadAd(adRequest);
@@ -78,6 +80,10 @@ public class PlayAgain extends AppCompatActivity {
         Toast.makeText(PlayAgain.this,
             "onRewarded! currency: " + rewardItem.getType() + "  amount: " + rewardItem.getAmount(),
             Toast.LENGTH_SHORT).show();
+        slowvalue += rewardItem.getAmount();
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("slowitem", slowvalue);
+        editor.commit();
         // Reward the user.
       }
 
