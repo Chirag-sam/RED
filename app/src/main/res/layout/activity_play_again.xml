@@ -9,6 +9,7 @@
     tools:context="com.tacyllems.game.red.PlayAgain"
     >
   <LinearLayout
+
       android:id="@+id/appname"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -123,14 +124,38 @@
         app:srcCompat="@drawable/ic_share_black_24dp"
         />
   </LinearLayout>
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:id="@+id/addpont"
+      android:layout_below="@+id/buttonPanel"
+      android:background="?selectableItemBackgroundBorderless"
+      android:layout_centerHorizontal="true">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/ic_exposure_plus_2_black_24dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:id="@+id/plus2"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Ad to get 2 slow points!"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"/>
+  </LinearLayout>
   <com.google.android.gms.ads.AdView
 
       xmlns:ads="http://schemas.android.com/apk/res-auto"
       android:id="@+id/adView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/buttonPanel"
+      android:layout_marginTop="16dp"
       android:layout_centerHorizontal="true"
+      android:layout_below="@id/addpont"
       ads:adSize="BANNER"
       ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
       >

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 
 public class PlayAgain extends AppCompatActivity {
 
@@ -31,6 +33,8 @@ public class PlayAgain extends AppCompatActivity {
   @BindView(R.id.share) ImageButton share;
   @BindView(R.id.status) TextView status;
   @BindView(R.id.adView) AdView adView;
+  @BindView(R.id.addpont)
+  LinearLayout videoad;
   InterstitialAd mInterstitialAd;
   private MediaPlayer laugh;
   private String ty;
@@ -39,6 +43,7 @@ public class PlayAgain extends AppCompatActivity {
   private Boolean audio;
   private String time;
   private int noofgames = 0;
+  RewardedVideoAd mAd;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,6 +53,8 @@ public class PlayAgain extends AppCompatActivity {
     MobileAds.initialize(this, getString(R.string.appidads));
     AdRequest adRequest = new AdRequest.Builder().build();
     adView.loadAd(adRequest);
+    mAd = MobileAds.getRewardedVideoAdInstance(this);
+    mAd.setRewardedVideoAdListener(this);
     mInterstitialAd = new InterstitialAd(this);
     if (BuildConfig.DEBUG) {
       mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
