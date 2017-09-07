@@ -152,9 +152,8 @@ public class EasyActivity extends AppCompatActivity {
         progressBar2.setVisibility(View.VISIBLE);
         ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
         animation.setDuration(10000);
-        long temp;
-        temp = speed;
-        speed = 2500;
+        cd.stop();
+
         animation.setInterpolator(new DecelerateInterpolator());
         animation.addListener(new Animator.AnimatorListener() {
             @Override
@@ -165,7 +164,7 @@ public class EasyActivity extends AppCompatActivity {
             public void onAnimationEnd(Animator animator) {
                 //do something when the countdown is complete
                 progressBar2.setVisibility(View.GONE);
-                speed = temp;
+                cd.start(speed);
             }
 
             @Override

@@ -180,13 +180,18 @@ public class PlayAgain extends AppCompatActivity {
 
             time = getIntent().getExtras().getLong("Time");
             Log.e("Time", "time: " + time);
-            status.setText("GAME OVER1234");
+            status.setText("GAME OVER");
             int secs = (int) (time / 1000);
             int mins = secs / 60;
             secs = secs % 60;
             int milliseconds = (int) (time % 1000);
             sc.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
                     milliseconds));
+            if(getIntent().hasExtra("Did"))
+            {
+                time=354000L;
+                sc.setText("00:00:000");
+            }
 
             long highScore = sharedPref.getLong(ty,354000);
 

@@ -123,6 +123,7 @@ public class Reflex30 extends AppCompatActivity {
             Intent intent = new Intent(Reflex30.this, PlayAgain.class);
             intent.putExtra("Time", updatedTime);
             intent.putExtra("Mode", "reflex");
+            intent.putExtra("Did","not complete");
             startActivity(intent);
             finish();
         }
