@@ -30,5 +30,14 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/stoner"
         android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REFLEX30: 24"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/reflex30"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

@@ -103,11 +103,25 @@ public class StartActivity extends AppCompatActivity {
         TextView easy = dialog.findViewById(R.id.easy);
         TextView hard = dialog.findViewById(R.id.hard);
         TextView stoner = dialog.findViewById(R.id.stoner);
+        TextView reflex30 = dialog.findViewById(R.id.reflex30);
         SharedPreferences sharedPreff = PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
         long easys = sharedPreff.getInt("easy",0);
         easy.setText("EASY: "+easys);
         hard.setText("HARD: "+sharedPreff.getInt("hard",0));
         stoner.setText("STONER HARD: "+sharedPreff.getInt("stoner",0));
+        Long p = sharedPref.getLong("reflex30",354000);
+
+        int secs = (int) (p / 1000);
+        int mins = secs / 60;
+        secs = secs % 60;
+        int milliseconds = (int) (p % 1000);
+        if(p==354000)
+        {
+          reflex30.setText("REFLEX30:"+" 00:00:000");
+        }
+        else
+        reflex30.setText("REFLEX30:"+"" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                milliseconds));
         dialog.show();
         break;
       case R.id.aboutus:

@@ -121,7 +121,7 @@ public class Reflex30 extends AppCompatActivity {
             customHandler.removeCallbacks(updateTimerThread);
             if (audio) player.stop();
             Intent intent = new Intent(Reflex30.this, PlayAgain.class);
-            intent.putExtra("Time", timer.getText().toString());
+            intent.putExtra("Time", updatedTime);
             intent.putExtra("Mode", "reflex");
             startActivity(intent);
             finish();
@@ -136,7 +136,7 @@ public class Reflex30 extends AppCompatActivity {
             timeSwapBuff += timeInMilliseconds;
             customHandler.removeCallbacks(updateTimerThread);
             Intent intent = new Intent(Reflex30.this, PlayAgain.class);
-            intent.putExtra("Time", timer.getText().toString());
+            intent.putExtra("Time", updatedTime);
             intent.putExtra("Mode", "reflex");
             startActivity(intent);
             finish();

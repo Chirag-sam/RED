@@ -56,7 +56,7 @@ public class PlayAgain extends AppCompatActivity {
     private int sco;
     private int slowvalue;
     private Boolean audio;
-    private String time;
+    private Long time;
     private int noofgames = 0;
 
     @Override
@@ -94,9 +94,6 @@ public class PlayAgain extends AppCompatActivity {
 
             @Override
             public void onRewarded(RewardItem rewardItem) {
-                Toast.makeText(PlayAgain.this,
-                        "onRewarded! currency: " + rewardItem.getType() + "  amount: " + rewardItem.getAmount(),
-                        Toast.LENGTH_SHORT).show();
                 slowvalue += rewardItem.getAmount();
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putInt("slowitem", slowvalue);
@@ -154,37 +151,65 @@ public class PlayAgain extends AppCompatActivity {
         });
 
         audio = sharedPref.getBoolean("audio", true);
+        ty = getIntent().getExtras().get("Mode").toString();
 
         if (audio) {
             laugh = MediaPlayer.create(this, R.raw.dennis);
             laugh.start();
         }
-        if (getIntent().hasExtra("Score")) s = getIntent().getExtras().get("Score").toString();
+        if (getIntent().hasExtra("Score")) {
+            s = getIntent().getExtras().get("Score").toString();
+            if (s != null) sco = Integer.parseInt(s);
+
+            long highScore = sharedPref.getInt(ty, 0);
+
+            if (highScore < sco) {
+                status.setText("NEW BEST!!");
+                highScore = sco;
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt(ty, sco);
+                editor.commit();
+            } else {
+                status.setText("GAME OVER!!");
+            }
+            sc.setText(String.valueOf(sco));
+            best.setText("BEST: " + String.valueOf(highScore));
+
+        }
         if (getIntent().hasExtra("Time")) {
 
-            time = getIntent().getExtras().get("Time").toString();
+            time = getIntent().getExtras().getLong("Time");
             Log.e("Time", "time: " + time);
             status.setText("GAME OVER1234");
-            sc.setText(time);
+            int secs = (int) (time / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (time % 1000);
+            sc.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                    milliseconds));
+
+            long highScore = sharedPref.getLong(ty,354000);
+
+            if (highScore > time) {
+                status.setText("NEW BEST!!");
+                if(time==354000)
+                    highScore=0;
+                else
+                    highScore = time;
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putLong(ty, time);
+                editor.commit();
+            } else {
+                status.setText("GAME OVER!!");
+            }
+            secs = (int) (time / 1000);
+            mins = secs / 60;
+            secs = secs % 60;
+            milliseconds = (int) (time % 1000);
+            best.setText("BEST: " + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                    milliseconds));
 
         }
-
-        ty = getIntent().getExtras().get("Mode").toString();
-        if (s != null) sco = Integer.parseInt(s);
-
-        long highScore = sharedPref.getInt(ty, 0);
-
-        if (highScore < sco) {
-            status.setText("NEW BEST!!");
-            highScore = sco;
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt(ty, sco);
-            editor.commit();
-        } else {
-            status.setText("GAME OVER!!");
-        }
-        sc.setText(String.valueOf(sco));
-        best.setText("BEST: " + String.valueOf(highScore));
     }
 
     @OnClick({R.id.restart, R.id.help, R.id.home, R.id.share, R.id.addpont})
@@ -235,12 +260,20 @@ public class PlayAgain extends AppCompatActivity {
                 TextView easy = dialog.findViewById(R.id.easy);
                 TextView hard = dialog.findViewById(R.id.hard);
                 TextView stoner = dialog.findViewById(R.id.stoner);
+                TextView reflex30 = dialog.findViewById(R.id.reflex30);
                 SharedPreferences sharedPref =
                         PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
                 long easys = sharedPref.getInt("easy", 0);
                 easy.setText("EASY: " + easys);
                 hard.setText("HARD: " + sharedPref.getInt("hard", 0));
                 stoner.setText("STONER HARD: " + sharedPref.getInt("stoner", 0));
+                Long p = sharedPref.getLong("reflex30",354000);
+                int secs = (int) (p / 1000);
+                int mins = secs / 60;
+                secs = secs % 60;
+                int milliseconds = (int) (p % 1000);
+                reflex30.setText("REFLEX30:"+"" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                        milliseconds));
                 dialog.show();
                 break;
             case R.id.home:
