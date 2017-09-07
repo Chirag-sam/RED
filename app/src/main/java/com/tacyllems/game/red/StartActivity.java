@@ -109,18 +109,18 @@ public class StartActivity extends AppCompatActivity {
         easy.setText("EASY: "+easys);
         hard.setText("HARD: "+sharedPreff.getInt("hard",0));
         stoner.setText("STONER HARD: "+sharedPreff.getInt("stoner",0));
-        Long p = sharedPref.getLong("reflex30",354000);
+        Long p = sharedPref.getLong("reflex",3540000L);
 
         int secs = (int) (p / 1000);
         int mins = secs / 60;
         secs = secs % 60;
         int milliseconds = (int) (p % 1000);
-        if(p==354000)
+        if(p==3540000)
         {
-          reflex30.setText("REFLEX30:"+" 00:00:000");
+          reflex30.setText("REFLEX30: "+" 00:00:000");
         }
         else
-        reflex30.setText("REFLEX30:"+"" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+        reflex30.setText("REFLEX30:"+" " + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
                 milliseconds));
         dialog.show();
         break;

@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +51,8 @@ public class EasyActivity extends AppCompatActivity {
     TextView slowitemtext;
     @BindView(R.id.progressBar2)
     ProgressBar progressBar2;
+    @BindView(R.id.freeze)
+    ImageButton freeze;
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private int sc;
@@ -60,6 +63,7 @@ public class EasyActivity extends AppCompatActivity {
     private Random rand = new Random();
     private MediaPlayer player;
     private Boolean audio;
+    private Boolean frozen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public class EasyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_easy);
         ButterKnife.bind(this);
         progressBar2.setVisibility(View.GONE);
+        freeze.setVisibility(View.VISIBLE);
         progressBar2.getProgressDrawable()
                 .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
                         android.graphics.PorterDuff.Mode.SRC_IN);
@@ -92,15 +97,18 @@ public class EasyActivity extends AppCompatActivity {
         valuecolor = rand.nextInt(4);
         colorText.setText(colorNames.get(valuetext));
         colorText.setTextColor(colors[valuecolor]);
-        cd.start(speed);
-        cd.setOnEndAnimationFinish(() -> {
-            cd.stop();
-            Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
-            intent.putExtra("Score", sc);
-            intent.putExtra("Mode", "easy");
-            startActivity(intent);
-            finish();
-        });
+        if (!frozen) {
+            cd.start(speed);
+            cd.setOnEndAnimationFinish(() -> {
+                if (audio) player.stop();
+                cd.stop();
+                Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
+                intent.putExtra("Score", sc);
+                intent.putExtra("Mode", "easy");
+                startActivity(intent);
+                finish();
+            });
+        }
     }
 
     @OnClick({R.id.rlred, R.id.rlyell, R.id.rlblu, R.id.rlgree})
@@ -147,12 +155,14 @@ public class EasyActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.mCountDownTimer)
+    @OnClick(R.id.freeze)
     public void onSlowClicked() {
         progressBar2.setVisibility(View.VISIBLE);
+        freeze.setVisibility(View.GONE);
         ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
         animation.setDuration(10000);
         cd.stop();
+        frozen = true;
 
         animation.setInterpolator(new DecelerateInterpolator());
         animation.addListener(new Animator.AnimatorListener() {
@@ -164,7 +174,9 @@ public class EasyActivity extends AppCompatActivity {
             public void onAnimationEnd(Animator animator) {
                 //do something when the countdown is complete
                 progressBar2.setVisibility(View.GONE);
+                freeze.setVisibility(View.VISIBLE);
                 cd.start(speed);
+                frozen = false;
             }
 
             @Override

@@ -48,6 +48,7 @@ public class PlayAgain extends AppCompatActivity {
     AdView adView;
     @BindView(R.id.addpont)
     LinearLayout videoad;
+    @BindView(R.id.sctext) TextView sctext;
     InterstitialAd mInterstitialAd;
     RewardedVideoAd mAd;
     private MediaPlayer laugh;
@@ -178,6 +179,8 @@ public class PlayAgain extends AppCompatActivity {
         }
         if (getIntent().hasExtra("Time")) {
 
+            sctext.setText("TIME");
+
             time = getIntent().getExtras().getLong("Time");
             Log.e("Time", "time: " + time);
             status.setText("GAME OVER");
@@ -187,18 +190,17 @@ public class PlayAgain extends AppCompatActivity {
             int milliseconds = (int) (time % 1000);
             sc.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
                     milliseconds));
-            if(getIntent().hasExtra("Did"))
-            {
-                time=354000L;
+            if (getIntent().hasExtra("Did")) {
+                time = 3540000L;
                 sc.setText("00:00:000");
             }
 
-            long highScore = sharedPref.getLong(ty,354000);
+            long highScore = sharedPref.getLong(ty, 3540000);
 
             if (highScore > time) {
                 status.setText("NEW BEST!!");
-                if(time==354000)
-                    highScore=0;
+                if (time == 3540000)
+                    highScore = 0;
                 else
                     highScore = time;
                 SharedPreferences.Editor editor = sharedPref.edit();
@@ -207,12 +209,16 @@ public class PlayAgain extends AppCompatActivity {
             } else {
                 status.setText("GAME OVER!!");
             }
-            secs = (int) (time / 1000);
-            mins = secs / 60;
-            secs = secs % 60;
-            milliseconds = (int) (time % 1000);
-            best.setText("BEST: " + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
-                    milliseconds));
+            if (highScore == 3540000) {
+                best.setText("BEST: 00:00:000");
+            } else {
+                secs = (int) (highScore / 1000);
+                mins = secs / 60;
+                secs = secs % 60;
+                milliseconds = (int) (highScore % 1000);
+                best.setText("BEST: " + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                        milliseconds));
+            }
 
         }
     }
@@ -272,13 +278,19 @@ public class PlayAgain extends AppCompatActivity {
                 easy.setText("EASY: " + easys);
                 hard.setText("HARD: " + sharedPref.getInt("hard", 0));
                 stoner.setText("STONER HARD: " + sharedPref.getInt("stoner", 0));
-                Long p = sharedPref.getLong("reflex30",354000);
-                int secs = (int) (p / 1000);
-                int mins = secs / 60;
-                secs = secs % 60;
-                int milliseconds = (int) (p % 1000);
-                reflex30.setText("REFLEX30:"+"" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
-                        milliseconds));
+                Long pq = sharedPref.getLong("reflex", 3540000L);
+
+                if (pq == 3540000)
+                    reflex30.setText("REFLEX30:" + " 00:00:000");
+                else {
+                    int secs = (int) (pq / 1000);
+                    int mins = secs / 60;
+                    secs = secs % 60;
+                    int milliseconds = (int) (pq % 1000);
+                    reflex30.setText("REFLEX30: " + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                            milliseconds));
+
+                }
                 dialog.show();
                 break;
             case R.id.home:

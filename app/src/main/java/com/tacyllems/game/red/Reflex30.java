@@ -90,6 +90,14 @@ public class Reflex30 extends AppCompatActivity {
 
     @OnClick({R.id.rlred, R.id.rlyell, R.id.rlblu, R.id.rlgree})
     public void onViewClicked(View view) {
+        if (audio) {
+            if (player.isPlaying() == true) {
+                player.stop();
+                player.release();
+                player = MediaPlayer.create(this, R.raw.ding);
+            }
+            player.start();
+        }
         if(init==0){
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);init++;}
@@ -117,6 +125,7 @@ public class Reflex30 extends AppCompatActivity {
                 speed = speed - 8;
             change();
         } else {
+            if (audio) player.stop();
             timeSwapBuff += timeInMilliseconds;
             customHandler.removeCallbacks(updateTimerThread);
             if (audio) player.stop();
@@ -134,6 +143,7 @@ public class Reflex30 extends AppCompatActivity {
         colorText.setText(colorNames.get(valuetext));
         colorText.setTextColor(colors[valuecolor]);
         if(Integer.parseInt(score.getText().toString())==0) {
+            if (audio) player.stop();
             timeSwapBuff += timeInMilliseconds;
             customHandler.removeCallbacks(updateTimerThread);
             Intent intent = new Intent(Reflex30.this, PlayAgain.class);
