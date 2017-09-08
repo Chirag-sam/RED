@@ -125,10 +125,14 @@ public class HardActivity extends AppCompatActivity {
     }
 
     public void ChangeBackgroundColour(int color) {
-        if (color == getResources().getColor(R.color.BLUE) || color == getResources().getColor(R.color.RED))
+        if (color == getResources().getColor(R.color.BLUE) || color == getResources().getColor(R.color.RED)) {
             rel.setBackgroundColor(Color.parseColor("#ffffff"));
-        else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN))
+            score.setTextColor(Color.parseColor("#000000"));
+        }
+        else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN)) {
             rel.setBackgroundColor(Color.parseColor("#000000"));
+            score.setTextColor(Color.parseColor("#ffffff"));
+        }
     }
 
     @OnClick({R.id.butt1, R.id.butt2, R.id.butt3, R.id.butt4})

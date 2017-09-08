@@ -1,6 +1,7 @@
 package com.tacyllems.game.red;
 
 import android.app.Dialog;
+import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -125,6 +126,7 @@ public class StartActivity extends AppCompatActivity {
         dialog.show();
         break;
       case R.id.aboutus:
+        startActivity(new Intent(StartActivity.this, AboutActivity.class));
         break;
       case R.id.mute:
         audio = sharedPref.getBoolean("audio", true);

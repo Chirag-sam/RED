@@ -14,4 +14,13 @@
   <color name="secondary_text">#757575</color>
   <color name="primary">#00bcd4</color>
   <color name="primary_dark">#0097A7</color>
+
+
+  <color name="dark_green">#478244</color>
+  <color name="orange">#ff7f24</color>
+  <color name="pink">#f371b6</color>
+  <color name="gray">#8f8992</color>
+  <color name="maroon">#82454c</color>
+  <color name="yellowish_orange">#ffa500</color>
+  <color name="purple">#4a2a46</color>
 </resources>

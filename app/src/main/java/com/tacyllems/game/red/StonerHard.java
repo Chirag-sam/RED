@@ -38,23 +38,12 @@ public class StonerHard extends AppCompatActivity {
     private MediaPlayer player;
     private Boolean audio;
     private int valuecolor;
+    private int redback[] = {R.color.BLUE,R.color.GREEN,R.color.YELLOW,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
+    private int blueback[] = {R.color.RED,R.color.GREEN,R.color.YELLOW,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
+    private int greenback[] = {R.color.BLUE,R.color.RED,R.color.YELLOW,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
+    private int yellowback[] = {R.color.BLUE,R.color.GREEN,R.color.RED,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
 
     private ArrayList<Integer> al = new ArrayList<>();
-
-    public static int OpposeColor(int ColorToInvert) {
-        int RGBMAX = 255;
-
-        float[] hsv = new float[3];
-        float H;
-
-        Color.RGBToHSV(Color.red(ColorToInvert), RGBMAX - Color.green(ColorToInvert),
-                Color.blue(ColorToInvert), hsv);
-
-        H = (float) (hsv[0] + 0.5);
-
-        if (H > 1) H -= 1;
-        return Color.HSVToColor(hsv);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,19 +137,15 @@ public class StonerHard extends AppCompatActivity {
         if (getResources().getDrawable(draw).getConstantState().equals
                 (getResources().getDrawable(R.drawable.blue_button_background).getConstantState())) {
             v.setTag("blue");
-            Log.e("The tag for", getResources().getDrawable(draw) + " is " + v.getTag());
         } else if (getResources().getDrawable(draw).getConstantState().equals
                 (getResources().getDrawable(R.drawable.red_button_background).getConstantState())) {
             v.setTag("red");
-            Log.e("The tag for", getResources().getDrawable(draw) + " is " + v.getTag());
         } else if (getResources().getDrawable(draw).getConstantState().equals
                 (getResources().getDrawable(R.drawable.green_colour_background).getConstantState())) {
             v.setTag("green");
-            Log.e("The tag for", getResources().getDrawable(draw) + " is " + v.getTag());
         } else if (getResources().getDrawable(draw).getConstantState().equals
                 (getResources().getDrawable(R.drawable.yellow_button_background).getConstantState())) {
             v.setTag("yellow");
-            Log.e("The tag for", getResources().getDrawable(draw) + " is " + v.getTag());
         }
 
     }
@@ -185,15 +170,27 @@ public class StonerHard extends AppCompatActivity {
 
     public void checkcolor(View view) {
         int color;
-        if (view.getTag().equals("red"))
+        int temparr[];
+        if (view.getTag().equals("red")){
             color = getResources().getColor(R.color.RED);
-        else if (view.getTag().equals("green"))
+            temparr = redback;
+        }
+        else if (view.getTag().equals("green")) {
             color = getResources().getColor(R.color.GREEN);
-        else if (view.getTag().equals("yellow"))
+            temparr = greenback;
+        }
+        else if (view.getTag().equals("yellow")) {
             color = getResources().getColor(R.color.YELLOW);
-        else
+            temparr = yellowback;
+        }
+        else{
             color = getResources().getColor(R.color.BLUE);
-        int contastcolor = OpposeColor(color);
+            temparr = blueback;
+        }
+        Random rand = new Random();
+        int valee = rand.nextInt(12);
+        Log.e("val:", "checkcolor: "+valee );
+        int contastcolor = temparr[valee];
         if (color == colors[valuecolor]) {
             if (audio) {
                 if (player.isPlaying() == true) {
