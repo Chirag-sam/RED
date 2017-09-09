@@ -1,43 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EASY: 24"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/easy"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HARD: 24"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/hard"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="STONER HARD: 24"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/stoner"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REFLEX30: 24"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/reflex30"
-        android:layout_gravity="center"/>
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/add_to_queue_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/RED">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="EASY: 30"
+                    android:textColor="#ffffff"
+                    android:textSize="17sp"
+                    android:id="@+id/easy"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/BLUE">
+
+                <TextView
+                    android:id="@+id/stoner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="STONER HARD: 30"
+                    android:textColor="#ffffff"
+                    android:textSize="17sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bookmark_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackgroundBorderless"
+            android:filterTouchesWhenObscured="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/YELLOW">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="HARD: 30"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:id="@+id/hard"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/GREEN">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="REFLEX30:\n 00:00:000"
+                    android:textColor="#000000"
+                    android:textSize="17sp"
+                    android:id="@+id/reflex30"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

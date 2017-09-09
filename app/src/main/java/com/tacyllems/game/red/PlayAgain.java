@@ -1,5 +1,7 @@
 package com.tacyllems.game.red;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -27,6 +25,10 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PlayAgain extends AppCompatActivity {
 
@@ -48,9 +50,16 @@ public class PlayAgain extends AppCompatActivity {
     AdView adView;
     @BindView(R.id.addpont)
     LinearLayout videoad;
-    @BindView(R.id.sctext) TextView sctext;
+    @BindView(R.id.sctext)
+    TextView sctext;
     InterstitialAd mInterstitialAd;
     RewardedVideoAd mAd;
+    @BindView(R.id.gamemode)
+    TextView gamemode;
+    @BindView(R.id.progressBar2)
+    ProgressBar progressBar2;
+    @BindView(R.id.xp)
+    TextView xp;
     private MediaPlayer laugh;
     private String ty;
     private String s;
@@ -59,13 +68,23 @@ public class PlayAgain extends AppCompatActivity {
     private Boolean audio;
     private Long time;
     private int noofgames = 0;
+    private int currextgamexp;
+    private int tempxp;
+    private int totalxp;
+    private ObjectAnimator animation1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_again);
         ButterKnife.bind(this);
+
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
+        tempxp = sharedPref.getInt("tempxp", 0);
+
+
+
         slowvalue = sharedPref.getInt("slowitem", 0);
         MobileAds.initialize(this, getString(R.string.appidads));
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -153,6 +172,7 @@ public class PlayAgain extends AppCompatActivity {
 
         audio = sharedPref.getBoolean("audio", true);
         ty = getIntent().getExtras().get("Mode").toString();
+        setgamemode(ty);
 
         if (audio) {
             laugh = MediaPlayer.create(this, R.raw.dennis);
@@ -161,6 +181,23 @@ public class PlayAgain extends AppCompatActivity {
         if (getIntent().hasExtra("Score")) {
             s = getIntent().getExtras().get("Score").toString();
             if (s != null) sco = Integer.parseInt(s);
+            currextgamexp = Integer.parseInt(s);
+            xp.setText("+"+currextgamexp+"xp");
+            SharedPreferences.Editor editorz = sharedPref.edit();
+            totalxp=tempxp+currextgamexp;
+            if(totalxp>100)
+            {
+                if_more_than_100(totalxp,tempxp);
+
+            }
+            else
+            {
+                editorz.putInt("tempxp", totalxp);
+                editorz.apply();
+                ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", tempxp, totalxp);
+                animation.setDuration(2000);
+                animation.start();
+            }
 
             long highScore = sharedPref.getInt(ty, 0);
 
@@ -190,9 +227,30 @@ public class PlayAgain extends AppCompatActivity {
             int milliseconds = (int) (time % 1000);
             sc.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
                     milliseconds));
+
             if (getIntent().hasExtra("Did")) {
                 time = 3540000L;
                 sc.setText("00:00:000");
+                xp.setText("+0xp");
+            }
+            else {
+                currextgamexp = 10;
+                SharedPreferences.Editor editorzz = sharedPref.edit();
+                totalxp=tempxp+currextgamexp;
+                if(totalxp>100)
+                {
+                    if_more_than_100(totalxp,tempxp);
+
+                }
+                else
+                {
+                    editorzz.putInt("tempxp", totalxp);
+                    editorzz.apply();
+                    ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", tempxp, totalxp);
+                    animation.setDuration(2000);
+                    animation.start();
+                }
+                xp.setText("+10xp");
             }
 
             long highScore = sharedPref.getLong(ty, 3540000);
@@ -281,13 +339,13 @@ public class PlayAgain extends AppCompatActivity {
                 Long pq = sharedPref.getLong("reflex", 3540000L);
 
                 if (pq == 3540000)
-                    reflex30.setText("REFLEX30:" + " 00:00:000");
+                    reflex30.setText("REFLEX30:\n" + "00:00:000");
                 else {
                     int secs = (int) (pq / 1000);
                     int mins = secs / 60;
                     secs = secs % 60;
                     int milliseconds = (int) (pq % 1000);
-                    reflex30.setText("REFLEX30: " + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                    reflex30.setText("REFLEX30:\n" + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
                             milliseconds));
 
                 }
@@ -332,5 +390,56 @@ public class PlayAgain extends AppCompatActivity {
     public void onDestroy() {
         mAd.destroy(this);
         super.onDestroy();
+    }
+
+    public void setgamemode(String gamem)
+    {
+        if(gamem.equals("easy"))
+          gamemode.setText("EASY");
+        else if(gamem.equals("hard"))
+            gamemode.setText("HARD");
+        else if(gamem.equals("reflex"))
+            gamemode.setText("REFLEX30");
+        else
+            gamemode.setText("STONER HARD");
+    }
+    public void if_more_than_100(int totalxp, int tempxp)
+    {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
+        int sub_xp = totalxp-100;
+        SharedPreferences.Editor editorz = sharedPref.edit();
+        editorz.putInt("tempxp", sub_xp);
+        editorz.apply();
+
+        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", tempxp, 100);
+        animation.setDuration(2000);
+        animation.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                if(sub_xp>100)
+                {
+                    if_more_than_100(sub_xp,0);
+                }
+                else
+                {
+                animation1 = ObjectAnimator.ofInt(progressBar2, "progress", 0, sub_xp);
+                animation.setDuration(2000);
+                    animation1.start();
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+            }
+        });
+        animation.start();
     }
 }

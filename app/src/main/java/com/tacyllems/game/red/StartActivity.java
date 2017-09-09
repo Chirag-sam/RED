@@ -118,10 +118,10 @@ public class StartActivity extends AppCompatActivity {
         int milliseconds = (int) (p % 1000);
         if(p==3540000)
         {
-          reflex30.setText("REFLEX30: "+" 00:00:000");
+          reflex30.setText("REFLEX30:\n"+" 00:00:000");
         }
         else
-        reflex30.setText("REFLEX30:"+" " + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+        reflex30.setText("REFLEX30:\n" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
                 milliseconds));
         dialog.show();
         break;
