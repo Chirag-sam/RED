@@ -60,7 +60,15 @@ public class EasyActivity extends AppCompatActivity {
     progressBar2.getProgressDrawable()
         .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
             android.graphics.PorterDuff.Mode.SRC_IN);
-
+    cd.setOnEndAnimationFinish(() -> {
+      if (audio) player.stop();
+      cd.stop();
+      Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
+      intent.putExtra("Score", sc);
+      intent.putExtra("Mode", "easy");
+      startActivity(intent);
+      finish();
+    });
     player = MediaPlayer.create(this, R.raw.ding);
     sharedPref = PreferenceManager.getDefaultSharedPreferences(EasyActivity.this);
     audio = sharedPref.getBoolean("audio", true);
@@ -85,15 +93,7 @@ public class EasyActivity extends AppCompatActivity {
     colorText.setTextColor(colors[valuecolor]);
     if (!frozen) {
       cd.start(speed);
-      cd.setOnEndAnimationFinish(() -> {
-        if (audio) player.stop();
-        cd.stop();
-        Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
-        intent.putExtra("Score", sc);
-        intent.putExtra("Mode", "easy");
-        startActivity(intent);
-        finish();
-      });
+
     }
   }
 
@@ -151,7 +151,7 @@ public class EasyActivity extends AppCompatActivity {
 
       ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
       animation.setDuration(10000);
-      cd.stop();
+      cd.pause();
       frozen = true;
 
       animation.setInterpolator(new DecelerateInterpolator());
