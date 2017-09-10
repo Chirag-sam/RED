@@ -159,21 +159,22 @@
 
         <ProgressBar
             android:id="@+id/progressBar2"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/xp"
             android:layout_marginBottom="18dp"
             android:layout_toLeftOf="@+id/infinitetime"
             android:max="100"
-            android:progress="100" />
+            android:progress="100"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            />
 
         <TextView
             android:id="@+id/xp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
             android:text="+30xp"
             android:textColor="@color/white"
@@ -191,5 +192,19 @@
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_infinite_time" />
+        <TextView
+            android:id="@+id/slowitemtext"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignRight="@+id/infinitetime"
+            android:layout_alignTop="@+id/infinitetime"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_background"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            />
     </RelativeLayout>
 </RelativeLayout>

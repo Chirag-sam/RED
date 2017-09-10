@@ -1,7 +1,6 @@
 package com.tacyllems.game.red;
 
 import android.app.Dialog;
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -12,7 +11,6 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -25,7 +23,7 @@ import com.google.android.gms.ads.MobileAds;
 
 public class StartActivity extends AppCompatActivity {
 
-  @BindView(R.id.start) Button start;
+  @BindView(R.id.start) ImageButton start;
   @BindView(R.id.spinner) AppCompatSpinner spinner;
   @BindView(R.id.ads) ImageButton ads;
   @BindView(R.id.high) ImageButton high;
@@ -34,6 +32,7 @@ public class StartActivity extends AppCompatActivity {
   Boolean audio;
   SharedPreferences sharedPref;
   InterstitialAd mInterstitialAd;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_start);
@@ -52,6 +51,7 @@ public class StartActivity extends AppCompatActivity {
         mInterstitialAd.loadAd(adRequest);
       }
     });
+
     sharedPref = PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
     audio = sharedPref.getBoolean("audio", true);
     if (audio) {
@@ -105,24 +105,25 @@ public class StartActivity extends AppCompatActivity {
         TextView hard = dialog.findViewById(R.id.hard);
         TextView stoner = dialog.findViewById(R.id.stoner);
         TextView reflex30 = dialog.findViewById(R.id.reflex30);
-        SharedPreferences sharedPreff = PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
-        long easys = sharedPreff.getInt("easy",0);
-        easy.setText("EASY: "+easys);
-        hard.setText("HARD: "+sharedPreff.getInt("hard",0));
-        stoner.setText("STONER HARD: "+sharedPreff.getInt("stoner",0));
-        Long p = sharedPref.getLong("reflex",3540000L);
+        SharedPreferences sharedPreff =
+            PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
+        long easys = sharedPreff.getInt("easy", 0);
+        easy.setText("EASY: " + easys);
+        hard.setText("HARD: " + sharedPreff.getInt("hard", 0));
+        stoner.setText("STONER HARD: " + sharedPreff.getInt("stoner", 0));
+        Long p = sharedPref.getLong("reflex", 3540000L);
 
         int secs = (int) (p / 1000);
         int mins = secs / 60;
         secs = secs % 60;
         int milliseconds = (int) (p % 1000);
-        if(p==3540000)
-        {
-          reflex30.setText("REFLEX30:\n"+" 00:00:000");
+        if (p == 3540000) {
+          reflex30.setText("REFLEX30:\n" + " 00:00:000");
+        } else {
+          reflex30.setText(
+              "REFLEX30:\n" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                  milliseconds));
         }
-        else
-        reflex30.setText("REFLEX30:\n" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
-                milliseconds));
         dialog.show();
         break;
       case R.id.aboutus:
