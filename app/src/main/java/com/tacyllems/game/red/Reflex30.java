@@ -14,9 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -40,9 +42,9 @@ public class Reflex30 extends AppCompatActivity {
     @BindView(R.id.rel)
     RelativeLayout rel;
     SharedPreferences sharedPref;
-  private TextView timer;
-  private long startTime = 0L;
-  private Handler customHandler = new Handler();
+    private TextView timer;
+    private long startTime = 0L;
+    private Handler customHandler = new Handler();
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private int sc;
@@ -53,19 +55,19 @@ public class Reflex30 extends AppCompatActivity {
     private Boolean audio;
     private Random rand = new Random();
     private int init;
-  private Runnable updateTimerThread = new Runnable() {
-    public void run() {
-      timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-      updatedTime = timeSwapBuff + timeInMilliseconds;
-      int secs = (int) (updatedTime / 1000);
-      int mins = secs / 60;
-      secs = secs % 60;
-      int milliseconds = (int) (updatedTime % 1000);
-      timer.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
-          milliseconds));
-      customHandler.postDelayed(this, 0);
-    }
-  };
+    private Runnable updateTimerThread = new Runnable() {
+        public void run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+            updatedTime = timeSwapBuff + timeInMilliseconds;
+            int secs = (int) (updatedTime / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (updatedTime % 1000);
+            timer.setText("" + mins + ":" + String.format("%02d", secs) + ":" + String.format("%03d",
+                    milliseconds));
+            customHandler.postDelayed(this, 0);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class Reflex30 extends AppCompatActivity {
         setContentView(R.layout.activity_reflex30);
         ButterKnife.bind(this);
         init = 0;
-      timer = findViewById(R.id.timer);
+        timer = findViewById(R.id.timer);
         player = MediaPlayer.create(this, R.raw.ding);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(Reflex30.this);
         audio = sharedPref.getBoolean("audio", true);
@@ -98,9 +100,11 @@ public class Reflex30 extends AppCompatActivity {
             }
             player.start();
         }
-        if(init==0){
-        startTime = SystemClock.uptimeMillis();
-        customHandler.postDelayed(updateTimerThread, 0);init++;}
+        if (init == 0) {
+            startTime = SystemClock.uptimeMillis();
+            customHandler.postDelayed(updateTimerThread, 0);
+            init++;
+        }
         switch (view.getId()) {
             case R.id.rlred:
                 checkcolor(((ColorDrawable) red.getBackground()).getColor());
@@ -116,12 +120,13 @@ public class Reflex30 extends AppCompatActivity {
                 break;
         }
     }
+
     void checkcolor(int color) {
         if (color == colors[valuecolor]) {
             sc = Integer.parseInt(score.getText().toString());
             sc--;
             score.setText(String.valueOf(sc));
-            if(speed>400)
+            if (speed > 400)
                 speed = speed - 8;
             change();
         } else {
@@ -132,17 +137,18 @@ public class Reflex30 extends AppCompatActivity {
             Intent intent = new Intent(Reflex30.this, PlayAgain.class);
             intent.putExtra("Time", updatedTime);
             intent.putExtra("Mode", "reflex");
-            intent.putExtra("Did","not complete");
+            intent.putExtra("Did", "not complete");
             startActivity(intent);
             finish();
         }
     }
+
     void change() {
         valuetext = rand.nextInt(4);
         valuecolor = rand.nextInt(4);
         colorText.setText(colorNames.get(valuetext));
         colorText.setTextColor(colors[valuecolor]);
-        if(Integer.parseInt(score.getText().toString())==0) {
+        if (Integer.parseInt(score.getText().toString()) == 0) {
             if (audio) player.stop();
             timeSwapBuff += timeInMilliseconds;
             customHandler.removeCallbacks(updateTimerThread);

@@ -12,16 +12,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import com.github.anastr.flattimelib.CountDownTimerView;
 import com.github.anastr.flattimelib.intf.OnTimeFinish;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class StonerHard extends AppCompatActivity {
 
-  SharedPreferences sharedPref;
+    SharedPreferences sharedPref;
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private int colordraw[] = {R.drawable.blue_button_background, R.drawable.red_button_background, R.drawable.green_colour_background, R.drawable.yellow_button_background};
@@ -38,10 +41,10 @@ public class StonerHard extends AppCompatActivity {
     private MediaPlayer player;
     private Boolean audio;
     private int valuecolor;
-    private int redback[] = {R.color.BLUE,R.color.GREEN,R.color.YELLOW,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
-    private int blueback[] = {R.color.RED,R.color.GREEN,R.color.YELLOW,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
-    private int greenback[] = {R.color.BLUE,R.color.RED,R.color.YELLOW,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
-    private int yellowback[] = {R.color.BLUE,R.color.GREEN,R.color.RED,R.color.dark_green,R.color.orange,R.color.pink,R.color.gray,R.color.maroon,R.color.yellowish_orange,R.color.purple,R.color.colorBackgroundDark,R.color.white};
+    private int redback[] = {R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
+    private int blueback[] = {R.color.RED, R.color.GREEN, R.color.YELLOW, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
+    private int greenback[] = {R.color.BLUE, R.color.RED, R.color.YELLOW, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
+    private int yellowback[] = {R.color.BLUE, R.color.GREEN, R.color.RED, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
 
     private ArrayList<Integer> al = new ArrayList<>();
 
@@ -170,27 +173,17 @@ public class StonerHard extends AppCompatActivity {
 
     public void checkcolor(View view) {
         int color;
-        int temparr[];
-        if (view.getTag().equals("red")){
+        if (view.getTag().equals("red")) {
             color = getResources().getColor(R.color.RED);
-            temparr = redback;
-        }
-        else if (view.getTag().equals("green")) {
+        } else if (view.getTag().equals("green")) {
             color = getResources().getColor(R.color.GREEN);
-            temparr = greenback;
-        }
-        else if (view.getTag().equals("yellow")) {
+        } else if (view.getTag().equals("yellow")) {
             color = getResources().getColor(R.color.YELLOW);
-            temparr = yellowback;
-        }
-        else{
+        } else {
             color = getResources().getColor(R.color.BLUE);
-            temparr = blueback;
         }
-        Random rand = new Random();
-        int valee = rand.nextInt(12);
-        Log.e("val:", "checkcolor: "+valee );
-        int contastcolor = temparr[valee];
+
+        int contastcolor = OpposeColor(color);
         if (color == colors[valuecolor]) {
             if (audio) {
                 if (player.isPlaying() == true) {
@@ -204,8 +197,8 @@ public class StonerHard extends AppCompatActivity {
             sc = Integer.parseInt(score.getText().toString());
             sc++;
             score.setText(String.valueOf(sc));
-            if(speed>380)
-            speed = speed - 10;
+            if (speed > 380)
+                speed = speed - 10;
             al.clear();
             change();
         } else {
@@ -216,5 +209,21 @@ public class StonerHard extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    public static int OpposeColor(int ColorToInvert) {
+        int RGBMAX = 255;
+        float[] hsv = new float[3];
+        float H;
+
+
+        Color.RGBToHSV(Color.red(ColorToInvert), RGBMAX - Color.green(ColorToInvert), Color.blue(ColorToInvert), hsv);
+
+
+        H = (float) (hsv[0] + 0.5);
+
+        if (H > 1) H -= 1;
+        return Color.HSVToColor(hsv);
+
     }
 }

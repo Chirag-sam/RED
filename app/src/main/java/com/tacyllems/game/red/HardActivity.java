@@ -1,5 +1,7 @@
 package com.tacyllems.game.red;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -7,11 +9,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.anastr.flattimelib.CountDownTimerView;
@@ -22,6 +30,12 @@ import java.util.Random;
 public class HardActivity extends AppCompatActivity {
 
   SharedPreferences sharedPref;
+    @BindView(R.id.slowitemtext)
+    TextView slowitemtext;
+    @BindView(R.id.progressBar2)
+    ProgressBar progressBar2;
+    @BindView(R.id.freeze)
+    ImageButton freeze;
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private CountDownTimerView cd;
@@ -31,12 +45,14 @@ public class HardActivity extends AppCompatActivity {
     private Button butt1;
     private Button butt2;
     private TextView score;
+    private int slowvalue;
     private int sc;
     private long speed;
     private RelativeLayout rel;
     private MediaPlayer player;
     private Boolean audio;
     private int valuecolor;
+    private Boolean frozen = false;
 
     private ArrayList<Integer> al = new ArrayList<>();
 
@@ -45,9 +61,16 @@ public class HardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hard);
         ButterKnife.bind(this);
+        progressBar2.setVisibility(View.GONE);
+        freeze.setVisibility(View.VISIBLE);
+        progressBar2.getProgressDrawable()
+                .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
+                        android.graphics.PorterDuff.Mode.SRC_IN);
         player = MediaPlayer.create(this, R.raw.ding);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(HardActivity.this);
         audio = sharedPref.getBoolean("audio", true);
+        slowvalue = sharedPref.getInt("slowitem", 0);
+        slowitemtext.setText(String.valueOf(slowvalue));
 
         cd = findViewById(R.id.mCountDownTimer);
         colorText = findViewById(R.id.colorText);
@@ -96,7 +119,10 @@ public class HardActivity extends AppCompatActivity {
         butt3.setBackgroundColor(colors[ran3]);
         butt4.setBackgroundColor(colors[ran4]);
 
-        cd.start(speed);
+        if (!frozen) {
+            cd.start(speed);
+
+        }
         cd.setOnEndAnimationFinish(new OnTimeFinish() {
             @Override
             public void onFinish() {
@@ -128,10 +154,12 @@ public class HardActivity extends AppCompatActivity {
         if (color == getResources().getColor(R.color.BLUE) || color == getResources().getColor(R.color.RED)) {
             rel.setBackgroundColor(Color.parseColor("#ffffff"));
             score.setTextColor(Color.parseColor("#000000"));
+            freeze.setBackgroundResource(R.drawable.ic_infinite_time_black);
         }
         else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN)) {
             rel.setBackgroundColor(Color.parseColor("#000000"));
             score.setTextColor(Color.parseColor("#ffffff"));
+            freeze.setBackgroundResource(R.drawable.ic_infinite_time);
         }
     }
 
@@ -177,6 +205,47 @@ public class HardActivity extends AppCompatActivity {
             intent.putExtra("Mode", "hard");
             startActivity(intent);
             finish();
+        }
+    }
+    @OnClick(R.id.freeze) public void onSlowClicked() {
+        slowvalue = sharedPref.getInt("slowitem", 0);
+        if (slowvalue > 0) {
+
+            progressBar2.setVisibility(View.VISIBLE);
+            freeze.setVisibility(View.GONE);
+            slowitemtext.setVisibility(View.GONE);
+
+            ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
+            animation.setDuration(10000);
+            cd.pause();
+            frozen = true;
+
+            animation.setInterpolator(new DecelerateInterpolator());
+            animation.addListener(new Animator.AnimatorListener() {
+                @Override public void onAnimationStart(Animator animator) {
+                }
+
+                @Override public void onAnimationEnd(Animator animator) {
+                    //do something when the countdown is complete
+                    slowvalue -= 1;
+                    SharedPreferences.Editor editorz = sharedPref.edit();
+                    editorz.putInt("slowitem", slowvalue);
+                    editorz.apply();
+                    progressBar2.setVisibility(View.GONE);
+                    freeze.setVisibility(View.VISIBLE);
+                    slowitemtext.setVisibility(View.VISIBLE);
+                    slowitemtext.setText(String.valueOf(slowvalue));
+                    cd.start(speed);
+                    frozen = false;
+                }
+
+                @Override public void onAnimationCancel(Animator animator) {
+                }
+
+                @Override public void onAnimationRepeat(Animator animator) {
+                }
+            });
+            animation.start();
         }
     }
 }
