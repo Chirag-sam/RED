@@ -53,6 +53,7 @@ public class HardActivity extends AppCompatActivity {
     private Boolean audio;
     private int valuecolor;
     private Boolean frozen = false;
+    private Boolean gameOver = false;
 
     private ArrayList<Integer> al = new ArrayList<>();
 
@@ -200,6 +201,7 @@ public class HardActivity extends AppCompatActivity {
             change();
         } else {
             cd.stop();
+            gameOver = true;
             Intent intent = new Intent(HardActivity.this, PlayAgain.class);
             intent.putExtra("Score", sc);
             intent.putExtra("Mode", "hard");
@@ -219,6 +221,10 @@ public class HardActivity extends AppCompatActivity {
             animation.setDuration(10000);
             cd.pause();
             frozen = true;
+            slowvalue -= 1;
+            SharedPreferences.Editor editorz = sharedPref.edit();
+            editorz.putInt("slowitem", slowvalue);
+            editorz.apply();
 
             animation.setInterpolator(new DecelerateInterpolator());
             animation.addListener(new Animator.AnimatorListener() {
@@ -227,16 +233,15 @@ public class HardActivity extends AppCompatActivity {
 
                 @Override public void onAnimationEnd(Animator animator) {
                     //do something when the countdown is complete
-                    slowvalue -= 1;
-                    SharedPreferences.Editor editorz = sharedPref.edit();
-                    editorz.putInt("slowitem", slowvalue);
-                    editorz.apply();
+
                     progressBar2.setVisibility(View.GONE);
                     freeze.setVisibility(View.VISIBLE);
                     slowitemtext.setVisibility(View.VISIBLE);
                     slowitemtext.setText(String.valueOf(slowvalue));
+                    if(!gameOver)
+                    {
                     cd.start(speed);
-                    frozen = false;
+                    frozen = false;}
                 }
 
                 @Override public void onAnimationCancel(Animator animator) {

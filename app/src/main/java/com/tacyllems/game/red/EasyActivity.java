@@ -50,6 +50,7 @@ public class EasyActivity extends AppCompatActivity {
   private MediaPlayer player;
   private Boolean audio;
   private Boolean frozen = false;
+  private Boolean gameOver = false;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -132,6 +133,7 @@ public class EasyActivity extends AppCompatActivity {
       change();
     } else {
       cd.stop();
+      gameOver = true;
       if (audio) player.stop();
       Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
       intent.putExtra("Score", sc);
@@ -149,6 +151,11 @@ public class EasyActivity extends AppCompatActivity {
       freeze.setVisibility(View.GONE);
       slowitemtext.setVisibility(View.GONE);
 
+      slowvalue -= 1;
+      SharedPreferences.Editor editorz = sharedPref.edit();
+      editorz.putInt("slowitem", slowvalue);
+      editorz.apply();
+
       ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
       animation.setDuration(10000);
       cd.pause();
@@ -161,16 +168,14 @@ public class EasyActivity extends AppCompatActivity {
 
         @Override public void onAnimationEnd(Animator animator) {
           //do something when the countdown is complete
-          slowvalue -= 1;
-          SharedPreferences.Editor editorz = sharedPref.edit();
-          editorz.putInt("slowitem", slowvalue);
-          editorz.apply();
+
           progressBar2.setVisibility(View.GONE);
           freeze.setVisibility(View.VISIBLE);
           slowitemtext.setVisibility(View.VISIBLE);
           slowitemtext.setText(String.valueOf(slowvalue));
-          cd.start(speed);
-          frozen = false;
+          if(!gameOver)
+          {cd.start(speed);
+          frozen = false;}
         }
 
         @Override public void onAnimationCancel(Animator animator) {
