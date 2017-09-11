@@ -226,7 +226,7 @@ public class HardActivity extends AppCompatActivity {
             slowitemtext.setVisibility(View.GONE);
 
             ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
-            animation.setDuration(10000);
+            animation.setDuration(5000);
             cd.pause();
             frozen = true;
             slowvalue -= 1;

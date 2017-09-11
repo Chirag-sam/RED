@@ -157,7 +157,7 @@ public class EasyActivity extends AppCompatActivity {
       editorz.apply();
 
       ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
-      animation.setDuration(10000);
+      animation.setDuration(7000);
       cd.pause();
       frozen = true;
 
