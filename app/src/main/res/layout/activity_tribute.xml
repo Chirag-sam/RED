@@ -12,6 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
+        android:id="@+id/text"
         android:textSize="20dp"
         android:text="salmon_skinroll and ron_vas_normandy,\nI would like to thank you for the support and the patience you have shown towards me throughout these past years. When I didn't believe in my ideas, you guys did. I wouldn't have made it so far if not for you guys. I hope this app is the first of many to come! Here you go, your names are etched into the Google database forever and ever:P Thanks again! :)"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/text"
+        android:textSize="20dp"
+        android:text="And of course, NotAHero. Thanks a lot man. I'm pretty sure, if it wasn't for you, I would still be watching stupid Android tutorials on YouTube, trying to figure out what's what!"/>
 </RelativeLayout>
