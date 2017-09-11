@@ -47,6 +47,7 @@
       android:layout_alignParentBottom="true"
       android:gravity="center"
       android:stretchColumns="0,1"
+      android:id="@+id/tableLayout"
       >
     <TableRow>
       <Button
@@ -79,5 +80,15 @@
           />
     </TableRow>
   </TableLayout>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/white"
+      android:text="(Choose the color of the text and not what it says!)"
+      android:layout_above="@+id/tableLayout"
+      android:id="@+id/instructions"
+      android:layout_centerHorizontal="true"
+      android:textSize="16dp"/>
 
 </RelativeLayout>

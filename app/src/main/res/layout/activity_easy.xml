@@ -82,11 +82,20 @@
           />
     </TableRow>
   </TableLayout>
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/white"
+      android:text="(Choose the color of the text and not what it says!)"
+      android:layout_above="@+id/tableLayout"
+      android:id="@+id/instructions"
+      android:layout_centerHorizontal="true"
+      android:textSize="16dp"/>
   <ProgressBar
       android:id="@+id/progressBar2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_above="@+id/tableLayout"
+      android:layout_above="@+id/instructions"
       android:layout_centerHorizontal="true"
       android:layout_margin="40dp"
       android:max="100"
@@ -97,7 +106,7 @@
       android:id="@+id/freeze"
       android:layout_width="40dp"
       android:layout_height="40dp"
-      android:layout_above="@+id/tableLayout"
+      android:layout_above="@+id/instructions"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="30dp"
       android:background="?selectableItemBackgroundBorderless"
@@ -109,7 +118,6 @@
       android:layout_width="20dp"
       android:layout_height="20dp"
       android:layout_alignRight="@+id/freeze"
-
       android:layout_alignTop="@+id/freeze"
       android:layout_centerHorizontal="true"
       android:background="@drawable/circle_background"

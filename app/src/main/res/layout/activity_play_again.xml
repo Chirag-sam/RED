@@ -76,9 +76,8 @@
             android:layout_height="40dp"
             android:layout_margin="12dp"
             android:background="?selectableItemBackgroundBorderless"
-
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_help_black_24dp" />
+            app:srcCompat="@drawable/ic_show_chart_black_24dp" />
 
         <ImageButton
             android:id="@+id/home"
@@ -119,7 +118,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View Ad to get 2 slow points!"
+            android:text="View Ad to get 2 free freeze points!"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
     </LinearLayout>

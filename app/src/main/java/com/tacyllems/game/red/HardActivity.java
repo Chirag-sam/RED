@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,23 +20,27 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.github.anastr.flattimelib.CountDownTimerView;
 import com.github.anastr.flattimelib.intf.OnTimeFinish;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class HardActivity extends AppCompatActivity {
 
-  SharedPreferences sharedPref;
+    SharedPreferences sharedPref;
     @BindView(R.id.slowitemtext)
     TextView slowitemtext;
     @BindView(R.id.progressBar2)
     ProgressBar progressBar2;
     @BindView(R.id.freeze)
     ImageButton freeze;
+    @BindView(R.id.instructions)
+    TextView instructions;
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private CountDownTimerView cd;
@@ -66,7 +71,7 @@ public class HardActivity extends AppCompatActivity {
         freeze.setVisibility(View.VISIBLE);
         progressBar2.getProgressDrawable()
                 .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
-                        android.graphics.PorterDuff.Mode.SRC_IN);
+                        PorterDuff.Mode.SRC_IN);
         player = MediaPlayer.create(this, R.raw.ding);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(HardActivity.this);
         audio = sharedPref.getBoolean("audio", true);
@@ -156,11 +161,12 @@ public class HardActivity extends AppCompatActivity {
             rel.setBackgroundColor(Color.parseColor("#ffffff"));
             score.setTextColor(Color.parseColor("#000000"));
             freeze.setBackgroundResource(R.drawable.ic_infinite_time_black);
-        }
-        else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN)) {
+            instructions.setTextColor(Color.parseColor("#000000"));
+        } else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN)) {
             rel.setBackgroundColor(Color.parseColor("#000000"));
             score.setTextColor(Color.parseColor("#ffffff"));
             freeze.setBackgroundResource(R.drawable.ic_infinite_time);
+            instructions.setTextColor(Color.parseColor("#ffffff"));
         }
     }
 
@@ -181,8 +187,8 @@ public class HardActivity extends AppCompatActivity {
                 break;
         }
     }
-    void checkcolor(int color)
-    {
+
+    void checkcolor(int color) {
         if (color == colors[valuecolor]) {
             if (audio) {
                 if (player.isPlaying() == true) {
@@ -195,8 +201,8 @@ public class HardActivity extends AppCompatActivity {
             sc = Integer.parseInt(score.getText().toString());
             sc++;
             score.setText(String.valueOf(sc));
-            if(speed>380)
-            speed = speed - 10;
+            if (speed > 380)
+                speed = speed - 10;
             al.clear();
             change();
         } else {
@@ -209,7 +215,9 @@ public class HardActivity extends AppCompatActivity {
             finish();
         }
     }
-    @OnClick(R.id.freeze) public void onSlowClicked() {
+
+    @OnClick(R.id.freeze)
+    public void onSlowClicked() {
         slowvalue = sharedPref.getInt("slowitem", 0);
         if (slowvalue > 0) {
 
@@ -228,26 +236,30 @@ public class HardActivity extends AppCompatActivity {
 
             animation.setInterpolator(new DecelerateInterpolator());
             animation.addListener(new Animator.AnimatorListener() {
-                @Override public void onAnimationStart(Animator animator) {
+                @Override
+                public void onAnimationStart(Animator animator) {
                 }
 
-                @Override public void onAnimationEnd(Animator animator) {
+                @Override
+                public void onAnimationEnd(Animator animator) {
                     //do something when the countdown is complete
 
                     progressBar2.setVisibility(View.GONE);
                     freeze.setVisibility(View.VISIBLE);
                     slowitemtext.setVisibility(View.VISIBLE);
                     slowitemtext.setText(String.valueOf(slowvalue));
-                    if(!gameOver)
-                    {
-                    cd.start(speed);
-                    frozen = false;}
+                    if (!gameOver) {
+                        cd.start(speed);
+                        frozen = false;
+                    }
                 }
 
-                @Override public void onAnimationCancel(Animator animator) {
+                @Override
+                public void onAnimationCancel(Animator animator) {
                 }
 
-                @Override public void onAnimationRepeat(Animator animator) {
+                @Override
+                public void onAnimationRepeat(Animator animator) {
                 }
             });
             animation.start();
