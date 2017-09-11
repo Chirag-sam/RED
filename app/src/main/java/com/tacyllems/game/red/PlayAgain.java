@@ -81,7 +81,7 @@ public class PlayAgain extends AppCompatActivity {
     AdRequest adRequest = new AdRequest.Builder().build();
     adView.loadAd(adRequest);
     mAd = MobileAds.getRewardedVideoAdInstance(this);
-    mAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+    mAd.loadAd(getString(R.string.videoadid), new AdRequest.Builder().build());
     mAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
       @Override public void onRewardedVideoAdLoaded() {
 
@@ -96,7 +96,7 @@ public class PlayAgain extends AppCompatActivity {
       }
 
       @Override public void onRewardedVideoAdClosed() {
-        mAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+        mAd.loadAd(getString(R.string.videoadid), new AdRequest.Builder().build());
       }
 
       @Override public void onRewarded(RewardItem rewardItem) {
@@ -117,11 +117,8 @@ public class PlayAgain extends AppCompatActivity {
       }
     });
     mInterstitialAd = new InterstitialAd(this);
-    if (BuildConfig.DEBUG) {
-      mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-    } else {
       mInterstitialAd.setAdUnitId(getString(R.string.fullscreenadid));
-    }
+
     mInterstitialAd.loadAd(new AdRequest.Builder().build());
     noofgames = sharedPref.getInt("noofgames", 0);
     Log.d("Wsa", "onCreate: " + noofgames);
@@ -159,10 +156,10 @@ public class PlayAgain extends AppCompatActivity {
     ty = getIntent().getExtras().get("Mode").toString();
     setgamemode(ty);
 
-    if (audio) {
-      laugh = MediaPlayer.create(this, R.raw.dennis);
-      laugh.start();
-    }
+    //if (audio) {
+    //  laugh = MediaPlayer.create(this, R.raw.dennis);
+    //  laugh.start();
+    //}
     if (getIntent().hasExtra("Score")) {
       s = getIntent().getExtras().get("Score").toString();
       if (s != null) sco = Integer.parseInt(s);
@@ -263,12 +260,12 @@ public class PlayAgain extends AppCompatActivity {
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.restart:
-        if (audio) {
-          if (laugh.isPlaying() == true) {
-            laugh.stop();
-            laugh.release();
-          }
-        }
+        //if (audio) {
+        //  if (laugh.isPlaying() == true) {
+        //    laugh.stop();
+        //    laugh.release();
+        //  }
+        //}
 
         switch (ty) {
           case "easy":
@@ -331,12 +328,12 @@ public class PlayAgain extends AppCompatActivity {
         dialog.show();
         break;
       case R.id.home:
-        if (audio) {
-          if (laugh.isPlaying() == true) {
-            laugh.stop();
-            laugh.release();
-          }
-        }
+        //if (audio) {
+        //  if (laugh.isPlaying() == true) {
+        //    laugh.stop();
+        //    laugh.release();
+        //  }
+        //}
         finish();
         break;
       case R.id.share:

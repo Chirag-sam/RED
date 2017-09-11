@@ -39,11 +39,9 @@ public class StartActivity extends AppCompatActivity {
     ButterKnife.bind(this);
     MobileAds.initialize(this, getString(R.string.appidads));
     mInterstitialAd = new InterstitialAd(this);
-    if (BuildConfig.DEBUG) {
-      mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-    } else {
-      mInterstitialAd.setAdUnitId(getString(R.string.fullscreenadid));
-    }
+
+    mInterstitialAd.setAdUnitId(getString(R.string.fullscreenadid));
+
     mInterstitialAd.loadAd(new AdRequest.Builder().build());
     mInterstitialAd.setAdListener(new AdListener() {
       @Override public void onAdClosed() {

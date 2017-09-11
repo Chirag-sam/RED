@@ -3,12 +3,19 @@
 
   <item
 
-      android:drawable="@color/colorPrimary"
+      android:drawable="@color/colorBackgroundDark"
 
       />
 
-  <item>
+  <item
+      android:bottom="100dp"
+      android:left="100dp"
+      android:right="100dp"
+      android:top="100dp"
+      >
+
     <bitmap
+
         android:gravity="center"
         android:src="@drawable/ic_launcher"/>
   </item>
