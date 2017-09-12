@@ -14,49 +14,54 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp">
 
-        <TableLayout
-            android:id="@+id/tableLayout"
+        <!--<TableLayout-->
+            <!--android:id="@+id/tableLayout"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:gravity="center">-->
+
+            <!--<TableRow>-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/rlred"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@color/RED" />-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/rlyell"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@color/YELLOW" />-->
+            <!--</TableRow>-->
+
+            <!--<TableRow>-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/rlblu"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@color/BLUE" />-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/rlgree"-->
+                    <!--android:layout_width="40dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:background="@color/GREEN" />-->
+            <!--</TableRow>-->
+        <!--</TableLayout>-->
+        <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:gravity="center">
-
-            <TableRow>
-
-                <Button
-                    android:id="@+id/rlred"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/RED" />
-
-                <Button
-                    android:id="@+id/rlyell"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/YELLOW" />
-            </TableRow>
-
-            <TableRow>
-
-                <Button
-                    android:id="@+id/rlblu"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/BLUE" />
-
-                <Button
-                    android:id="@+id/rlgree"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/GREEN" />
-            </TableRow>
-        </TableLayout>
+            android:background="@drawable/ic_launcher"
+            android:id="@+id/icon"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/tableLayout"
+            android:layout_toRightOf="@+id/icon"
             android:text="RED"
             android:textColor="@color/colorPrimary"
             android:layout_centerVertical="true"
