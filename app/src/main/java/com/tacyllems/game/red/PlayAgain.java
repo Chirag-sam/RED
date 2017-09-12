@@ -63,13 +63,14 @@ public class PlayAgain extends AppCompatActivity {
   private int tempxp;
   private int totalxp;
   private ObjectAnimator animation1;
+  private SharedPreferences sharedPref;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_play_again);
     ButterKnife.bind(this);
 
-    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
+    sharedPref = PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
     tempxp = sharedPref.getInt("tempxp", 0);
     progressBar2.getProgressDrawable()
         .setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
@@ -120,37 +121,7 @@ public class PlayAgain extends AppCompatActivity {
       mInterstitialAd.setAdUnitId(getString(R.string.fullscreenadid));
 
     mInterstitialAd.loadAd(new AdRequest.Builder().build());
-    noofgames = sharedPref.getInt("noofgames", 0);
-    Log.d("Wsa", "onCreate: " + noofgames);
-    if (noofgames < 5) {
-      noofgames += 1;
-      SharedPreferences.Editor editor = sharedPref.edit();
-      editor.putInt("noofgames", noofgames);
-      editor.apply();
-    } else {
-      mInterstitialAd.setAdListener(new AdListener() {
-        @Override public void onAdClosed() {
 
-        }
-
-        @Override public void onAdLoaded() {
-          if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-            mInterstitialAd.setAdListener(null);
-          } else {
-            Log.d("TAG", "The interstitial wasn't loaded yet.");
-          }
-
-          // Code to be executed when an ad finishes loading.
-
-          Log.i("Ads", "onAdLoaded");
-        }
-      });
-      noofgames = 0;
-      SharedPreferences.Editor editor = sharedPref.edit();
-      editor.putInt("noofgames", noofgames);
-      editor.apply();
-    }
 
     audio = sharedPref.getBoolean("audio", true);
     ty = getIntent().getExtras().get("Mode").toString();
@@ -266,25 +237,84 @@ public class PlayAgain extends AppCompatActivity {
         //    laugh.release();
         //  }
         //}
+        noofgames = sharedPref.getInt("noofgames", 0);
+        Log.d("Wsa", "onCreate: " + noofgames);
+        if (noofgames < 5) {
+          noofgames += 1;
+          SharedPreferences.Editor editor = sharedPref.edit();
+          editor.putInt("noofgames", noofgames);
+          editor.apply();
+          switch (ty) {
+            case "easy":
+              startActivity(new Intent(PlayAgain.this, EasyActivity.class));
+              finish();
+              break;
+            case "hard":
+              startActivity(new Intent(PlayAgain.this, HardActivity.class));
+              finish();
+              break;
+            case "stoner":
+              startActivity(new Intent(PlayAgain.this, StonerHard.class));
+              finish();
+              break;
+            case "reflex":
+              startActivity(new Intent(PlayAgain.this, Reflex30.class));
+              finish();
+              break;
+          }
+        } else {
+          if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+            noofgames = 0;
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("noofgames", noofgames);
+            editor.apply();
+            mInterstitialAd.setAdListener(new AdListener() {
+              @Override public void onAdClosed() {
+                super.onAdClosed();
+                switch (ty) {
+                  case "easy":
+                    startActivity(new Intent(PlayAgain.this, EasyActivity.class));
+                    finish();
+                    break;
+                  case "hard":
+                    startActivity(new Intent(PlayAgain.this, HardActivity.class));
+                    finish();
+                    break;
+                  case "stoner":
+                    startActivity(new Intent(PlayAgain.this, StonerHard.class));
+                    finish();
+                    break;
+                  case "reflex":
+                    startActivity(new Intent(PlayAgain.this, Reflex30.class));
+                    finish();
+                    break;
+                }
+              }
+            });
+          } else {
+            switch (ty) {
+              case "easy":
+                startActivity(new Intent(PlayAgain.this, EasyActivity.class));
+                finish();
+                break;
+              case "hard":
+                startActivity(new Intent(PlayAgain.this, HardActivity.class));
+                finish();
+                break;
+              case "stoner":
+                startActivity(new Intent(PlayAgain.this, StonerHard.class));
+                finish();
+                break;
+              case "reflex":
+                startActivity(new Intent(PlayAgain.this, Reflex30.class));
+                finish();
+                break;
+            }
+          }
 
-        switch (ty) {
-          case "easy":
-            startActivity(new Intent(PlayAgain.this, EasyActivity.class));
-            finish();
-            break;
-          case "hard":
-            startActivity(new Intent(PlayAgain.this, HardActivity.class));
-            finish();
-            break;
-          case "stoner":
-            startActivity(new Intent(PlayAgain.this, StonerHard.class));
-            finish();
-            break;
-          case "reflex":
-            startActivity(new Intent(PlayAgain.this, Reflex30.class));
-            finish();
-            break;
         }
+
         break;
       case R.id.help:
         //        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Sample Text")

@@ -83,13 +83,13 @@
     </TableRow>
   </TableLayout>
   <TextView
+      android:id="@+id/instructions"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textColor="@color/white"
-      android:text="(Choose the color of the text and not what it says!)"
       android:layout_above="@+id/tableLayout"
-      android:id="@+id/instructions"
       android:layout_centerHorizontal="true"
+      android:text="(Choose the color of the text and not what it says!)"
+      android:textColor="@color/white"
       android:textSize="16dp"/>
   <ProgressBar
       android:id="@+id/progressBar2"
@@ -109,8 +109,9 @@
       android:layout_above="@+id/instructions"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="30dp"
-      android:background="@drawable/ic_infinite_time"
+      android:background="?selectableItemBackgroundBorderless"
       android:scaleType="fitXY"
+      app:srcCompat="@drawable/ic_infinite_time"
       />
   <TextView
       android:id="@+id/slowitemtext"

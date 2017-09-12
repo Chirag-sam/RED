@@ -19,16 +19,13 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.github.anastr.flattimelib.CountDownTimerView;
-import com.github.anastr.flattimelib.intf.OnTimeFinish;
-
-import java.util.ArrayList;
-import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.github.anastr.flattimelib.CountDownTimerView;
+import com.github.anastr.flattimelib.intf.OnTimeFinish;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class HardActivity extends AppCompatActivity {
 
@@ -160,12 +157,12 @@ public class HardActivity extends AppCompatActivity {
         if (color == getResources().getColor(R.color.BLUE) || color == getResources().getColor(R.color.RED)) {
             rel.setBackgroundColor(Color.parseColor("#ffffff"));
             score.setTextColor(Color.parseColor("#000000"));
-            freeze.setBackgroundResource(R.drawable.ic_infinite_time_black);
+            freeze.setImageResource(R.drawable.ic_infinite_time_black);
             instructions.setTextColor(Color.parseColor("#000000"));
         } else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN)) {
             rel.setBackgroundColor(Color.parseColor("#000000"));
             score.setTextColor(Color.parseColor("#ffffff"));
-            freeze.setBackgroundResource(R.drawable.ic_infinite_time);
+            freeze.setImageResource(R.drawable.ic_infinite_time);
             instructions.setTextColor(Color.parseColor("#ffffff"));
         }
     }
