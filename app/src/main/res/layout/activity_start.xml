@@ -5,104 +5,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundDark"
-    tools:context="com.tacyllems.game.red.StartActivity"
-    >
-  <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_above="@+id/start"
-      android:layout_centerHorizontal="true"
-      android:layout_margin="60dp"
-      android:gravity="center"
-      android:orientation="horizontal"
-      >
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    tools:context="com.tacyllems.game.red.StartActivity">
 
-        app:srcCompat="@drawable/ic_launcher"
-        />
-    <TextView
-        android:id="@+id/title"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="RED"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30dp"
-        />
+        android:layout_above="@+id/start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp">
 
-  </LinearLayout>
-  <ImageButton
-      android:id="@+id/start"
-      android:layout_width="120dp"
-      android:layout_height="120dp"
-      android:layout_centerHorizontal="true"
-      android:layout_centerVertical="true"
-      android:background="?selectableItemBackgroundBorderless"
-      android:elevation="5dp"
-      android:scaleType="fitXY"
-      app:srcCompat="@drawable/ic_play_arrow_black_24dp"
-      />
-  <android.support.v7.widget.AppCompatSpinner
-      android:id="@+id/spinner"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/start"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="20dp"
-      android:entries="@array/modes"
-      style="@style/Spinner"
-      >
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center">
 
-  </android.support.v7.widget.AppCompatSpinner>
-  <ImageButton
-      android:id="@+id/ads"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentStart="true"
-      android:layout_margin="10dp"
-      android:background="?selectableItemBackgroundBorderless"
-      android:scaleType="fitXY"
-      app:srcCompat="@drawable/ic_attach_money_black_24dp"
-      />
-  <ImageButton
-      android:id="@+id/high"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_alignLeft="@+id/start"
-      android:layout_below="@id/spinner"
-      android:layout_marginTop="15dp"
-      android:background="?selectableItemBackgroundBorderless"
-      android:scaleType="fitXY"
-      app:srcCompat="@drawable/ic_show_chart_black_24dp"
-      />
-  <ImageButton
-      android:id="@+id/aboutus"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentEnd="true"
-      android:layout_alignParentRight="true"
-      android:layout_margin="10dp"
-      android:background="?selectableItemBackgroundBorderless"
-      android:scaleType="fitXY"
-      app:srcCompat="@drawable/ic_info_black_24dp"
-      />
-  <ImageButton
-      android:id="@+id/mute"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      android:layout_alignRight="@+id/start"
-      android:layout_below="@id/spinner"
-      android:layout_marginTop="15dp"
-      android:background="?selectableItemBackgroundBorderless"
-      android:scaleType="fitXY"
-      app:srcCompat="@drawable/ic_volume_off_black_24dp"
-      />
+            <TableRow>
+
+                <Button
+                    android:id="@+id/rlred"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/RED" />
+
+                <Button
+                    android:id="@+id/rlyell"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/YELLOW" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/rlblu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/BLUE" />
+
+                <Button
+                    android:id="@+id/rlgree"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/GREEN" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/tableLayout"
+            android:text="RED"
+            android:textColor="@color/colorPrimary"
+            android:layout_centerVertical="true"
+            android:textSize="30dp" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/start"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="?selectableItemBackgroundBorderless"
+        android:elevation="5dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        style="@style/Spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:entries="@array/modes">
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <ImageButton
+        android:id="@+id/ads"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_attach_money_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/high"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/start"
+        android:layout_below="@id/spinner"
+        android:layout_marginTop="15dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_show_chart_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/aboutus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_info_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/mute"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/start"
+        android:layout_below="@id/spinner"
+        android:layout_marginTop="15dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_volume_off_black_24dp" />
 
 
 </RelativeLayout>
