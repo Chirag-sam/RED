@@ -22,6 +22,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.iwgang.countdownview.CountdownView;
+
 import com.github.anastr.flattimelib.CountDownTimerView;
 import com.github.anastr.flattimelib.intf.OnTimeFinish;
 import java.util.ArrayList;
@@ -36,11 +38,8 @@ public class HardActivity extends AppCompatActivity {
     ProgressBar progressBar2;
     @BindView(R.id.freeze)
     ImageButton freeze;
-    @BindView(R.id.instructions)
-    TextView instructions;
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
-    private CountDownTimerView cd;
     private TextView colorText;
     private Button butt4;
     private Button butt3;
@@ -56,6 +55,7 @@ public class HardActivity extends AppCompatActivity {
     private int valuecolor;
     private Boolean frozen = false;
     private Boolean gameOver = false;
+    private CountdownView mCountDownTimer;
 
     private ArrayList<Integer> al = new ArrayList<>();
 
@@ -66,6 +66,7 @@ public class HardActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         progressBar2.setVisibility(View.GONE);
         freeze.setVisibility(View.VISIBLE);
+        mCountDownTimer = (CountdownView)findViewById(R.id.mCountDownTimer);
         progressBar2.getProgressDrawable()
                 .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
                         PorterDuff.Mode.SRC_IN);
@@ -74,8 +75,6 @@ public class HardActivity extends AppCompatActivity {
         audio = sharedPref.getBoolean("audio", true);
         slowvalue = sharedPref.getInt("slowitem", 0);
         slowitemtext.setText(String.valueOf(slowvalue));
-
-        cd = findViewById(R.id.mCountDownTimer);
         colorText = findViewById(R.id.colorText);
 
         butt4 = findViewById(R.id.butt4);
@@ -94,7 +93,7 @@ public class HardActivity extends AppCompatActivity {
         colors[2] = Color.GREEN;
         colors[3] = Color.YELLOW;
 
-        speed = 1000;
+        speed = 1200;
         change();
     }
 
@@ -123,13 +122,13 @@ public class HardActivity extends AppCompatActivity {
         butt4.setBackgroundColor(colors[ran4]);
 
         if (!frozen) {
-            cd.start(speed);
+            mCountDownTimer.start(speed);
 
         }
-        cd.setOnEndAnimationFinish(new OnTimeFinish() {
+        mCountDownTimer.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
             @Override
-            public void onFinish() {
-                cd.stop();
+            public void onEnd(CountdownView cv) {
+                mCountDownTimer.stop();
                 Intent intent = new Intent(HardActivity.this, PlayAgain.class);
                 intent.putExtra("Score", sc);
                 intent.putExtra("Mode", "hard");
@@ -158,12 +157,10 @@ public class HardActivity extends AppCompatActivity {
             rel.setBackgroundColor(Color.parseColor("#ffffff"));
             score.setTextColor(Color.parseColor("#000000"));
             freeze.setImageResource(R.drawable.ic_infinite_time_black);
-            instructions.setTextColor(Color.parseColor("#000000"));
         } else if (color == getResources().getColor(R.color.YELLOW) || color == getResources().getColor(R.color.GREEN)) {
             rel.setBackgroundColor(Color.parseColor("#000000"));
             score.setTextColor(Color.parseColor("#ffffff"));
             freeze.setImageResource(R.drawable.ic_infinite_time);
-            instructions.setTextColor(Color.parseColor("#ffffff"));
         }
     }
 
@@ -203,7 +200,7 @@ public class HardActivity extends AppCompatActivity {
             al.clear();
             change();
         } else {
-            cd.stop();
+            mCountDownTimer.stop();
             gameOver = true;
             Intent intent = new Intent(HardActivity.this, PlayAgain.class);
             intent.putExtra("Score", sc);
@@ -224,7 +221,7 @@ public class HardActivity extends AppCompatActivity {
 
             ObjectAnimator animation = ObjectAnimator.ofInt(progressBar2, "progress", 100, 0);
             animation.setDuration(5000);
-            cd.pause();
+            mCountDownTimer.pause();
             frozen = true;
             slowvalue -= 1;
             SharedPreferences.Editor editorz = sharedPref.edit();
@@ -246,7 +243,7 @@ public class HardActivity extends AppCompatActivity {
                     slowitemtext.setVisibility(View.VISIBLE);
                     slowitemtext.setText(String.valueOf(slowvalue));
                     if (!gameOver) {
-                        cd.start(speed);
+                        mCountDownTimer.start(speed);
                         frozen = false;
                     }
                 }

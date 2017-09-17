@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.iwgang.countdownview.CountdownView;
 
 import com.github.anastr.flattimelib.CountDownTimerView;
 import com.github.anastr.flattimelib.intf.OnTimeFinish;
@@ -28,7 +29,6 @@ public class StonerHard extends AppCompatActivity {
     private ArrayList<String> colorNames = new ArrayList<>();
     private int colors[] = new int[4];
     private int colordraw[] = {R.drawable.blue_button_background, R.drawable.red_button_background, R.drawable.green_colour_background, R.drawable.yellow_button_background};
-    private CountDownTimerView cd;
     private TextView colorText;
     private Button butt4;
     private Button butt3;
@@ -41,6 +41,7 @@ public class StonerHard extends AppCompatActivity {
     private MediaPlayer player;
     private Boolean audio;
     private int valuecolor;
+    private CountdownView mCountDownTimer;
     private int redback[] = {R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
     private int blueback[] = {R.color.RED, R.color.GREEN, R.color.YELLOW, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
     private int greenback[] = {R.color.BLUE, R.color.RED, R.color.YELLOW, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
@@ -58,8 +59,8 @@ public class StonerHard extends AppCompatActivity {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(StonerHard.this);
         audio = sharedPref.getBoolean("audio", true);
 
-        cd = findViewById(R.id.mCountDownTimer);
         colorText = findViewById(R.id.colorText);
+        mCountDownTimer = findViewById(R.id.mCountDownTimer);
 
         butt4 = findViewById(R.id.butt4);
         butt3 = findViewById(R.id.butt3);
@@ -77,7 +78,7 @@ public class StonerHard extends AppCompatActivity {
         colors[2] = Color.GREEN;
         colors[3] = Color.YELLOW;
 
-        speed = 1000;
+        speed = 1200;
         change();
     }
 
@@ -108,11 +109,11 @@ public class StonerHard extends AppCompatActivity {
         butt4.setBackgroundResource(colordraw[ran4]);
         setTag(colordraw[ran4], butt4);
 
-        cd.start(speed);
-        cd.setOnEndAnimationFinish(new OnTimeFinish() {
+        mCountDownTimer.start(speed);
+        mCountDownTimer.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
             @Override
-            public void onFinish() {
-                cd.stop();
+            public void onEnd(CountdownView cv) {
+                mCountDownTimer.stop();
                 Intent intent = new Intent(StonerHard.this, PlayAgain.class);
                 intent.putExtra("Score", sc);
                 intent.putExtra("Mode", "stoner");
@@ -202,7 +203,7 @@ public class StonerHard extends AppCompatActivity {
             al.clear();
             change();
         } else {
-            cd.stop();
+            mCountDownTimer.stop();
             Intent intent = new Intent(StonerHard.this, PlayAgain.class);
             intent.putExtra("Score", sc);
             intent.putExtra("Mode", "stoner");

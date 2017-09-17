@@ -20,14 +20,24 @@
       android:textStyle="bold"
       />
 
-  <com.github.anastr.flattimelib.CountDownTimerView
+  <cn.iwgang.countdownview.CountdownView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:isShowMinute="false"
+      app:isShowSecond="true"
+      app:isShowMillisecond="true"
+      app:timeTextColor="#ffffff"
+      app:suffix=":"
+      app:timeTextSize="22sp"
+      app:isTimeTextBold="true"
+      app:suffixGravity="bottom"
+      app:suffixTextColor="#ffffff"
+      app:suffixTextSize="10sp"
       android:id="@+id/mCountDownTimer"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
       android:layout_alignParentRight="true"
+      android:layout_marginTop="20dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"
-      />
+      android:background="#000000"/>
 
 
 
@@ -82,20 +92,11 @@
           />
     </TableRow>
   </TableLayout>
-  <TextView
-      android:id="@+id/instructions"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_above="@+id/tableLayout"
-      android:layout_centerHorizontal="true"
-      android:text="(Choose the color of the text and not what it says!)"
-      android:textColor="@color/white"
-      android:textSize="16dp"/>
   <ProgressBar
       android:id="@+id/progressBar2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_above="@+id/instructions"
+      android:layout_above="@+id/tableLayout"
       android:layout_centerHorizontal="true"
       android:layout_margin="40dp"
       android:max="100"
@@ -106,7 +107,7 @@
       android:id="@+id/freeze"
       android:layout_width="40dp"
       android:layout_height="40dp"
-      android:layout_above="@+id/instructions"
+      android:layout_above="@+id/tableLayout"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="30dp"
       android:background="?selectableItemBackgroundBorderless"
