@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.iwgang.countdownview.CountdownView;
 
-import com.github.anastr.flattimelib.CountDownTimerView;
+
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -73,7 +73,7 @@ public class EasyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         progressBar2.setVisibility(View.GONE);
         freeze.setVisibility(View.VISIBLE);
-        mCountDownTimer = (CountdownView)findViewById(R.id.mCountDownTimer);
+        mCountDownTimer = (CountdownView) findViewById(R.id.mCountDownTimer);
         progressBar2.getProgressDrawable()
                 .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
                         android.graphics.PorterDuff.Mode.SRC_IN);

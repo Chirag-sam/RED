@@ -96,6 +96,14 @@
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_share_black_24dp" />
+        <ImageButton
+            android:id="@+id/playhigh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="12dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_insert_chart_black_24dp" />
     </LinearLayout>
 
     <LinearLayout

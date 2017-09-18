@@ -24,8 +24,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.iwgang.countdownview.CountdownView;
 
-import com.github.anastr.flattimelib.CountDownTimerView;
-import com.github.anastr.flattimelib.intf.OnTimeFinish;
 import java.util.ArrayList;
 import java.util.Random;
 
