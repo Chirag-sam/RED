@@ -153,16 +153,4 @@
         app:srcCompat="@drawable/ic_info_black_24dp" />
 
 
-    <ImageButton
-        android:id="@+id/playsignin"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="15dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
-        android:layout_alignBottom="@+id/ads"
-        android:layout_centerHorizontal="true"
-        app:srcCompat="@drawable/ic_games_controller" />
-
-
 </RelativeLayout>

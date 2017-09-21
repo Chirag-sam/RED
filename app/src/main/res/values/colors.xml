@@ -23,4 +23,5 @@
   <color name="maroon">#82454c</color>
   <color name="yellowish_orange">#ffa500</color>
   <color name="purple">#4a2a46</color>
+  <color name="cache_color">#00000000</color>
 </resources>

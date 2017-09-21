@@ -16,6 +16,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -101,6 +103,8 @@ public class PlayAgain extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_play_again);
         ButterKnife.bind(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -211,6 +215,18 @@ public class PlayAgain extends AppCompatActivity implements
             }
             sc.setText(String.valueOf(sco));
             best.setText("BEST: " + String.valueOf(highScore));
+        }
+        if(getIntent().hasExtra("Winner"))
+        {
+            String p = getIntent().getExtras().getString("Winner");
+            if(p.equals("P1"))
+            {
+                best.setText("Player 1 wins!!");
+            }
+            else
+            {
+                best.setText("Player 2 wins!!");
+            }
         }
         if (getIntent().hasExtra("Time")) {
 
@@ -422,15 +438,21 @@ public class PlayAgain extends AppCompatActivity implements
                 if (mAd.isLoaded()) mAd.show();
                 break;
             case R.id.playhigh:
-                if (ty.equals("easy"))
-                    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
-                            getString(R.string.easylead)), 1);
-                else if (ty.equals("hard"))
-                    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
-                            getString(R.string.hardlead)), 1);
-                else if (ty.equals("stoner"))
-                    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
-                            getString(R.string.stonerhardlead)), 1);
+                mSignInClicked = true;
+                if (mGoogleApiClient.isConnected()) {
+                    if (ty.equals("easy"))
+                        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                                getString(R.string.easylead)), 1);
+                    else if (ty.equals("hard"))
+                        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                                getString(R.string.hardlead)), 1);
+                    else if (ty.equals("stoner"))
+                        startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+                                getString(R.string.stonerhardlead)), 1);
+                } else {
+                    mGoogleApiClient.connect();
+                }
+
                 break;
         }
     }

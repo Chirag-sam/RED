@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -51,8 +53,6 @@ public class StartActivity extends AppCompatActivity implements
     Boolean audio;
     SharedPreferences sharedPref;
     InterstitialAd mInterstitialAd;
-    @BindView(R.id.playsignin)
-    ImageButton playsignin;
     @BindView(R.id.playhigh)
     ImageButton playhigh;
     private GoogleApiClient mGoogleApiClient;
@@ -66,6 +66,8 @@ public class StartActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -114,6 +116,9 @@ public class StartActivity extends AppCompatActivity implements
                 break;
             case "REFLEX 30":
                 startActivity(new Intent(StartActivity.this, Reflex30.class));
+                break;
+            case "MULTIPLAYER":
+                startActivity(new Intent(StartActivity.this, Multiplayer.class));
                 break;
             default:
                 startActivity(new Intent(StartActivity.this, EasyActivity.class));
@@ -255,35 +260,16 @@ public class StartActivity extends AppCompatActivity implements
         mGoogleApiClient.disconnect();
     }
 
-    @OnClick(R.id.playsignin)
-    public void onPlaysigninCLicked() {
-        mSignInClicked = true;
-        if (mGoogleApiClient.isConnected()) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this,R.style.MyDialogTheme);
-            builder.setMessage("Sign Out?");
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    mExplicitSignOut = true;
-                    if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-                        Games.signOut(mGoogleApiClient);
-                        mGoogleApiClient.disconnect();
-
-
-                    }
-                }
-            });
-            builder.setNegativeButton("No", null);
-            builder.show();
-        } else {
-            mGoogleApiClient.connect();
-        }
-
-    }
 
 
     @OnClick(R.id.playhigh)
     public void onPlayhighClicked() {
-        startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent( mGoogleApiClient ), 1);
+        mSignInClicked = true;
+        if (mGoogleApiClient.isConnected()) {
+            startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent( mGoogleApiClient ), 1);
+        } else {
+            mGoogleApiClient.connect();
+        }
+
     }
 }
