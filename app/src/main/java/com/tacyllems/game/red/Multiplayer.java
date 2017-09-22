@@ -85,7 +85,6 @@ public class Multiplayer extends AppCompatActivity {
                 }
                 intent.putExtra("Mode", "multiplayer");
                 startActivity(intent);
-                finish();
             }
         });
 

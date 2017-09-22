@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,10 @@ public class StartActivity extends AppCompatActivity implements
 
     @BindView(R.id.start)
     ImageButton start;
-    @BindView(R.id.spinner)
-    AppCompatSpinner spinner;
+    @BindView(R.id.modescontainer)
+    RelativeLayout modescontainer;
+    @BindView(R.id.modes)
+    TextView modes;
     @BindView(R.id.ads)
     ImageButton ads;
     @BindView(R.id.high)
@@ -97,14 +100,60 @@ public class StartActivity extends AppCompatActivity implements
         } else {
             mute.setImageResource(R.drawable.ic_volume_off_black_24dp);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_text,
-                getResources().getStringArray(R.array.modes));
-        spinner.setAdapter(adapter);
+        modescontainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog;
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    dialog = new Dialog(StartActivity.this, R.style.dialogthemez);
+                } else {
+                    dialog = new Dialog(StartActivity.this);
+                }
+                dialog.setContentView(R.layout.mode_dialog);
+                RelativeLayout easy = dialog.findViewById(R.id.easy);
+                RelativeLayout hard = dialog.findViewById(R.id.hard);
+                RelativeLayout stoner = dialog.findViewById(R.id.stoner);
+                RelativeLayout reflex30 = dialog.findViewById(R.id.reflex30);
+                RelativeLayout multiplayer = dialog.findViewById(R.id.multiplayer);
+                easy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modes.setText("EASY");dialog.dismiss();
+                    }
+                });
+                hard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modes.setText("HARD");dialog.dismiss();
+                    }
+                });
+                stoner.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modes.setText("STONER HARD");dialog.dismiss();
+                    }
+                });
+                reflex30.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modes.setText("REFLEX 30");dialog.dismiss();
+                    }
+                });
+                multiplayer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modes.setText("MULTIPLAYER");dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
     }
 
     @OnClick(R.id.start)
     public void onViewClicked() {
-        switch (spinner.getSelectedItem().toString()) {
+        switch (modes.getText().toString()) {
             case "EASY":
                 startActivity(new Intent(StartActivity.this, EasyActivity.class));
                 break;

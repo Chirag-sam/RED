@@ -16,8 +16,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".EasyActivity" />
-        <activity android:name=".PlayAgain" />
-        <activity android:name=".StartActivity">
+        <activity
+            android:name=".PlayAgain"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StartActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +34,12 @@
         <activity android:name=".Reflex30" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".Tribute" />
-        <activity android:name=".Multiplayer" />
-        <activity android:name=".MultiplayerEnd"
+        <activity android:name=".Multiplayer"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MultiplayerEnd"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@style/Theme.CustomTranslucent"></activity>
     </application>
 
 </manifest>
