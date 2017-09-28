@@ -76,13 +76,9 @@ public class Multiplayer extends AppCompatActivity {
                 if (audio) player.stop();
                 mCountDownTimer.stop();
                 Intent intent = new Intent(Multiplayer.this, MultiplayerEnd.class);
-                if(sc>sc2) {
-                    intent.putExtra("Winner", "P1");
-                }
-                else
-                {
-                    intent.putExtra("Winner", "P2");
-                }
+                intent.putExtra("Score1", sc);
+                intent.putExtra("Score2", sc2);
+
                 intent.putExtra("Mode", "multiplayer");
                 startActivity(intent);
             }
@@ -120,16 +116,8 @@ public class Multiplayer extends AppCompatActivity {
         colorText2.setTextColor(colors[valuecolor1]);
     }
 
-    @OnClick({R.id.rlred, R.id.rlyell, R.id.rlblu, R.id.rlgree,R.id.rlred1, R.id.rlyell1, R.id.rlblu1, R.id.rlgree1})
+    @OnClick({R.id.rlred, R.id.rlyell, R.id.rlblu, R.id.rlgree, R.id.rlred1, R.id.rlyell1, R.id.rlblu1, R.id.rlgree1})
     public void onViewClicked(View view) {
-        if (audio) {
-            if (player.isPlaying() == true) {
-                player.stop();
-                player.release();
-                player = MediaPlayer.create(this, R.raw.ding);
-            }
-            player.start();
-        }
         switch (view.getId()) {
             case R.id.rlred:
                 checkcolor(((ColorDrawable) rlred.getBackground()).getColor());
@@ -171,6 +159,7 @@ public class Multiplayer extends AppCompatActivity {
             change();
         }
     }
+
     void checkcolor1(int color) {
         if (color == colors[valuecolor1]) {
             sc2 = Integer.parseInt(score2.getText().toString());

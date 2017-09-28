@@ -1,42 +1,49 @@
 <resources>
 
-  <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:fontFamily">sans-serif-thin</item>
-    <item name="android:textStyle">bold</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:textStyle">bold</item>
 
-  </style>
-  <style name="Theme.CustomTranslucent" parent="android:style/Theme.Translucent">
-    <item name="android:backgroundDimEnabled">true</item>
-    <item name="android:backgroundDimAmount">0.5</item>
-    <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-    <item name="android:background">@android:color/transparent</item>
-  </style>
+    </style>
+
+    <style name="Theme.CustomTranslucent" parent="android:style/Theme.Translucent">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
 
-  <style name="pop" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="android:windowIsTranslucent">true</item>
-    <item name="colorPrimary">@color/primary</item>
-    <item name="colorPrimaryDark">@color/primary_dark</item>
-    <item name="android:windowCloseOnTouchOutside">true</item>
-    <item name="android:textColorPrimary">@color/primary_text</item>
-    <item name="android:textColorSecondary">@color/secondary_text</item>
-    <item name="colorAccent">@color/colorPrimaryDark</item>
-    <item name="android:layout_width">300dp</item>
-  </style>
+    <style name="pop" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:layout_width">300dp</item>
+    </style>
 
-  <style name="Spinner" parent="Widget.AppCompat.Spinner">
-    <item name="backgroundTint">@color/colorPrimary</item>
-    <item name="android:textColor">@color/colorPrimary</item>
-  </style>
-  <style name="dialogthemez" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="colorAccent">@color/colorAccent</item>
-  </style>
-  <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="colorPrimary">@color/colorPrimary</item>
-  </style>
+    <style name="Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="dialogthemez" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -22,7 +22,6 @@
         <activity
             android:name=".StartActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,12 +33,13 @@
         <activity android:name=".Reflex30" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".Tribute" />
-        <activity android:name=".Multiplayer"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Multiplayer"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MultiplayerEnd"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.CustomTranslucent"></activity>
+            android:theme="@style/Theme.CustomTranslucent" />
+        <activity android:name=".StatsActivity"></activity>
     </application>
 
 </manifest>
