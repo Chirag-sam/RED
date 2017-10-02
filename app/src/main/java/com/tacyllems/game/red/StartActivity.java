@@ -116,6 +116,7 @@ public class StartActivity extends AppCompatActivity implements
                 RelativeLayout stoner = dialog.findViewById(R.id.stoner);
                 RelativeLayout reflex30 = dialog.findViewById(R.id.reflex30);
                 RelativeLayout multiplayer = dialog.findViewById(R.id.multiplayer);
+                RelativeLayout doubletrouble = dialog.findViewById(R.id.doubletrouble);
                 easy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -146,6 +147,12 @@ public class StartActivity extends AppCompatActivity implements
                         modes.setText("MULTIPLAYER");dialog.dismiss();
                     }
                 });
+                doubletrouble.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        modes.setText("DOUBLE TROUBLE");dialog.dismiss();
+                    }
+                });
                 dialog.show();
             }
         });
@@ -168,6 +175,9 @@ public class StartActivity extends AppCompatActivity implements
                 break;
             case "MULTIPLAYER":
                 startActivity(new Intent(StartActivity.this, Multiplayer.class));
+                break;
+            case "DOUBLE TROUBLE":
+                startActivity(new Intent(StartActivity.this, DoubleTrouble.class));
                 break;
             default:
                 startActivity(new Intent(StartActivity.this, EasyActivity.class));

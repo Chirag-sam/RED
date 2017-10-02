@@ -94,7 +94,6 @@ public class StonerHard extends AppCompatActivity {
         colorText.setTextColor(colors[valuecolor]);
 
         int ran1 = generateRandom(4, null);
-
         al.add(ran1);
         int ran2 = generateRandom(4, al);
         al.add(ran2);
