@@ -326,6 +326,10 @@ public class PlayAgain extends AppCompatActivity implements
                             startActivity(new Intent(PlayAgain.this, Reflex30.class));
                             finish();
                             break;
+                        case "double":
+                            startActivity(new Intent(PlayAgain.this, DoubleTrouble.class));
+                            finish();
+                            break;
                     }
                 } else {
                     if (mInterstitialAd.isLoaded()) {
@@ -355,6 +359,10 @@ public class PlayAgain extends AppCompatActivity implements
                                         startActivity(new Intent(PlayAgain.this, Reflex30.class));
                                         finish();
                                         break;
+                                    case "double":
+                                        startActivity(new Intent(PlayAgain.this, DoubleTrouble.class));
+                                        finish();
+                                        break;
                                 }
                             }
                         });
@@ -374,6 +382,10 @@ public class PlayAgain extends AppCompatActivity implements
                                 break;
                             case "reflex":
                                 startActivity(new Intent(PlayAgain.this, Reflex30.class));
+                                finish();
+                                break;
+                            case "double":
+                                startActivity(new Intent(PlayAgain.this, DoubleTrouble.class));
                                 finish();
                                 break;
                         }

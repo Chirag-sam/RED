@@ -85,7 +85,7 @@ public class DoubleTrouble extends AppCompatActivity {
       mCountDownTimer1.stop();
       Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
       intent.putExtra("Score", sc);
-      intent.putExtra("Mode", "easy");
+      intent.putExtra("Mode", "double");
       startActivity(intent);
       finish();
     });
@@ -94,7 +94,7 @@ public class DoubleTrouble extends AppCompatActivity {
       mCountDownTimer2.stop();
       Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
       intent.putExtra("Score", sc);
-      intent.putExtra("Mode", "easy");
+      intent.putExtra("Mode", "double");
       startActivity(intent);
       finish();
     });
@@ -200,7 +200,7 @@ public class DoubleTrouble extends AppCompatActivity {
         if (audio) player.stop();
         Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
         intent.putExtra("Score", sc);
-        intent.putExtra("Mode", "easy");
+        intent.putExtra("Mode", "double");
         startActivity(intent);
         finish();
       }
@@ -220,7 +220,7 @@ public class DoubleTrouble extends AppCompatActivity {
         if (audio) player.stop();
         Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
         intent.putExtra("Score", sc);
-        intent.putExtra("Mode", "easy");
+        intent.putExtra("Mode", "double");
         startActivity(intent);
         finish();
       }
