@@ -1,7 +1,6 @@
 package com.tacyllems.game.red;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -9,19 +8,17 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -31,14 +28,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class StartActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    private static int RC_SIGN_IN = 9001;
     @BindView(R.id.start)
     ImageButton start;
     @BindView(R.id.modescontainer)
@@ -58,13 +52,12 @@ public class StartActivity extends AppCompatActivity implements
     InterstitialAd mInterstitialAd;
     @BindView(R.id.playhigh)
     ImageButton playhigh;
+    boolean mExplicitSignOut = false;
+    boolean mInSignInFlow = false;
     private GoogleApiClient mGoogleApiClient;
-    private static int RC_SIGN_IN = 9001;
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
     private boolean mSignInClicked = false;
-    boolean mExplicitSignOut = false;
-    boolean mInSignInFlow = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -308,8 +301,8 @@ public class StartActivity extends AppCompatActivity implements
                 // failed. The R.string.signin_failure should reference an error
                 // string in your strings.xml file that tells the user they
                 // could not be signed in, such as "Unable to sign in."
-                BaseGameUtils.showActivityResultError(this,
-                        requestCode, resultCode, 0);
+                BaseGameUtils.showActivityResultError(this, requestCode, resultCode,
+                    R.string.sign_in_other_error);
             }
         }
     }
