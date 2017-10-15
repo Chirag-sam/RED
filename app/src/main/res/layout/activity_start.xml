@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundDark"
-    tools:context="com.tacyllems.game.red.StartActivity">
+    tools:context="com.tacyllems.game.red.StartActivity"
+    android:id="@+id/root">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -132,7 +133,7 @@
             android:layout_marginTop="15dp"
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_show_chart_black_24dp" />
+            app:srcCompat="@drawable/ic_insert_chart_black_24dp" />
 
         <ImageButton
             android:id="@+id/playhigh"
@@ -142,7 +143,7 @@
             android:layout_marginTop="15dp"
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_insert_chart_black_24dp" />
+            app:srcCompat="@drawable/ic_games_controller" />
 
         <ImageButton
             android:id="@+id/mute"

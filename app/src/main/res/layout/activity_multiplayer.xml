@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.tacyllems.game.red.Multiplayer"
     android:background="#232B2B"
+    android:id="@+id/rel"
     >
     <TableLayout
         android:id="@+id/tableLayout"

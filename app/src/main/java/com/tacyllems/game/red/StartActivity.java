@@ -16,9 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -27,6 +25,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class StartActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -54,6 +56,8 @@ public class StartActivity extends AppCompatActivity implements
     ImageButton playhigh;
     boolean mExplicitSignOut = false;
     boolean mInSignInFlow = false;
+    @BindView(R.id.root)
+    RelativeLayout root;
     private GoogleApiClient mGoogleApiClient;
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
@@ -113,37 +117,43 @@ public class StartActivity extends AppCompatActivity implements
                 easy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modes.setText("EASY");dialog.dismiss();
+                        modes.setText("EASY");
+                        dialog.dismiss();
                     }
                 });
                 hard.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modes.setText("HARD");dialog.dismiss();
+                        modes.setText("HARD");
+                        dialog.dismiss();
                     }
                 });
                 stoner.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modes.setText("STONER HARD");dialog.dismiss();
+                        modes.setText("STONER HARD");
+                        dialog.dismiss();
                     }
                 });
                 reflex30.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modes.setText("REFLEX 30");dialog.dismiss();
+                        modes.setText("REFLEX 30");
+                        dialog.dismiss();
                     }
                 });
                 multiplayer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modes.setText("MULTIPLAYER");dialog.dismiss();
+                        modes.setText("MULTIPLAYER");
+                        dialog.dismiss();
                     }
                 });
                 doubletrouble.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        modes.setText("DOUBLE TROUBLE");dialog.dismiss();
+                        modes.setText("DOUBLE TROUBLE");
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();
@@ -220,7 +230,7 @@ public class StartActivity extends AppCompatActivity implements
 //                                    milliseconds));
 //                }
 //                dialog.show();
-                startActivity(new Intent(StartActivity.this,StatsActivity.class));
+                startActivity(new Intent(StartActivity.this, StatsActivity.class));
                 break;
             case R.id.aboutus:
                 startActivity(new Intent(StartActivity.this, AboutActivity.class));
@@ -302,7 +312,7 @@ public class StartActivity extends AppCompatActivity implements
                 // string in your strings.xml file that tells the user they
                 // could not be signed in, such as "Unable to sign in."
                 BaseGameUtils.showActivityResultError(this, requestCode, resultCode,
-                    R.string.sign_in_other_error);
+                        R.string.sign_in_other_error);
             }
         }
     }
@@ -314,15 +324,28 @@ public class StartActivity extends AppCompatActivity implements
     }
 
 
-
     @OnClick(R.id.playhigh)
     public void onPlayhighClicked() {
         mSignInClicked = true;
         if (mGoogleApiClient.isConnected()) {
-            startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent( mGoogleApiClient ), 1);
+            startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(mGoogleApiClient), 1);
         } else {
             mGoogleApiClient.connect();
         }
 
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            root.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
 }

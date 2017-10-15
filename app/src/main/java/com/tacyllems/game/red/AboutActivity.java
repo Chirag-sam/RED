@@ -1,16 +1,23 @@
 package com.tacyllems.game.red;
+
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AboutActivity extends AppCompatActivity {
+    @BindView(R.id.activity_about)
+    RelativeLayout activityAbout;
     private int count;
 
     @Override
@@ -19,6 +26,7 @@ public class AboutActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_about);
+        ButterKnife.bind(this);
         count = 0;
 
         TextView version = (TextView) findViewById(R.id.introtext2);
@@ -34,10 +42,9 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 count++;
-                if(count==15)
-                {
-                    count =0;
-                    startActivity(new Intent(AboutActivity.this,Tribute.class));
+                if (count == 15) {
+                    count = 0;
+                    startActivity(new Intent(AboutActivity.this, Tribute.class));
                     finish();
                 }
 
@@ -52,6 +59,20 @@ public class AboutActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return "Error. We didn't expect this.";
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            activityAbout.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
 }

@@ -22,11 +22,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -40,6 +37,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PlayAgain extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -79,6 +80,8 @@ public class PlayAgain extends AppCompatActivity implements
     ImageView plus2;
     @BindView(R.id.slowitemtext)
     TextView slowitemtext;
+    @BindView(R.id.root)
+    RelativeLayout root;
     private MediaPlayer laugh;
     private String ty;
     private String s;
@@ -121,6 +124,7 @@ public class PlayAgain extends AppCompatActivity implements
 
         slowvalue = sharedPref.getInt("slowitem", 0);
         slowitemtext.setText(String.valueOf(slowvalue));
+
 
         MobileAds.initialize(this, getString(R.string.appidads));
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -177,6 +181,7 @@ public class PlayAgain extends AppCompatActivity implements
         audio = sharedPref.getBoolean("audio", true);
         ty = getIntent().getExtras().get("Mode").toString();
         setgamemode(ty);
+        updatestats(ty);
 
         //if (audio) {
         //  laugh = MediaPlayer.create(this, R.raw.dennis);
@@ -216,15 +221,11 @@ public class PlayAgain extends AppCompatActivity implements
             sc.setText(String.valueOf(sco));
             best.setText("BEST: " + String.valueOf(highScore));
         }
-        if(getIntent().hasExtra("Winner"))
-        {
+        if (getIntent().hasExtra("Winner")) {
             String p = getIntent().getExtras().getString("Winner");
-            if(p.equals("P1"))
-            {
+            if (p.equals("P1")) {
                 best.setText("Player 1 wins!!");
-            }
-            else
-            {
+            } else {
                 best.setText("Player 2 wins!!");
             }
         }
@@ -612,6 +613,76 @@ public class PlayAgain extends AppCompatActivity implements
                 BaseGameUtils.showActivityResultError(this,
                         requestCode, resultCode, 0);
             }
+        }
+    }
+
+    public void updatestats(String ty) {
+        // for total number of games
+        int total;
+        total = sharedPref.getInt("totalnumberofgames", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        total++;
+        editor.putInt("totalnumberofgames", total);
+        editor.apply();
+
+        //for specific modes
+        switch (ty) {
+            case "easy":
+                SharedPreferences.Editor editor1 = sharedPref.edit();
+                int total1 = sharedPref.getInt("easytotal", 0);
+                total1++;
+                editor1.putInt("easytotal", total1);
+                editor1.apply();
+                break;
+            case "hard":
+                SharedPreferences.Editor editor2 = sharedPref.edit();
+                int total2 = sharedPref.getInt("hardtotal", 0);
+                total2++;
+                editor2.putInt("hardtotal", total2);
+                editor2.apply();
+                break;
+            case "stoner":
+                SharedPreferences.Editor editor3 = sharedPref.edit();
+                int total3 = sharedPref.getInt("stonertotal", 0);
+                total3++;
+                editor3.putInt("stonertotal", total3);
+                editor3.apply();
+                break;
+            case "reflex":
+                SharedPreferences.Editor editor4 = sharedPref.edit();
+                int total4 = sharedPref.getInt("reflextotal", 0);
+                total4++;
+                editor4.putInt("reflextotal", total4);
+                editor4.apply();
+                break;
+            case "multiplayer":
+                SharedPreferences.Editor editor5 = sharedPref.edit();
+                int total5 = sharedPref.getInt("multitotal", 0);
+                total5++;
+                editor5.putInt("multitotal", total5);
+                editor5.apply();
+                break;
+            case "double":
+                SharedPreferences.Editor editor6 = sharedPref.edit();
+                int total6 = sharedPref.getInt("doubletotal", 0);
+                total6++;
+                editor6.putInt("doubletotal", total6);
+                editor6.apply();
+                break;
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            root.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
 }

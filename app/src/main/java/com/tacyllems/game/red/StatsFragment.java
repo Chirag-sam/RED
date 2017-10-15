@@ -1,18 +1,25 @@
 package com.tacyllems.game.red;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link StatsFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link StatsFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -22,6 +29,22 @@ public class StatsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @BindView(R.id.totalgamesplayed)
+    TextView totalgamesplayed;
+    @BindView(R.id.easygamesplayed)
+    TextView easygamesplayed;
+    @BindView(R.id.hardgamesplayed)
+    TextView hardgamesplayed;
+    @BindView(R.id.stonergamesplayed)
+    TextView stonergamesplayed;
+    @BindView(R.id.reflexgamesplayed)
+    TextView reflexgamesplayed;
+    @BindView(R.id.doublegamesplayed)
+    TextView doublegamesplayed;
+    @BindView(R.id.multigamesplayed)
+    TextView multigamesplayed;
+    Unbinder unbinder;
+    private SharedPreferences sharedPref;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,7 +87,24 @@ public class StatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stats, container, false);
+        View view = inflater.inflate(R.layout.fragment_stats, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int total = sharedPref.getInt("totalnumberofgames",0);
+        totalgamesplayed.setText(String.valueOf(total));
+        int total1 = sharedPref.getInt("hardtotal",0);
+        hardgamesplayed.setText(String.valueOf(total1));
+        int total2 = sharedPref.getInt("multitotal",0);
+        multigamesplayed.setText(String.valueOf(total2));
+        int total3 = sharedPref.getInt("stonertotal",0);
+        stonergamesplayed.setText(String.valueOf(total3));
+        int total4 = sharedPref.getInt("reflextotal",0);
+        reflexgamesplayed.setText(String.valueOf(total4));
+        int total5 = sharedPref.getInt("doubletotal",0);
+        doublegamesplayed.setText(String.valueOf(total5));
+        int total6 = sharedPref.getInt("easytotal",0);
+        easygamesplayed.setText(String.valueOf(total6));
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -89,6 +129,12 @@ public class StatsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     /**

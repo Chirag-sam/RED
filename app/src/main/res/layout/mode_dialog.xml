@@ -100,6 +100,26 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/doubletrouble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imagedouble"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/app_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imagedouble"
+                android:text="DOUBLE TROUBLE"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/multiplayer"
@@ -122,26 +142,7 @@
                 android:textSize="20dp" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/doubletrouble"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/imagedouble"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:srcCompat="@drawable/app_logo" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imagedouble"
-                android:text="DOUBLE TROUBLE"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp" />
-        </RelativeLayout>
 
 
     </LinearLayout>

@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,10 +19,14 @@ public class StatsActivity extends AppCompatActivity implements StatsFragment.On
     TabLayout tabLayout;
     @BindView(R.id.pager)
     ViewPager pager;
+    @BindView(R.id.root)
+    LinearLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_stats);
         ButterKnife.bind(this);
 
@@ -26,7 +34,7 @@ public class StatsActivity extends AppCompatActivity implements StatsFragment.On
         tabLayout.addTab(tabLayout.newTab().setText("Stats"));
         tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
 
-         com.tacyllems.game.red.StatsPagerAdapter adapter = new com.tacyllems.game.red.StatsPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        StatsPagerAdapter adapter = new StatsPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         pager.setAdapter(adapter);
         pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -51,6 +59,20 @@ public class StatsActivity extends AppCompatActivity implements StatsFragment.On
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            root.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
 
 }

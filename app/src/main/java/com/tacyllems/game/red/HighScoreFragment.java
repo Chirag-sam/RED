@@ -1,18 +1,25 @@
 package com.tacyllems.game.red;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HighScoreFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link HighScoreFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -22,6 +29,15 @@ public class HighScoreFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    @BindView(R.id.easy)
+    TextView easy;
+    @BindView(R.id.stoner)
+    TextView stoner;
+    @BindView(R.id.hard)
+    TextView hard;
+    @BindView(R.id.reflex30)
+    TextView reflex30;
+    Unbinder unbinder;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,7 +80,29 @@ public class HighScoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_high_score, container, false);
+        View view = inflater.inflate(R.layout.fragment_high_score, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(getActivity());
+        long easys = sharedPref.getInt("easy", 0);
+        easy.setText("EASY: " + easys);
+        hard.setText("HARD: " + sharedPref.getInt("hard", 0));
+        stoner.setText("STONER HARD: " + sharedPref.getInt("stoner", 0));
+        Long pq = sharedPref.getLong("reflex", 3540000L);
+
+        if (pq == 3540000) {
+            reflex30.setText("REFLEX30:\n" + "00:00:000");
+        } else {
+            int secs = (int) (pq / 1000);
+            int mins = secs / 60;
+            secs = secs % 60;
+            int milliseconds = (int) (pq % 1000);
+            reflex30.setText(
+                    "REFLEX30:\n" + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format(
+                            "%03d", milliseconds));
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -89,6 +127,12 @@ public class HighScoreFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     /**
