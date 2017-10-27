@@ -40,7 +40,8 @@
             android:name=".MultiplayerEnd"
             android:theme="@style/Theme.CustomTranslucent" />
         <activity android:name=".StatsActivity" />
-        <activity android:name=".DoubleTrouble"></activity>
+        <activity android:name=".DoubleTrouble" />
+        <activity android:name=".IntroActivity"></activity>
     </application>
 
 </manifest>

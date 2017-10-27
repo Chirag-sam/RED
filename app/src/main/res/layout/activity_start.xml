@@ -166,6 +166,15 @@
         android:background="?selectableItemBackgroundBorderless"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_info_black_24dp" />
-
+    <ImageButton
+        android:id="@+id/info"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_question_mark_on_a_circular_black_background" />
 
 </RelativeLayout>

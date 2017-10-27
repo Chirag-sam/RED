@@ -58,6 +58,8 @@ public class StartActivity extends AppCompatActivity implements
     boolean mInSignInFlow = false;
     @BindView(R.id.root)
     RelativeLayout root;
+    @BindView(R.id.info)
+    ImageButton info;
     private GoogleApiClient mGoogleApiClient;
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
@@ -70,6 +72,13 @@ public class StartActivity extends AppCompatActivity implements
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StartActivity.this, IntroActivity.class));
+            }
+        });
+        callintroifnecessary();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -346,6 +355,18 @@ public class StartActivity extends AppCompatActivity implements
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
+
+    void callintroifnecessary() {
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(StartActivity.this);
+        long gamesplayed = sharedPref.getInt("introshown", 0);
+        if (gamesplayed == 0)
+        {startActivity(new Intent(StartActivity.this, IntroActivity.class));
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("introshown",1);
+            editor.apply();
         }
     }
 }

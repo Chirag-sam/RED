@@ -396,45 +396,7 @@ public class PlayAgain extends AppCompatActivity implements
 
                 break;
             case R.id.help:
-                //        AlertDialog.Builder builder = new AlertDialog.Builder(this).setTitle("Sample Text")
-                //            .setMessage(
-                //                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin diam purus, eget feugiat erat luctus malesuada. Sed egestas convallis metus, sed convallis orci gravida vel. In hac habitasse platea dictumst. Donec non dolor felis. Nam vel varius nibh, at gravida nisl. Curabitur blandit et massa eget lobortis. Integer vel efficitur augue, non fermentum lectus. Proin urna lacus, gravida nec porttitor at, mattis eu ex. Curabitur molestie lectus tellus, id eleifend urna ornare quis. Suspendisse id molestie metu")
-                //            .setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss());
-                //        AlertDialog dialog = builder.create();
-                //        dialog.show();
-                //        break;
-                final Dialog dialog;
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    dialog = new Dialog(PlayAgain.this, R.style.dialogthemez);
-                } else {
-                    dialog = new Dialog(PlayAgain.this);
-                }
-                dialog.setContentView(R.layout.highscoredialog);
-                TextView easy = dialog.findViewById(R.id.easy);
-                TextView hard = dialog.findViewById(R.id.hard);
-                TextView stoner = dialog.findViewById(R.id.stoner);
-                TextView reflex30 = dialog.findViewById(R.id.reflex30);
-                SharedPreferences sharedPref =
-                        PreferenceManager.getDefaultSharedPreferences(PlayAgain.this);
-                long easys = sharedPref.getInt("easy", 0);
-                easy.setText("EASY: " + easys);
-                hard.setText("HARD: " + sharedPref.getInt("hard", 0));
-                stoner.setText("STONER HARD: " + sharedPref.getInt("stoner", 0));
-                Long pq = sharedPref.getLong("reflex", 3540000L);
-
-                if (pq == 3540000) {
-                    reflex30.setText("REFLEX30:\n" + "00:00:000");
-                } else {
-                    int secs = (int) (pq / 1000);
-                    int mins = secs / 60;
-                    secs = secs % 60;
-                    int milliseconds = (int) (pq % 1000);
-                    reflex30.setText(
-                            "REFLEX30:\n" + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format(
-                                    "%03d", milliseconds));
-                }
-                dialog.show();
+                startActivity(new Intent(PlayAgain.this,IntroActivity.class));
                 break;
             case R.id.home:
                 finish();

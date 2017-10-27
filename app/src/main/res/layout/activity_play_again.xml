@@ -78,7 +78,7 @@
             android:layout_margin="12dp"
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_show_chart_black_24dp" />
+            app:srcCompat="@drawable/ic_question_mark_on_a_circular_black_background" />
 
         <ImageButton
             android:id="@+id/home"
