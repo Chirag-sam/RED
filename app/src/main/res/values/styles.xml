@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textStyle">bold</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
 
     </style>
 

@@ -2,12 +2,10 @@ package com.tacyllems.game.red;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -24,7 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -38,14 +38,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class PlayAgain extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    private static int RC_SIGN_IN = 9001;
     @BindView(R.id.sc12)
     TextView sc;
     @BindView(R.id.best)
@@ -82,6 +79,8 @@ public class PlayAgain extends AppCompatActivity implements
     TextView slowitemtext;
     @BindView(R.id.root)
     RelativeLayout root;
+    boolean mExplicitSignOut = false;
+    boolean mInSignInFlow = false;
     private MediaPlayer laugh;
     private String ty;
     private String s;
@@ -99,16 +98,13 @@ public class PlayAgain extends AppCompatActivity implements
     private boolean mResolvingConnectionFailure = false;
     private boolean mAutoStartSignInflow = true;
     private boolean mSignInClicked = false;
-    boolean mExplicitSignOut = false;
-    boolean mInSignInFlow = false;
-    private static int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_play_again);
+        setContentView(R.layout.fragment_play_again);
         ButterKnife.bind(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)

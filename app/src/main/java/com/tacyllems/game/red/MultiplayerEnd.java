@@ -9,7 +9,6 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -54,7 +53,7 @@ public class MultiplayerEnd extends Activity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home:
-                startActivity(new Intent(MultiplayerEnd.this, StartActivity.class));
+              startActivity(new Intent(MultiplayerEnd.this, MainActivity.class));
                 break;
             case R.id.playagain:
                 startActivity(new Intent(MultiplayerEnd.this, Multiplayer.class));
