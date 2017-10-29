@@ -2,11 +2,11 @@ package com.tacyllems.game.red;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,14 +22,12 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.iwgang.countdownview.CountdownView;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class EasyActivity extends AppCompatActivity {
 
@@ -77,7 +75,7 @@ public class EasyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         progressBar2.setVisibility(View.GONE);
         freeze.setVisibility(View.VISIBLE);
-        mCountDownTimer = (CountdownView) findViewById(R.id.mCountDownTimer);
+        mCountDownTimer = findViewById(R.id.mCountDownTimer);
         progressBar2.getProgressDrawable()
                 .setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary),
                         PorterDuff.Mode.SRC_IN);
@@ -86,10 +84,10 @@ public class EasyActivity extends AppCompatActivity {
             public void onEnd(CountdownView cv) {
                 if (audio) player.stop();
                 mCountDownTimer.stop();
-                Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
-                intent.putExtra("Score", sc);
+                Intent intent = new Intent();
+                intent.putExtra("Score", String.valueOf(sc));
                 intent.putExtra("Mode", "easy");
-                startActivity(intent);
+                setResult(6969, intent);
                 finish();
             }
         });
@@ -158,10 +156,10 @@ public class EasyActivity extends AppCompatActivity {
             mCountDownTimer.stop();
             gameOver = true;
             if (audio) player.stop();
-            Intent intent = new Intent(EasyActivity.this, PlayAgain.class);
-            intent.putExtra("Score", sc);
+            Intent intent = new Intent();
+            intent.putExtra("Score", String.valueOf(sc));
             intent.putExtra("Mode", "easy");
-            startActivity(intent);
+            setResult(6969, intent);
             finish();
         }
     }
@@ -229,5 +227,11 @@ public class EasyActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 }

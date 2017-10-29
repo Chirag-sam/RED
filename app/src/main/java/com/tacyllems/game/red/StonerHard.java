@@ -1,5 +1,6 @@
 package com.tacyllems.game.red;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -7,20 +8,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.iwgang.countdownview.CountdownView;
-
-
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -49,6 +45,20 @@ public class StonerHard extends AppCompatActivity {
     private int yellowback[] = {R.color.BLUE, R.color.GREEN, R.color.RED, R.color.dark_green, R.color.orange, R.color.pink, R.color.gray, R.color.maroon, R.color.yellowish_orange, R.color.purple, R.color.colorBackgroundDark, R.color.white};
 
     private ArrayList<Integer> al = new ArrayList<>();
+
+    public static int OpposeColor(int ColorToInvert) {
+        int RGBMAX = 255;
+        float[] hsv = new float[3];
+        float H;
+
+        Color.RGBToHSV(Color.red(ColorToInvert), RGBMAX - Color.green(ColorToInvert),
+            Color.blue(ColorToInvert), hsv);
+
+        H = (float) (hsv[0] + 0.5);
+
+        if (H > 1) H -= 1;
+        return Color.HSVToColor(hsv);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,10 +126,10 @@ public class StonerHard extends AppCompatActivity {
             @Override
             public void onEnd(CountdownView cv) {
                 mCountDownTimer.stop();
-                Intent intent = new Intent(StonerHard.this, PlayAgain.class);
-                intent.putExtra("Score", sc);
+                Intent intent = new Intent();
+                intent.putExtra("Score", String.valueOf(sc));
                 intent.putExtra("Mode", "stoner");
-                startActivity(intent);
+                setResult(6969, intent);
                 finish();
             }
         });
@@ -206,29 +216,14 @@ public class StonerHard extends AppCompatActivity {
             change();
         } else {
             mCountDownTimer.stop();
-            Intent intent = new Intent(StonerHard.this, PlayAgain.class);
-            intent.putExtra("Score", sc);
+            Intent intent = new Intent();
+            intent.putExtra("Score", String.valueOf(sc));
             intent.putExtra("Mode", "stoner");
-            startActivity(intent);
+            setResult(6969, intent);
             finish();
         }
     }
 
-    public static int OpposeColor(int ColorToInvert) {
-        int RGBMAX = 255;
-        float[] hsv = new float[3];
-        float H;
-
-
-        Color.RGBToHSV(Color.red(ColorToInvert), RGBMAX - Color.green(ColorToInvert), Color.blue(ColorToInvert), hsv);
-
-
-        H = (float) (hsv[0] + 0.5);
-
-        if (H > 1) H -= 1;
-        return Color.HSVToColor(hsv);
-
-    }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -241,5 +236,11 @@ public class StonerHard extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 }

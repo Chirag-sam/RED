@@ -87,6 +87,11 @@ public class StartFragment extends Fragment {
           .setColorFilter(ContextCompat.getColor(getContext(), R.color.colorPrimary),
               PorterDuff.Mode.SRC_ATOP);
     }
+    if (mShowSignIn) {
+      signin.setText("Play Sign In");
+    } else {
+      signin.setText("Play Sign out");
+    }
     mute.setImageResource(
         audio ? R.drawable.ic_volume_up_black_24dp : R.drawable.ic_volume_off_black_24dp);
   }
@@ -172,7 +177,7 @@ public class StartFragment extends Fragment {
 
   public void setShowSignInButton(boolean showSignIn) {
     mShowSignIn = showSignIn;
-    if (showSignIn) {
+    if (signin != null) if (showSignIn) {
       signin.setText("Play Sign In");
     } else {
       signin.setText("Play Sign out");

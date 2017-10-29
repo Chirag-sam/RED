@@ -1,5 +1,6 @@
 package com.tacyllems.game.red;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,14 +15,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.iwgang.countdownview.CountdownView;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class DoubleTrouble extends AppCompatActivity {
 
@@ -98,19 +97,19 @@ public class DoubleTrouble extends AppCompatActivity {
         mCountDownTimer1.setOnCountdownEndListener(cv -> {
             if (audio) player.stop();
             mCountDownTimer1.stop();
-            Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
-            intent.putExtra("Score", sc);
+            Intent intent = new Intent();
+            intent.putExtra("Score", String.valueOf(sc));
             intent.putExtra("Mode", "double");
-            startActivity(intent);
+            setResult(6969, intent);
             finish();
         });
         mCountDownTimer2.setOnCountdownEndListener(cv -> {
             if (audio) player.stop();
             mCountDownTimer2.stop();
-            Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
-            intent.putExtra("Score", sc);
+            Intent intent = new Intent();
+            intent.putExtra("Score", String.valueOf(sc));
             intent.putExtra("Mode", "double");
-            startActivity(intent);
+            setResult(6969, intent);
             finish();
         });
     }
@@ -152,6 +151,11 @@ public class DoubleTrouble extends AppCompatActivity {
         //        }
     }
 
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
     @OnClick({R.id.butt1, R.id.butt3})
     public void onViewClicked(View view) {
         if (audio) {
@@ -215,10 +219,10 @@ public class DoubleTrouble extends AppCompatActivity {
                 mCountDownTimer1.stop();
                 gameOver = true;
                 if (audio) player.stop();
-                Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
-                intent.putExtra("Score", sc);
+                Intent intent = new Intent();
+                intent.putExtra("Score", String.valueOf(sc));
                 intent.putExtra("Mode", "double");
-                startActivity(intent);
+                setResult(6969, intent);
                 finish();
             }
         } else {
@@ -235,10 +239,10 @@ public class DoubleTrouble extends AppCompatActivity {
                 mCountDownTimer2.stop();
                 gameOver = true;
                 if (audio) player.stop();
-                Intent intent = new Intent(DoubleTrouble.this, PlayAgain.class);
-                intent.putExtra("Score", sc);
+                Intent intent = new Intent();
+                intent.putExtra("Score", String.valueOf(sc));
                 intent.putExtra("Mode", "double");
-                startActivity(intent);
+                setResult(6969, intent);
                 finish();
             }
         }

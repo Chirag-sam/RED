@@ -1,5 +1,6 @@
 package com.tacyllems.game.red;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,11 +24,12 @@ import com.google.example.games.basegameutils.BaseGameUtils;
 
 public class MainActivity extends AppCompatActivity
     implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-    StartFragment.OnFragmentInteractionListener {
+    StartFragment.OnFragmentInteractionListener, PlayAgainFragment.OnFragmentInteractionListener {
   // request codes we use when invoking an external activity
   private static final int RC_RESOLVE = 5000;
   private static final int RC_UNUSED = 5001;
   private static final int RC_SIGN_IN = 9001;
+  private static final int RC_GAMESCORE = 6969;
   // tag for debug logging
   final boolean ENABLE_DEBUG = true;
   final String TAG = "MainActivity";
@@ -79,7 +81,10 @@ public class MainActivity extends AppCompatActivity
 
   // Switch UI to the given fragment
   void switchToFragment(Fragment newFrag) {
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragment, newFrag).commit();
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragment, newFrag)
+        .addToBackStack(null)
+        .commit();
   }
 
   private boolean isSignedIn() {
@@ -111,8 +116,51 @@ public class MainActivity extends AppCompatActivity
       if (resultCode == RESULT_OK) {
         mGoogleApiClient.connect();
       } else {
-        BaseGameUtils.showActivityResultError(this, requestCode, resultCode,
-            R.string.sign_in_other_error);
+        BaseGameUtils.showActivityResultError(this, requestCode, resultCode, R.string.sign_in_other_error);
+      }
+    }
+    if (resultCode == Activity.RESULT_CANCELED) {
+      // Do something
+    }
+    if (requestCode == RC_GAMESCORE && intent != null) {
+      String mode = intent.getStringExtra("Mode");
+      String sco = intent.getStringExtra("Score");
+      Boolean did = intent.getBooleanExtra("Did", false);
+
+      PlayAgainFragment p;
+      switch (mode) {
+        case "easy":
+          p = PlayAgainFragment.newInstance(mode, sco);
+          switchToFragment(p);
+          if (mGoogleApiClient.isConnected()) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.easylead),
+                Integer.parseInt(sco));
+          }
+          break;
+        case "hard":
+          p = PlayAgainFragment.newInstance(mode, sco);
+          switchToFragment(p);
+          if (mGoogleApiClient.isConnected()) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.hardlead),
+                Integer.parseInt(sco));
+          }
+          break;
+        case "stoner":
+          p = PlayAgainFragment.newInstance(mode, sco);
+          switchToFragment(p);
+          if (mGoogleApiClient.isConnected()) {
+            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.stonerhardlead),
+                Integer.parseInt(sco));
+          }
+          break;
+        case "reflex":
+          p = PlayAgainFragment.newInstance(mode, sco, did);
+          switchToFragment(p);
+          break;
+        case "double":
+          p = PlayAgainFragment.newInstance(mode, sco);
+          switchToFragment(p);
+          break;
       }
     }
   }
@@ -120,7 +168,7 @@ public class MainActivity extends AppCompatActivity
   @Override public void onConnected(Bundle bundle) {
     Log.d(TAG, "onConnected(): connected to Google APIs");
     // Show sign-out button on main menu
-    mMainMenuFragment.setShowSignInButton(false);
+    if (mMainMenuFragment != null) mMainMenuFragment.setShowSignInButton(false);
 
     // Set the greeting appropriately on main menu
     Player p = Games.Players.getCurrentPlayer(mGoogleApiClient);
@@ -199,22 +247,22 @@ public class MainActivity extends AppCompatActivity
   @Override public void onStartFragmentInteraction(String activity) {
     switch (activity) {
       case "EASY":
-        startActivity(new Intent(MainActivity.this, EasyActivity.class));
+        startActivityForResult(new Intent(MainActivity.this, EasyActivity.class), RC_GAMESCORE);
         break;
       case "HARD":
-        startActivity(new Intent(MainActivity.this, HardActivity.class));
+        startActivityForResult(new Intent(MainActivity.this, HardActivity.class), RC_GAMESCORE);
         break;
       case "STONER HARD":
-        startActivity(new Intent(MainActivity.this, StonerHard.class));
+        startActivityForResult(new Intent(MainActivity.this, StonerHard.class), RC_GAMESCORE);
         break;
       case "REFLEX 30":
-        startActivity(new Intent(MainActivity.this, Reflex30.class));
+        startActivityForResult(new Intent(MainActivity.this, Reflex30.class), RC_GAMESCORE);
         break;
       case "MULTIPLAYER":
         startActivity(new Intent(MainActivity.this, Multiplayer.class));
         break;
       case "DOUBLE TROUBLE":
-        startActivity(new Intent(MainActivity.this, DoubleTrouble.class));
+        startActivityForResult(new Intent(MainActivity.this, DoubleTrouble.class), RC_GAMESCORE);
         break;
       case "HIGH SCORES":
         startActivity(new Intent(MainActivity.this, StatsActivity.class));
@@ -235,6 +283,59 @@ public class MainActivity extends AppCompatActivity
         break;
       default:
         startActivity(new Intent(MainActivity.this, EasyActivity.class));
+    }
+  }
+
+  @Override public void onLeaderBoardInteraction(String mode) {
+    if (mGoogleApiClient.isConnected()) {
+      switch (mode) {
+        case "easy":
+          startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+              getString(R.string.easylead)), 1);
+          break;
+        case "hard":
+          startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+              getString(R.string.hardlead)), 1);
+          break;
+        case "stoner":
+          startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient,
+              getString(R.string.stonerhardlead)), 1);
+          break;
+      }
+    }
+  }
+
+  @Override public void onLaunchActivityInteraction(String activity) {
+    switch (activity) {
+      case "easy":
+        getSupportFragmentManager().popBackStackImmediate();
+        startActivityForResult(new Intent(this, EasyActivity.class), RC_GAMESCORE);
+
+        break;
+      case "hard":
+        getSupportFragmentManager().popBackStackImmediate();
+        startActivityForResult(new Intent(this, HardActivity.class), RC_GAMESCORE);
+
+        break;
+      case "stoner":
+        getSupportFragmentManager().popBackStackImmediate();
+        startActivityForResult(new Intent(this, StonerHard.class), RC_GAMESCORE);
+
+        break;
+      case "reflex":
+        getSupportFragmentManager().popBackStackImmediate();
+        startActivityForResult(new Intent(this, Reflex30.class), RC_GAMESCORE);
+
+        break;
+      case "double":
+        getSupportFragmentManager().popBackStackImmediate();
+        startActivityForResult(new Intent(this, DoubleTrouble.class), RC_GAMESCORE);
+        break;
+      case "help":
+        startActivity(new Intent(MainActivity.this, IntroActivity.class));
+        break;
+      case "back":
+        getSupportFragmentManager().popBackStackImmediate();
     }
   }
 }

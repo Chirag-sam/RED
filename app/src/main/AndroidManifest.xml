@@ -16,10 +16,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".EasyActivity" />
-        <activity
-            android:name=".PlayAgain"
-            android:screenOrientation="portrait" />
-        <activity
+      <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
