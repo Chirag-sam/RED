@@ -1,15 +1,20 @@
 package com.tacyllems.game.red;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -21,6 +26,8 @@ import butterknife.Unbinder;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+
+import java.lang.reflect.Method;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +51,7 @@ public class StartFragment extends Fragment {
   Boolean audio;
   SharedPreferences sharedPref;
   InterstitialAd mInterstitialAd;
+  AlertDialog deleteDialog;
   @BindView(R.id.linearll) LinearLayout linearll;
   @BindView(R.id.signin) Button signin;
   // TODO: Rename and change types of parameters
@@ -56,6 +64,15 @@ public class StartFragment extends Fragment {
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    Boolean hc = check_if_high_contrast_is_on();
+    if(hc==true)
+    {
+      display_dialog();
+    }
+
+
+
     sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
     audio = sharedPref.getBoolean("audio", true);
     mInterstitialAd = new InterstitialAd(getContext());
@@ -183,6 +200,51 @@ public class StartFragment extends Fragment {
       signin.setText("Play Sign out");
     }
   }
+  public Boolean check_if_high_contrast_is_on()
+  {
+    AccessibilityManager am = (AccessibilityManager) getActivity().getSystemService(Context.ACCESSIBILITY_SERVICE);
+    Class clazz = am.getClass();
+    Method m = null;
+    try {
+      m = clazz.getMethod("isHighTextContrastEnabled",null);
+    } catch (NoSuchMethodException e) {
+      Log.e("FAIL", "isHighTextContrastEnabled not found in AccessibilityManager");
+      return false;
+    }
+
+
+    Object result = null;
+    try {
+      result = m.invoke(am, null);
+      if (result != null && result instanceof Boolean)  {
+        Boolean b = (Boolean)result;
+        Log.e("result", "b =" + b);
+        return b;
+      }
+    }  catch (Exception e) {
+      android.util.Log.e("fail",  "isHighTextContrastEnabled invoked with an exception" + e.getMessage());
+      return false;
+    }
+    return false;
+  }
+  public void display_dialog()
+  {
+    LayoutInflater factory = LayoutInflater.from(getActivity());
+    final View deleteDialogView = factory.inflate(R.layout.high_contrast_dialog, null);
+    deleteDialog = new AlertDialog.Builder(getActivity()).create();
+    deleteDialog.setCancelable(false);
+    deleteDialog.setCanceledOnTouchOutside(false);
+    deleteDialog.setView(deleteDialogView);
+    deleteDialogView.findViewById(R.id.go).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+      }
+    });
+
+    deleteDialog.show();
+  }
+
 
   /**
    * This interface must be implemented by activities that contain this
@@ -201,5 +263,21 @@ public class StartFragment extends Fragment {
     void onSignInButtonClicked();
 
     void onSignOutButtonClicked();
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == Activity.RESULT_CANCELED) {
+      Boolean b = check_if_high_contrast_is_on();
+      if(b==true)
+      {
+        display_dialog();
+      }
+      else
+      {
+        deleteDialog.dismiss();
+      }
+    }
   }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We notice that the 'High contrast' setting is on on your device. Please switch it off to continue. Go to Settings> Accessibility> High Contrast text."
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:id="@+id/text"
+        android:padding="15dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to settings"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text"
+        android:id="@+id/go"/>
+
+</RelativeLayout>
