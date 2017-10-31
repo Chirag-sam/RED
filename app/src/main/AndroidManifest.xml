@@ -18,27 +18,38 @@
         <activity android:name=".EasyActivity" />
       <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:resizeableActivity="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HardActivity" />
-        <activity android:name=".StonerHard" />
-        <activity android:name=".Reflex30" />
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".Tribute" />
+        <activity android:name=".HardActivity"
+            android:resizeableActivity="false"/>
+        <activity android:name=".StonerHard"
+            android:resizeableActivity="false"/>
+        <activity android:name=".Reflex30"
+            android:resizeableActivity="false"/>
+        <activity android:name=".AboutActivity"
+            android:resizeableActivity="false"/>
+        <activity android:name=".Tribute"
+            android:resizeableActivity="false"/>
         <activity
             android:name=".Multiplayer"
+            android:resizeableActivity="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MultiplayerEnd"
+            android:resizeableActivity="false"
             android:theme="@style/Theme.CustomTranslucent" />
-        <activity android:name=".StatsActivity" />
-        <activity android:name=".DoubleTrouble" />
-        <activity android:name=".IntroActivity"></activity>
+        <activity android:name=".StatsActivity"
+            android:resizeableActivity="false"/>
+        <activity android:name=".DoubleTrouble"
+            android:resizeableActivity="false"/>
+        <activity android:name=".IntroActivity"
+            android:resizeableActivity="false"></activity>
     </application>
 
 </manifest>
