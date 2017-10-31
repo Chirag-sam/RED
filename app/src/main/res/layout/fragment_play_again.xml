@@ -111,6 +111,17 @@
         app:srcCompat="@drawable/ic_insert_chart_black_24dp"
         />
   </LinearLayout>
+  <com.wang.avi.AVLoadingIndicatorView
+      android:id="@+id/avi"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      style="@style/AVLoadingIndicatorView"
+      android:visibility="gone"
+      app:indicatorName="BallPulseIndicator"
+      app:indicatorColor="@color/colorAccent"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+  />
 
   <LinearLayout
       android:id="@+id/addpont"
