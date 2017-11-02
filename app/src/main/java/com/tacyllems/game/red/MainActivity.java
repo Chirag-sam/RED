@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
   boolean mInSignInFlow = false;
   @BindView(R.id.root) RelativeLayout root;
   @BindView(R.id.fragment) FrameLayout fragment;
+  HighScoreOutbox mOutbox = new HighScoreOutbox();
   // Client used to interact with Google APIs
   private GoogleApiClient mGoogleApiClient;
   // Are we currently resolving a connection failure?
@@ -130,28 +131,23 @@ public class MainActivity extends AppCompatActivity
       PlayAgainFragment p;
       switch (mode) {
         case "easy":
+          Log.e(TAG, "onActivityResult: " + mGoogleApiClient.isConnected());
+          mOutbox.mEasymode = Integer.parseInt(sco);
           p = PlayAgainFragment.newInstance(mode, sco);
           switchToFragment(p);
-          if (mGoogleApiClient.isConnected()) {
-            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.easylead),
-                Integer.parseInt(sco));
-          }
+
           break;
         case "hard":
+          mOutbox.mHardMode = Integer.parseInt(sco);
           p = PlayAgainFragment.newInstance(mode, sco);
           switchToFragment(p);
-          if (mGoogleApiClient.isConnected()) {
-            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.hardlead),
-                Integer.parseInt(sco));
-          }
+
           break;
         case "stoner":
+          mOutbox.mStonerHard = Integer.parseInt(sco);
           p = PlayAgainFragment.newInstance(mode, sco);
           switchToFragment(p);
-          if (mGoogleApiClient.isConnected()) {
-            Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.stonerhardlead),
-                Integer.parseInt(sco));
-          }
+
           break;
         case "reflex":
           p = PlayAgainFragment.newInstance(mode, sco, did);
@@ -171,6 +167,7 @@ public class MainActivity extends AppCompatActivity
 
     // Set the greeting appropriately on main menu
     Player p = Games.Players.getCurrentPlayer(mGoogleApiClient);
+    pushHighscores();
   }
 
   @Override public void onConnectionSuspended(int i) {
@@ -336,4 +333,34 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().popBackStackImmediate();
     }
   }
+
+  void pushHighscores() {
+    if (!isSignedIn()) {
+      // can't push to the cloud, so save locally
+      return;
+    }
+    if (mOutbox.mEasymode >= 0) {
+      Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.easylead),
+          mOutbox.mEasymode);
+
+      mOutbox.mEasymode = -1;
+    }
+    if (mOutbox.mHardMode >= 0) {
+      Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.hardlead),
+          mOutbox.mHardMode);
+      mOutbox.mHardMode = -1;
+    }
+    if (mOutbox.mStonerHard >= 0) {
+      Games.Leaderboards.submitScore(mGoogleApiClient, getString(R.string.stonerhardlead),
+          mOutbox.mStonerHard);
+      mOutbox.mStonerHard = -1;
+    }
+  }
+
+  class HighScoreOutbox {
+    int mEasymode = 0;
+    int mHardMode = -1;
+    int mStonerHard = -1;
+  }
+
 }
