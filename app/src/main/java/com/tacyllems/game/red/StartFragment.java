@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -26,11 +25,10 @@ import butterknife.Unbinder;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-
 import java.lang.reflect.Method;
 
 /**
- * A simple {@link Fragment} subclass.
+
  * Activities that contain this fragment must implement the
  * to handle interaction events.
  * create an instance of this fragment.
@@ -38,7 +36,7 @@ import java.lang.reflect.Method;
 public class StartFragment extends Fragment {
   // TODO: Rename parameter arguments, choose names that match
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  boolean mShowSignIn = true;
+
   @BindView(R.id.start) ImageButton start;
   @BindView(R.id.modescontainer) Spinner modescontainer;
   @BindView(R.id.ads) ImageButton ads;
@@ -53,7 +51,7 @@ public class StartFragment extends Fragment {
   InterstitialAd mInterstitialAd;
   AlertDialog deleteDialog;
   @BindView(R.id.linearll) LinearLayout linearll;
-  @BindView(R.id.signin) Button signin;
+
   // TODO: Rename and change types of parameters
 
   private OnFragmentInteractionListener mListener;
@@ -104,11 +102,7 @@ public class StartFragment extends Fragment {
           .setColorFilter(ContextCompat.getColor(getContext(), R.color.colorPrimary),
               PorterDuff.Mode.SRC_ATOP);
     }
-    if (mShowSignIn) {
-      signin.setText("Play Sign In");
-    } else {
-      signin.setText("Play Sign out");
-    }
+
     mute.setImageResource(
         audio ? R.drawable.ic_volume_up_black_24dp : R.drawable.ic_volume_off_black_24dp);
   }
@@ -134,8 +128,7 @@ public class StartFragment extends Fragment {
   }
 
   @OnClick({
-      R.id.start, R.id.ads, R.id.high, R.id.playhigh, R.id.mute, R.id.aboutus, R.id.info,
-      R.id.signin
+      R.id.start, R.id.ads, R.id.high, R.id.playhigh, R.id.mute, R.id.aboutus, R.id.info
   }) public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.start:
@@ -180,26 +173,9 @@ public class StartFragment extends Fragment {
           mListener.onStartFragmentInteraction("INFO");
         }
         break;
-      case R.id.signin:
-        if (mListener != null) {
-          if (mShowSignIn) {
-            mListener.onSignInButtonClicked();
-          } else {
-            mListener.onSignOutButtonClicked();
-          }
-        }
-        break;
     }
   }
 
-  public void setShowSignInButton(boolean showSignIn) {
-    mShowSignIn = showSignIn;
-    if (signin != null) if (showSignIn) {
-      signin.setText("Play Sign In");
-    } else {
-      signin.setText("Play Sign out");
-    }
-  }
   public Boolean check_if_high_contrast_is_on()
   {
     AccessibilityManager am = (AccessibilityManager) getActivity().getSystemService(Context.ACCESSIBILITY_SERVICE);
@@ -245,6 +221,17 @@ public class StartFragment extends Fragment {
     deleteDialog.show();
   }
 
+  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == Activity.RESULT_CANCELED) {
+      Boolean b = check_if_high_contrast_is_on();
+      if (b == true) {
+        display_dialog();
+      } else {
+        deleteDialog.dismiss();
+      }
+    }
+  }
 
   /**
    * This interface must be implemented by activities that contain this
@@ -263,21 +250,5 @@ public class StartFragment extends Fragment {
     void onSignInButtonClicked();
 
     void onSignOutButtonClicked();
-  }
-
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == Activity.RESULT_CANCELED) {
-      Boolean b = check_if_high_contrast_is_on();
-      if(b==true)
-      {
-        display_dialog();
-      }
-      else
-      {
-        deleteDialog.dismiss();
-      }
-    }
   }
 }

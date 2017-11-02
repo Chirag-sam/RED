@@ -20,7 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -29,11 +32,6 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.wang.avi.AVLoadingIndicatorView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -353,8 +351,9 @@ public class PlayAgainFragment extends Fragment implements RewardedVideoAdListen
             case R.id.share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "I've Got " + sc.getText().toString() + " in RED, Can you beat it ;)");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "https://goo.gl/GU8Jyj\n I've Got "
+                    + sc.getText().toString()
+                    + " in RED, Can you beat it ;)");
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Share Score Via"));
                 break;
@@ -536,6 +535,13 @@ public class PlayAgainFragment extends Fragment implements RewardedVideoAdListen
 
     }
 
+    public void showrewardVideo() {
+        mAd.loadAd(getString(R.string.videoadid), new AdRequest.Builder().build());
+        avi.setVisibility(View.VISIBLE);
+        avi.show();
+        mAd.setRewardedVideoAdListener(this);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -552,12 +558,5 @@ public class PlayAgainFragment extends Fragment implements RewardedVideoAdListen
         void onLeaderBoardInteraction(String mode);
 
         void onLaunchActivityInteraction(String activity);
-    }
-
-    public void showrewardVideo() {
-        mAd.loadAd(getString(R.string.videoadid), new AdRequest.Builder().build());
-        avi.setVisibility(View.VISIBLE);
-        avi.show();
-        mAd.setRewardedVideoAdListener(this);
     }
 }

@@ -168,7 +168,6 @@ public class MainActivity extends AppCompatActivity
   @Override public void onConnected(Bundle bundle) {
     Log.d(TAG, "onConnected(): connected to Google APIs");
     // Show sign-out button on main menu
-    if (mMainMenuFragment != null) mMainMenuFragment.setShowSignInButton(false);
 
     // Set the greeting appropriately on main menu
     Player p = Games.Players.getCurrentPlayer(mGoogleApiClient);
@@ -194,7 +193,7 @@ public class MainActivity extends AppCompatActivity
               RC_SIGN_IN, getString(R.string.sign_in_other_error));
     }
 
-    mMainMenuFragment.setShowSignInButton(true);
+
   }
 
   @Override public void onSignInButtonClicked() {
@@ -209,8 +208,6 @@ public class MainActivity extends AppCompatActivity
     if (mGoogleApiClient.isConnected()) {
       mGoogleApiClient.disconnect();
     }
-
-    mMainMenuFragment.setShowSignInButton(true);
   }
 
   //@OnClick(R.id.playhigh) public void onPlayhighClicked() {
@@ -273,6 +270,7 @@ public class MainActivity extends AppCompatActivity
               RC_UNUSED);
         } else {
           BaseGameUtils.makeSimpleDialog(this, getString(R.string.sign_in_other_error)).show();
+          mGoogleApiClient.connect();
         }
         break;
       case "ABOUT US":

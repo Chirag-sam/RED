@@ -49,5 +49,6 @@ android {
         minSdkVersion android_min_sdk_version
         targetSdkVersion android_compile_version
     }
+
 }
 

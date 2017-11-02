@@ -12,14 +12,25 @@ android {
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     android.defaultConfig.vectorDrawables.useSupportLibrary = true
   }
+  signingConfigs {
+    release {
+      keyAlias KEYSTORE_ALIAS
+      keyPassword KEYSTORE_PASSWORD
+      storeFile file('C:/Users/krsnv/StudioProjects/RED/keystore.jks')
+      storePassword KEYSTORE_PASSWORD
+      v2SigningEnabled true
+    }
+  }
   buildTypes {
     release {
       shrinkResources true
       minifyEnabled true
       useProguard true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
     }
   }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
@@ -27,7 +38,7 @@ android {
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
+  compile fileTree(include: ['*.jar'], dir: 'libs')
   //  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
   //    exclude group: 'com.android.support', module: 'support-annotations'
   //  })
