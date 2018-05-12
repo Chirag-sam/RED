@@ -535,6 +535,11 @@ public class PlayAgainFragment extends Fragment implements RewardedVideoAdListen
 
     }
 
+    @Override
+    public void onRewardedVideoCompleted() {
+
+    }
+
     public void showrewardVideo() {
         mAd.loadAd(getString(R.string.videoadid), new AdRequest.Builder().build());
         avi.setVisibility(View.VISIBLE);

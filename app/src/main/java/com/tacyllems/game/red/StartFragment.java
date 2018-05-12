@@ -64,7 +64,7 @@ public class StartFragment extends Fragment {
     super.onCreate(savedInstanceState);
 
     Boolean hc = check_if_high_contrast_is_on();
-    if(hc==true)
+    if(hc)
     {
       display_dialog();
     }
@@ -182,7 +182,7 @@ public class StartFragment extends Fragment {
     Class clazz = am.getClass();
     Method m = null;
     try {
-      m = clazz.getMethod("isHighTextContrastEnabled",null);
+      m = clazz.getMethod("isHighTextContrastEnabled");
     } catch (NoSuchMethodException e) {
       Log.e("FAIL", "isHighTextContrastEnabled not found in AccessibilityManager");
       return false;
@@ -191,7 +191,7 @@ public class StartFragment extends Fragment {
 
     Object result = null;
     try {
-      result = m.invoke(am, null);
+      result = m.invoke(am);
       if (result != null && result instanceof Boolean)  {
         Boolean b = (Boolean)result;
         Log.e("result", "b =" + b);
@@ -225,7 +225,7 @@ public class StartFragment extends Fragment {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == Activity.RESULT_CANCELED) {
       Boolean b = check_if_high_contrast_is_on();
-      if (b == true) {
+      if (b) {
         display_dialog();
       } else {
         deleteDialog.dismiss();
