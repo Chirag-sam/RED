@@ -1,183 +1,231 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tacyllems.game.red.StatsFragment"
-    android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="Total games played"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/totalgamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/totalgamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="'Easy'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/easygamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/easygamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="'Hard'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/hardgamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/hardgamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="'Stoner hard'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/stonergamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/stonergamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="'Reflex 30'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/reflexgamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/reflexgamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="'Double Trouble'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/doublegamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/doublegamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="'Multiplayer'"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="55"
-            android:textSize="25dp"
-            android:id="@+id/multigamesplayed"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/multigamesplayed"
-            android:layout_marginTop="5dp"
-            ></RelativeLayout>
-    </RelativeLayout>
+    android:layout_height="match_parent">
 
-</LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.tacyllems.game.red.StatsFragment">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_total_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total games played"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/totalgamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_easy_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'Easy'"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/easygamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_hard_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'Hard'"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/hardgamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_stoner_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'Stoner hard'"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/stonergamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_reflex_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'Reflex 30'"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/reflexgamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_double_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'Double Trouble'"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/doublegamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_multi_games"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="'Multiplayer'"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/multigamesplayed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="55"
+                    android:textColor="@color/white"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

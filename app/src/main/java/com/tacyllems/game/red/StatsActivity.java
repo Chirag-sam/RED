@@ -21,6 +21,7 @@ public class StatsActivity extends AppCompatActivity implements StatsFragment.On
     ViewPager pager;
     @BindView(R.id.root)
     LinearLayout root;
+    StatsPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +35,14 @@ public class StatsActivity extends AppCompatActivity implements StatsFragment.On
         tabLayout.addTab(tabLayout.newTab().setText("Stats"));
         tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
 
-        StatsPagerAdapter adapter = new StatsPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        adapter = new StatsPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         pager.setAdapter(adapter);
-        pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                pager.setCurrentItem(tab.getPosition());
+                setAdapter(tab.getPosition());
             }
 
             @Override
@@ -73,6 +74,11 @@ public class StatsActivity extends AppCompatActivity implements StatsFragment.On
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    void setAdapter(int position) {
+        pager.setCurrentItem(position);
+        adapter.notifyDataSetChanged();
     }
 
 }
