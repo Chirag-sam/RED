@@ -91,14 +91,14 @@ public class HighScoreFragment extends Fragment {
         Long pq = sharedPref.getLong("reflex", 3540000L);
 
         if (pq == 3540000) {
-            reflex30.setText("REFLEX30:\n" + "00:00:000");
+            reflex30.setText("REFLEX30: " + "00:00:000");
         } else {
             int secs = (int) (pq / 1000);
             int mins = secs / 60;
             secs = secs % 60;
             int milliseconds = (int) (pq % 1000);
             reflex30.setText(
-                    "REFLEX30:\n" + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format(
+                    "REFLEX30: " + "" + mins + ":" + String.format("%02d", secs) + ":" + String.format(
                             "%03d", milliseconds));
         }
 

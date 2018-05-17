@@ -7,21 +7,22 @@
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
+        android:layout_height="match_parent"
+        >
 
         <LinearLayout
             android:id="@+id/add_to_queue_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/RED">
+                android:background="@color/RED"
+                android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -38,7 +39,8 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/BLUE">
+                android:background="@color/BLUE"
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/stoner"
@@ -50,21 +52,11 @@
                     android:textColor="#ffffff"
                     android:textSize="17sp" />
             </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bookmark_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?selectableItemBackgroundBorderless"
-            android:filterTouchesWhenObscured="true"
-            android:orientation="vertical">
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/YELLOW">
+                android:background="@color/YELLOW"
+                android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,14 +72,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/GREEN">
+                android:background="@color/GREEN"
+                android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="REFLEX30:\n 00:00:000"
+                    android:text="REFLEX30: 00:00:000"
                     android:textColor="#000000"
                     android:textSize="17sp"
                     android:id="@+id/reflex30"/>

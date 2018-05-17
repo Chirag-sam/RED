@@ -15,7 +15,8 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,8 +32,8 @@
         android:id="@+id/tabLayout"
         android:background="@color/white"
         app:tabIndicatorColor="@color/colorPrimary"
-        app:tabTextColor="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/orange"
+        app:tabTextColor="@color/colorPrimaryDark"
+        app:tabSelectedTextColor="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme.AppBarOverlay"
         >
